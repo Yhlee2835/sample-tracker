@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Custody & Asset Tracker</title>
+  <meta name="description" content="Multi-event asset & machine sample custody tracking system with Firebase real-time sync">
+  <style>
+:root {
+  --bg-canvas: #F8F9FA;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #F1F3F4;
+  --bg-input: #FFFFFF;
+  --border-color: #E0E0E0;
+  --border-strong: #BDC1C6;
+  --border-focus: #1A73E8;
+  --text-primary: #1F1F1F;
+  --text-secondary: #4A4A4A;
+  --text-tertiary: #70757A;
+  --google-blue: #1A73E8;
+  --google-blue-hover: #1557B0;
+  --google-blue-bg: rgba(26, 115, 232, 0.08);
+  --google-green: #1E8E3E;
+  --google-yellow: #D97706;
+  --google-red: #D93025;
+  --google-purple: #9333EA;
+  --status-pending-bg: rgba(217, 119, 6, 0.1);
+  --status-pending-text: #B45309;
+  --status-pending-border: rgba(217, 119, 6, 0.25);
+  --status-confirmed-bg: rgba(26, 115, 232, 0.1);
+  --status-confirmed-text: #1A73E8;
+  --status-confirmed-border: rgba(26, 115, 232, 0.25);
+  --status-using-bg: rgba(30, 142, 62, 0.1);
+  --status-using-text: #1E8E3E;
+  --status-using-border: rgba(30, 142, 62, 0.25);
+  --status-transferring-bg: rgba(147, 51, 234, 0.1);
+  --status-transferring-text: #7E22CE;
+  --status-transferring-border: rgba(147, 51, 234, 0.25);
+  --status-returned-bg: rgba(107, 114, 128, 0.12);
+  --status-returned-text: #374151;
+  --status-returned-border: rgba(107, 114, 128, 0.25);
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 9999px;
+  --shadow-sm: 0 1px 3px rgba(60, 64, 67, 0.08), 0 4px 12px rgba(60, 64, 67, 0.04);
+  --shadow-hover: 0 4px 16px rgba(60, 64, 67, 0.12), 0 8px 24px rgba(60, 64, 67, 0.06);
+  --shadow-flyout: 0 12px 32px rgba(60, 64, 67, 0.16);
+  --transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+[data-theme="dark"] {
+  --bg-canvas: #121212; --bg-surface: #1E1E1E; --bg-surface-elevated: #282828; --bg-input: #262626;
+  --border-color: rgba(255,255,255,0.15); --border-strong: rgba(255,255,255,0.25); --border-focus: #8AB4F8;
+  --text-primary: #F1F3F4; --text-secondary: #BDC1C6; --text-tertiary: #9AA0A6;
+  --google-blue: #8AB4F8; --google-blue-hover: #AECBFA; --google-blue-bg: rgba(138,180,248,0.15);
+  --google-green: #81C995; --google-yellow: #FDE293; --google-red: #F28B82; --google-purple: #C58AF9;
+  --status-pending-bg: rgba(253,226,147,0.15); --status-pending-text: #FDE293; --status-pending-border: rgba(253,226,147,0.35);
+  --status-confirmed-bg: rgba(138,180,248,0.15); --status-confirmed-text: #8AB4F8; --status-confirmed-border: rgba(138,180,248,0.35);
+  --status-using-bg: rgba(129,201,149,0.15); --status-using-text: #81C995; --status-using-border: rgba(129,201,149,0.35);
+  --status-transferring-bg: rgba(197,138,249,0.15); --status-transferring-text: #C58AF9; --status-transferring-border: rgba(197,138,249,0.35);
+  --status-returned-bg: rgba(154,160,166,0.18); --status-returned-text: #E8EAED; --status-returned-border: rgba(154,160,166,0.35);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4); --shadow-hover: 0 6px 20px rgba(0,0,0,0.6); --shadow-flyout: 0 12px 32px rgba(0,0,0,0.7);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-family); background-color: var(--bg-canvas); color: var(--text-primary); line-height: 1.5; font-size: 14px; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+svg { display: inline-block; vertical-align: middle; fill: currentColor; }
+.app-container { display: flex; flex-direction: column; min-height: 100vh; width: 100%; overflow-x: hidden; }
+.app-header { background: var(--bg-surface); border-bottom: 1px solid var(--border-color); padding: 0.85rem 1.75rem; box-shadow: 0 1px 2px rgba(0,0,0,0.03); }
+.header-content { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+.brand { display: flex; align-items: center; gap: 0.75rem; }
+.brand-icon { width: 36px; height: 36px; background: var(--google-blue-bg); color: var(--google-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: var(--transition); }
+.brand-icon:hover { transform: rotate(10deg) scale(1.05); }
+.brand-title { font-size: 1.2rem; font-weight: 500; color: var(--text-primary); letter-spacing: -0.01em; }
+.header-actions { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.cloud-sync-status { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.35rem 0.85rem; border-radius: var(--radius-pill); font-size: 0.775rem; font-weight: 500; background: var(--bg-surface-elevated); border: 1px solid var(--border-color); color: var(--text-secondary); transition: var(--transition); }
+.cloud-sync-status .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--google-green); box-shadow: 0 0 6px rgba(30,142,62,0.4); }
+.cloud-sync-status.syncing .sync-dot { background: var(--google-yellow); animation: pulseSync 0.8s infinite alternate; }
+.cloud-sync-status.offline .sync-dot { background: var(--google-red); box-shadow: 0 0 6px rgba(217,48,37,0.4); }
+@keyframes pulseSync { from { opacity: 0.3; transform: scale(0.8); } to { opacity: 1; transform: scale(1.2); } }
+.steps-nav-bar { background: var(--bg-surface); border-bottom: 1px solid var(--border-color); padding: 0.65rem 1.75rem; display: flex; justify-content: center; overflow-x: auto; }
+.steps-nav-content { max-width: 1440px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0.75rem; min-width: max-content; }
+.nav-tab { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; padding: 0.6rem 1.4rem; color: var(--text-secondary); font-weight: 500; font-size: 0.9rem; border-radius: var(--radius-pill); cursor: pointer; transition: var(--transition); border: 1px solid var(--border-color); background: var(--bg-surface-elevated); white-space: nowrap; box-shadow: var(--shadow-sm); }
+.nav-tab:hover { color: var(--text-primary); border-color: var(--border-strong); transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.nav-tab.active { color: var(--google-blue); background: var(--google-blue-bg); border-color: rgba(26,115,232,0.4); font-weight: 500; box-shadow: 0 0 0 1px rgba(26,115,232,0.2); }
+.nav-tab-badge { background: rgba(0,0,0,0.06); color: var(--text-primary); padding: 0.15rem 0.55rem; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 700; min-width: 22px; text-align: center; }
+.nav-tab.active .nav-tab-badge { background: var(--google-blue); color: #FFFFFF; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem; padding: 0.5rem 1.1rem; border-radius: var(--radius-pill); font-size: 0.85rem; font-weight: 500; font-family: var(--font-family); cursor: pointer; border: 1px solid var(--border-strong); background: var(--bg-surface); color: var(--text-primary); transition: var(--transition); text-decoration: none; white-space: nowrap; box-shadow: var(--shadow-sm); }
+.btn:hover { background: var(--bg-surface-elevated); transform: translateY(-1px); box-shadow: var(--shadow-hover); }
+.btn-primary { background: var(--google-blue); color: #FFFFFF; border-color: var(--google-blue); font-weight: 500; }
+.btn-primary:hover { background: var(--google-blue-hover); border-color: var(--google-blue-hover); }
+.btn-secondary { background: var(--bg-surface-elevated); border-color: var(--border-color); }
+.btn-sm { padding: 0.35rem 0.75rem; font-size: 0.775rem; }
+.main-content { flex: 1; max-width: 1440px; width: 100%; margin: 0 auto; padding: 1.5rem 1.75rem 3rem 1.75rem; }
+.tab-view { display: none; }
+.tab-view.active { display: block; animation: fadeIn 0.25s cubic-bezier(0.2,0,0,1); }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.metrics-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+@media (max-width: 1024px) { .metrics-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); } }
+.metric-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.1rem 1.25rem; display: flex; align-items: center; justify-content: space-between; transition: var(--transition); position: relative; overflow: hidden; box-shadow: var(--shadow-sm); }
+.metric-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.metric-info h4 { font-size: 0.75rem; font-weight: 500; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.3rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.metric-value { font-size: 1.6rem; font-weight: 500; line-height: 1.1; color: var(--text-primary); }
+.metric-icon { width: 38px; height: 38px; border-radius: 50%; background: var(--bg-surface-elevated); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); flex-shrink: 0; transition: var(--transition); }
+.metric-card:hover .metric-icon { transform: scale(1.08); }
+.control-bar { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem; box-shadow: var(--shadow-sm); }
+.search-box { position: relative; flex: 1; min-width: 240px; }
+.search-icon { position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%); color: var(--text-tertiary); pointer-events: none; }
+.search-input { width: 100%; background: var(--bg-surface-elevated); border: 1px solid transparent; border-radius: var(--radius-pill); padding: 0.5rem 0.85rem 0.5rem 2.4rem; color: var(--text-primary); font-size: 0.85rem; font-family: var(--font-family); transition: var(--transition); }
+.search-input:focus { outline: none; border-color: var(--border-focus); background: var(--bg-surface); }
+.filter-group { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.filter-select { background: var(--bg-surface-elevated); border: 1px solid transparent; border-radius: var(--radius-pill); padding: 0.5rem 0.9rem; color: var(--text-primary); font-size: 0.85rem; font-family: var(--font-family); cursor: pointer; transition: var(--transition); }
+.filter-select:focus { outline: none; border-color: var(--border-focus); background: var(--bg-surface); }
+.gantt-container { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.5rem; overflow-x: auto; box-shadow: var(--shadow-sm); }
+.gantt-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.gantt-title { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem; }
+.gantt-chart { display: flex; flex-direction: column; gap: 0.75rem; min-width: 680px; position: relative; }
+.gantt-axis { display: flex; justify-content: space-between; font-size: 0.725rem; color: var(--text-tertiary); border-bottom: 1px dashed var(--border-color); padding-bottom: 0.4rem; margin-bottom: 0.25rem; }
+.gantt-row { display: flex; align-items: center; gap: 1rem; }
+.gantt-label { width: 180px; font-size: 0.825rem; font-weight: 500; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; flex-shrink: 0; }
+.gantt-track { flex: 1; background: var(--bg-surface-elevated); height: 28px; border-radius: var(--radius-pill); position: relative; overflow: hidden; border: 1px solid var(--border-color); }
+.gantt-bar { position: absolute; top: 2px; bottom: 2px; background: var(--google-blue); border-radius: var(--radius-pill); display: flex; align-items: center; padding: 0 0.65rem; font-size: 0.725rem; font-weight: 500; color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-shadow: 0 2px 4px rgba(0,0,0,0.15); transition: var(--transition); }
+.gantt-bar:hover { opacity: 0.92; transform: scaleY(1.05); }
+.events-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.event-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; transition: var(--transition); position: relative; box-shadow: var(--shadow-sm); }
+.event-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.event-seq-num { position: absolute; top: 1rem; right: 1rem; font-size: 0.75rem; font-weight: 500; color: var(--text-tertiary); background: var(--bg-surface-elevated); border: 1px solid var(--border-color); padding: 0.1rem 0.55rem; border-radius: var(--radius-pill); }
+.event-badge { align-self: flex-start; padding: 0.15rem 0.65rem; border-radius: var(--radius-pill); font-size: 0.725rem; font-weight: 500; background: var(--google-blue-bg); color: var(--google-blue); border: 1px solid rgba(26,115,232,0.3); margin-bottom: 0.5rem; }
+.event-title { font-size: 1.05rem; margin-bottom: 0.35rem; font-weight: 500; }
+.event-meta { font-size: 0.825rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
+.batch-table-wrapper { overflow-x: auto; margin-top: 0.75rem; border: 1px solid var(--border-color); border-radius: var(--radius-md); background: var(--bg-surface-elevated); }
+.batch-table { width: 100%; border-collapse: collapse; min-width: 650px; }
+.batch-table th { background: var(--bg-surface); color: var(--text-secondary); font-size: 0.775rem; font-weight: 500; padding: 0.65rem 0.85rem; text-align: left; border-bottom: 1px solid var(--border-color); }
+.batch-table td { padding: 0.65rem 0.85rem; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+.batch-table input.form-input, .batch-table select.form-select { padding: 0.45rem 0.65rem; font-size: 0.85rem; }
+.data-table-container { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow-x: auto; box-shadow: var(--shadow-sm); }
+.data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem; min-width: 1000px; }
+.data-table th { background: var(--bg-surface-elevated); color: var(--text-secondary); font-weight: 500; font-size: 0.75rem; padding: 0.85rem 1.1rem; border-bottom: 1px solid var(--border-color); white-space: nowrap; }
+.data-table td { padding: 0.85rem 1.1rem; border-bottom: 1px solid var(--border-color); color: var(--text-primary); vertical-align: middle; }
+.data-table tbody tr:hover { background: var(--bg-surface-elevated); }
+.segment-tag { display: inline-flex; align-items: center; justify-content: center; padding: 0.15rem 0.55rem; background: var(--google-blue-bg); color: var(--google-blue); border: 1px solid rgba(26,115,232,0.3); border-radius: var(--radius-pill); font-size: 0.7rem; font-weight: 500; margin-right: 0.25rem; line-height: 1.2; }
+.qty-ratio-badge { display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; padding: 0.2rem 0.65rem; border-radius: var(--radius-pill); font-size: 0.775rem; font-weight: 700; font-family: monospace; background: var(--bg-surface-elevated); border: 1px solid var(--border-color); line-height: 1.2; }
+.qty-ratio-badge.full { color: var(--google-green); border-color: rgba(30,142,62,0.35); }
+.qty-ratio-badge.partial { color: var(--google-yellow); border-color: rgba(217,119,6,0.35); }
+.qty-ratio-badge.zero { color: var(--google-red); border-color: rgba(217,48,37,0.35); }
+.status-badge { display: inline-flex; align-items: center; justify-content: center; gap: 0.35rem; padding: 0.25rem 0.75rem; border-radius: var(--radius-pill); font-size: 0.75rem; font-weight: 500; border: 1px solid transparent; white-space: nowrap; line-height: 1.2; }
+.badge-submitted, .badge-pending { background: var(--status-pending-bg); color: var(--status-pending-text); border-color: var(--status-pending-border); }
+.badge-confirmed { background: var(--status-confirmed-bg); color: var(--status-confirmed-text); border-color: var(--status-confirmed-border); }
+.badge-using { background: var(--status-using-bg); color: var(--status-using-text); border-color: var(--status-using-border); }
+.badge-reclaimed, .badge-returned { background: var(--status-returned-bg); color: var(--status-returned-text); border-color: var(--status-returned-border); }
+.badge-transferring { background: var(--status-transferring-bg); color: var(--status-transferring-text); border-color: var(--status-transferring-border); }
+.table-actions { display: flex; align-items: center; gap: 0.35rem; white-space: nowrap; justify-content: flex-start; }
+.modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 99999; display: none; align-items: center; justify-content: center; padding: 1rem; }
+.modal-overlay.active { display: flex !important; }
+.modal-card { background: var(--bg-surface); border: 1px solid var(--border-strong); border-radius: var(--radius-lg); box-shadow: var(--shadow-flyout); width: 100%; max-width: 620px; max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; }
+.modal-header { padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; }
+.modal-title { font-size: 1.05rem; font-weight: 500; color: var(--text-primary); }
+.modal-close { background: transparent; border: none; color: var(--text-secondary); cursor: pointer; padding: 0.25rem; border-radius: 50%; font-size: 1.2rem; }
+.modal-close:hover { color: var(--text-primary); background: var(--bg-surface-elevated); }
+.modal-body { padding: 1.25rem; overflow-y: auto; flex: 1; }
+.modal-footer { padding: 0.85rem 1.25rem; border-top: 1px solid var(--border-color); display: flex; align-items: center; justify-content: flex-end; gap: 0.5rem; background: var(--bg-surface-elevated); }
+.form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+.form-group.full-width { grid-column: span 2; }
+.form-label { font-size: 0.775rem; font-weight: 500; color: var(--text-secondary); }
+.form-label span.required { color: var(--google-red); }
+.form-input, .form-select, .form-textarea { background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 0.5rem 0.75rem; color: var(--text-primary); font-family: var(--font-family); font-size: 0.85rem; transition: var(--transition); width: 100%; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--border-focus); background: var(--bg-surface); box-shadow: 0 0 0 2px rgba(26,115,232,0.2); }
+.timeline { position: relative; padding-left: 1.5rem; margin-top: 0.75rem; }
+.timeline::before { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: var(--border-color); }
+.timeline-item { position: relative; margin-bottom: 1.25rem; }
+.timeline-item:last-child { margin-bottom: 0; }
+.timeline-dot { position: absolute; left: -1.5rem; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--google-blue); border: 2px solid var(--bg-surface); }
+.timeline-content { background: var(--bg-surface-elevated); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 0.85rem; }
+.timeline-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem; }
+.timeline-action { font-weight: 500; font-size: 0.825rem; color: var(--google-blue); }
+.timeline-date { font-size: 0.725rem; color: var(--text-tertiary); }
+.timeline-details { font-size: 0.825rem; color: var(--text-secondary); }
+.toast-container { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200000; display: flex; flex-direction: column; gap: 0.5rem; }
+.toast { background: var(--bg-surface); border: 1px solid var(--border-strong); border-left: 4px solid var(--google-blue); border-radius: var(--radius-md); padding: 0.75rem 1rem; color: var(--text-primary); font-size: 0.85rem; box-shadow: var(--shadow-flyout); animation: fadeIn 0.25s ease; }
+@media (max-width: 768px) { .app-header { padding: 0.75rem 1rem; } .steps-nav-bar { padding: 0.5rem 1rem; } .main-content { padding: 1rem; } .form-grid { grid-template-columns: 1fr; } .form-group.full-width { grid-column: span 1; } .metrics-grid { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body data-theme="light">
+<div class="app-container">
+  <header class="app-header">
+    <div class="header-content">
+      <div class="brand">
+        <div class="brand-icon"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM7 10h2v7H7zm4-3h2v10h-2zm4 6h2v4h-2z"/></svg></div>
+        <h1 class="brand-title">Sample Custody & Asset Tracker</h1>
+      </div>
+      <div class="header-actions">
+        <div class="cloud-sync-status syncing" id="syncStatusBadge">
+          <span class="sync-dot"></span>
+          <span id="syncStatusText">Connecting to Firebase...</span>
+        </div>
+        <button id="btnExportCsv" class="btn btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg> Export CSV</button>
+        <button id="themeToggle" class="btn btn-secondary" title="Toggle Theme"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.40 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg> Dark Mode</button>
+      </div>
+    </div>
+  </header>
+  <nav class="steps-nav-bar"><div class="steps-nav-content">
+    <div class="nav-tab active" data-target="tabEventsView"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg> Events Master <span class="nav-tab-badge" id="badgeEventsCount">0</span></div>
+    <div class="nav-tab" data-target="tabTrackingView"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg> Custody Tracking <span class="nav-tab-badge" id="badgeSamplesCount">0</span></div>
+  </div></nav>
+  <main class="main-content">
+    <section id="tabEventsView" class="tab-view active">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:0.5rem;">
+        <div><h2 style="font-size:1.25rem;font-weight:500;letter-spacing:-0.01em;">Events Master</h2><p style="font-size:0.85rem;color:var(--text-secondary);">Manage events, preceding relationships, and asset schedules.</p></div>
+        <button id="btnCreateEvent" class="btn btn-primary"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> Create New Event</button>
+      </div>
+      <div class="gantt-container"><div class="gantt-header"><div class="gantt-title"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg> Event Schedule Timeline</div></div><div class="gantt-chart" id="ganttChartBody"></div></div>
+      <div class="events-grid" id="eventsGridContainer"></div>
+    </section>
+    <section id="tabTrackingView" class="tab-view">
+      <section class="metrics-grid">
+        <div class="metric-card"><div class="metric-info"><h4>Total Units</h4><div class="metric-value" id="metricTotal">0</div></div><div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M20 8h-3V4H7v4H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6h6v2H9V6zm11 14H4v-8h16v8z"/></svg></div></div>
+        <div class="metric-card"><div class="metric-info"><h4>Pending SPM</h4><div class="metric-value" id="metricPending" style="color:var(--google-yellow);">0</div></div><div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div></div>
+        <div class="metric-card"><div class="metric-info"><h4>In Use</h4><div class="metric-value" id="metricInUse" style="color:var(--google-green);">0</div></div><div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg></div></div>
+        <div class="metric-card"><div class="metric-info"><h4>Transferring</h4><div class="metric-value" id="metricTransferring" style="color:var(--google-purple);">0</div></div><div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg></div></div>
+        <div class="metric-card"><div class="metric-info"><h4>Returned</h4><div class="metric-value" id="metricReturned" style="color:var(--text-tertiary);">0</div></div><div class="metric-icon"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div></div>
+      </section>
+      <section class="control-bar">
+        <div class="search-box"><span class="search-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 14z"/></svg></span><input type="text" id="searchInput" class="search-input" placeholder="Search event, model, serial #, SPM, requester, or custodian..."></div>
+        <div class="filter-group">
+          <select id="eventFilter" class="filter-select"><option value="ALL">All Events</option></select>
+          <select id="reqByFilter" class="filter-select"><option value="ALL">All Requesters</option></select>
+          <select id="spmFilter" class="filter-select"><option value="ALL">All SPMs</option></select>
+          <select id="statusFilter" class="filter-select"><option value="ALL">All Statuses</option><option value="待PM確認">Pending SPM</option><option value="已確認可提供">SPM Confirmed</option><option value="使用中">In Use</option><option value="轉交中">In Transfer</option><option value="已回收">Reclaimed</option><option value="已歸還">Returned</option></select>
+        </div>
+      </section>
+      <section class="data-table-container"><table class="data-table"><thead><tr><th>Event & Requester</th><th>Region / Location</th><th>Model / Serial No.</th><th>Model SPM</th><th>Qty</th><th>Ready Date</th><th>Status</th><th>Current Custodian</th><th style="text-align:left;">Actions</th></tr></thead><tbody id="tableBody"></tbody></table></section>
+    </section>
+  </main>
+</div>
+
+<!-- Modals -->
+<div id="modalNewEvent" class="modal-overlay"><div class="modal-card"><div class="modal-header"><h3 class="modal-title" id="modalEventTitle">Create New Event</h3><button class="modal-close">&times;</button></div><form id="formNewEvent"><input type="hidden" id="editEventId"><div class="modal-body"><div class="form-grid">
+  <div class="form-group full-width"><label class="form-label">Event Title <span class="required">*</span></label><input type="text" id="eventTitle" class="form-input" placeholder="e.g. BBY visiting" required></div>
+  <div class="form-group"><label class="form-label">Preceding Event</label><select id="eventPrecedingSelect" class="form-select"><option value="">-- None --</option></select></div>
+  <div class="form-group"><label class="form-label">Event Type <span class="required">*</span></label><select id="eventType" class="form-select" required><option value="Customer Visiting">Customer Visiting</option><option value="Retail Summit">Retail Summit</option><option value="PreG">PreG</option><option value="Other">Other</option></select></div>
+  <div class="form-group"><label class="form-label">Location <span class="required">*</span></label><input type="text" id="eventLocation" class="form-input" placeholder="e.g. LiGong Building" required></div>
+  <div class="form-group"><label class="form-label">Start Date <span class="required">*</span></label><input type="date" id="eventStartDate" class="form-input" required></div>
+  <div class="form-group"><label class="form-label">End Date <span class="required">*</span></label><input type="date" id="eventEndDate" class="form-input" required></div>
+  <div class="form-group"><label class="form-label">Organizer <span class="required">*</span></label><input type="text" id="eventOrganizer" class="form-input" placeholder="e.g. Sarah Lee" required></div>
+  <div class="form-group"><label class="form-label">Sample Deadline <span class="required">*</span></label><input type="date" id="eventDeadline" class="form-input" required></div>
+  <div class="form-group full-width"><label class="form-label">Notes</label><textarea id="eventNotes" class="form-textarea" rows="2"></textarea></div>
+</div></div><div class="modal-footer"><button type="button" class="btn btn-secondary modal-cancel">Cancel</button><button type="submit" class="btn btn-primary" id="btnSubmitEvent">Save Event</button></div></form></div></div>
+
+<div id="modalBatchRequest" class="modal-overlay"><div class="modal-card" style="max-width:780px;"><div class="modal-header"><h3 class="modal-title">Batch Sample Request</h3><button class="modal-close">&times;</button></div><form id="formNewRequestModal"><div class="modal-body"><div class="form-grid">
+  <div class="form-group full-width"><label class="form-label">Target Event <span class="required">*</span></label><select id="reqModalEventSelect" class="form-select" required></select></div>
+  <div class="form-group"><label class="form-label">Requested By <span class="required">*</span></label><input type="text" id="reqModalUser" class="form-input" placeholder="e.g. Sarah Lee" required></div>
+  <div class="form-group"><label class="form-label">Ready Date <span class="required">*</span></label><input type="date" id="reqModalDate" class="form-input" required></div>
+</div><div style="margin-top:1.25rem;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.5rem;flex-wrap:wrap;gap:0.5rem;"><label class="form-label">Machine Line Items <span class="required">*</span></label><div style="display:flex;gap:0.5rem;"><button type="button" id="btnImportCsvBatchModal" class="btn btn-secondary btn-sm">Import CSV</button><input type="file" id="csvFileInputModal" accept=".csv" style="display:none;"><button type="button" id="btnAddBatchRowModal" class="btn btn-secondary btn-sm">+ Add Line</button></div></div>
+<div class="batch-table-wrapper"><table class="batch-table"><thead><tr><th style="width:22%;">Segment</th><th style="width:45%;">Model Name</th><th style="width:12%;">Qty</th><th style="width:25%;">Model SPM</th><th style="width:40px;"></th></tr></thead><tbody id="batchTableBodyModal"></tbody></table></div></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary modal-cancel">Cancel</button><button type="submit" class="btn btn-primary">Submit Request</button></div></form></div></div>
+
+<div id="modalTransfer" class="modal-overlay"><div class="modal-card"><div class="modal-header"><h3 class="modal-title">Log Custody Transfer</h3><button class="modal-close">&times;</button></div><form id="formTransfer"><div class="modal-body">
+  <div style="margin-bottom:0.85rem;padding:0.5rem 0.75rem;background:var(--bg-surface-elevated);border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.8rem;"><strong>Target:</strong> <span id="transSampleInfo" style="color:var(--google-blue);font-weight:500;">-</span></div>
+  <div class="form-grid">
+    <div class="form-group"><label class="form-label">Action <span class="required">*</span></label><select id="transAction" class="form-select" required><option value="轉交">Cross-Event Transfer</option><option value="交付">Handover</option><option value="回收">Reclaim</option><option value="歸還">Return Depot</option></select></div>
+    <div class="form-group"><label class="form-label">From</label><input type="text" id="transFromPerson" class="form-input"></div>
+    <div class="form-group"><label class="form-label">To <span class="required">*</span></label><input type="text" id="transToPerson" class="form-input" required></div>
+    <div class="form-group"><label class="form-label">Target Event</label><select id="transTargetEventSelect" class="form-select"></select></div>
+    <div class="form-group full-width"><label class="form-label">Condition</label><select id="transCondition" class="form-select"><option value="Good">Good</option><option value="Minor Scratch">Minor Scratch</option><option value="Needs Repair">Needs Repair</option><option value="Missing Accessories">Missing Accessories</option></select></div>
+    <div class="form-group full-width"><label class="form-label">Notes</label><textarea id="transNotes" class="form-textarea" rows="2"></textarea></div>
+  </div></div><div class="modal-footer"><button type="button" class="btn btn-secondary modal-cancel">Cancel</button><button type="submit" class="btn btn-primary">Save Transfer</button></div></form></div></div>
+
+<div id="modalPMConfirm" class="modal-overlay"><div class="modal-card"><div class="modal-header"><h3 class="modal-title">SPM Confirmation & SN Fill-in</h3><button class="modal-close">&times;</button></div><form id="formPMConfirm"><div class="modal-body">
+  <div style="margin-bottom:0.85rem;padding:0.5rem 0.75rem;background:var(--bg-surface-elevated);border:1px solid var(--border-color);border-radius:var(--radius-sm);font-size:0.8rem;"><strong>Target:</strong> <span id="pmConfirmInfo" style="color:var(--google-blue);font-weight:500;">-</span></div>
+  <div class="form-grid">
+    <div class="form-group full-width"><label class="form-label">Decision <span class="required">*</span></label><select id="pmDecision" class="form-select" required><option value="已確認可提供">Fully Confirmed</option><option value="部分確認">Partially Confirmed</option><option value="無法提供">Unavailable</option></select></div>
+    <div class="form-group full-width"><label class="form-label">Serial Number (SN)</label><input type="text" id="pmBackfillSN" class="form-input"></div>
+    <div class="form-group"><label class="form-label">Confirmed Qty (Max: <span id="pmMaxRequestedQty">1</span>)</label><input type="number" id="pmConfirmedQty" class="form-input" value="1" min="0"></div>
+    <div class="form-group"><label class="form-label">Ready Date</label><input type="date" id="pmReadyDate" class="form-input"></div>
+    <div class="form-group full-width"><label class="form-label">Notes</label><textarea id="pmNotes" class="form-textarea" rows="2"></textarea></div>
+  </div></div><div class="modal-footer"><button type="button" class="btn btn-secondary modal-cancel">Cancel</button><button type="submit" class="btn btn-primary">Submit</button></div></form></div></div>
+
+<div id="modalTimeline" class="modal-overlay"><div class="modal-card"><div class="modal-header"><h3 class="modal-title" id="timelineTitle">Custody Chain</h3><button class="modal-close">&times;</button></div><div class="modal-body"><div id="timelineContainer" class="timeline"></div></div><div class="modal-footer"><button type="button" class="btn btn-secondary modal-cancel">Close</button></div></div></div>
+
+<!-- ========== Firebase SDK (CDN Compat) ========== -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<script>
+/* ================================================================
+   🔥 Firebase Configuration & Initialization
+   ================================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyAJoO7AtBDhI8YyFN9tsgEmIJMeczwDUsE",
+  authDomain: "sample-tracker-3a23c.firebaseapp.com",
+  databaseURL: "https://sample-tracker-3a23c-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "sample-tracker-3a23c",
+  storageBucket: "sample-tracker-3a23c.firebasestorage.app",
+  messagingSenderId: "754003248645",
+  appId: "1:754003248645:web:79fbbd8c0bd4baf972be6c"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const eventsRef = db.ref("tracker/events");
+const samplesRef = db.ref("tracker/samples");
+
+/* ================================================================
+   App State
+   ================================================================ */
+let eventsData = [];
+let samplesData = [];
+let isWriting = false;  // prevent echo from own writes
+
+let currentFilterEvent = "ALL";
+let currentFilterReqBy = "ALL";
+let currentFilterSPM = "ALL";
+let currentFilterStatus = "ALL";
+let currentSearchQuery = "";
+let selectedSampleId = null;
+let batchRows = [{ segment: "Zenbook", model: "", qty: 1, pm: "" }];
+
+/* ================================================================
+   Firebase Sync Status
+   ================================================================ */
+function setSyncStatus(status, text) {
+  const badge = document.getElementById("syncStatusBadge");
+  const label = document.getElementById("syncStatusText");
+  if (!badge || !label) return;
+  badge.className = "cloud-sync-status " + status;
+  label.textContent = text;
+}
+
+// Monitor Firebase connection state
+db.ref(".info/connected").on("value", (snap) => {
+  if (snap.val() === true) {
+    setSyncStatus("connected", "🔥 Firebase Synced");
+  } else {
+    setSyncStatus("offline", "Offline — reconnecting...");
+  }
+});
+
+/* ================================================================
+   Firebase Read: Real-time Listeners (auto-sync from cloud)
+   ================================================================ */
+eventsRef.on("value", (snapshot) => {
+  if (isWriting) return;
+  eventsData = snapshot.val() || [];
+  renderApp();
+});
+
+samplesRef.on("value", (snapshot) => {
+  if (isWriting) return;
+  samplesData = snapshot.val() || [];
+  renderApp();
+});
+
+/* ================================================================
+   Firebase Write: Save to cloud
+   ================================================================ */
+function saveEventsData() {
+  isWriting = true;
+  setSyncStatus("syncing", "Syncing...");
+  eventsRef.set(eventsData).then(() => {
+    isWriting = false;
+    setSyncStatus("connected", "🔥 Firebase Synced");
+  }).catch(() => {
+    isWriting = false;
+    setSyncStatus("offline", "Sync Error");
+  });
+}
+
+function saveSamplesData() {
+  isWriting = true;
+  setSyncStatus("syncing", "Syncing...");
+  samplesRef.set(samplesData).then(() => {
+    isWriting = false;
+    setSyncStatus("connected", "🔥 Firebase Synced");
+  }).catch(() => {
+    isWriting = false;
+    setSyncStatus("offline", "Sync Error");
+  });
+}
+
+/* ================================================================
+   Init
+   ================================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  bindEvents();
+  renderBatchRows();
+  updateThemeToggleButton();
+});
+
+/* ================================================================
+   All UI Logic (unchanged from original)
+   ================================================================ */
+function bindEvents() {
+  document.querySelectorAll(".nav-tab").forEach(tab => { tab.addEventListener("click", () => switchTab(tab.getAttribute("data-target"))); });
+  const si = document.getElementById("searchInput"); if(si) si.addEventListener("input", (e) => { currentSearchQuery = e.target.value.trim().toLowerCase(); renderTable(); });
+  const ef = document.getElementById("eventFilter"); if(ef) ef.addEventListener("change", (e) => { currentFilterEvent = e.target.value; renderTable(); });
+  const rf = document.getElementById("reqByFilter"); if(rf) rf.addEventListener("change", (e) => { currentFilterReqBy = e.target.value; renderTable(); });
+  const sf = document.getElementById("spmFilter"); if(sf) sf.addEventListener("change", (e) => { currentFilterSPM = e.target.value; renderTable(); });
+  const stf = document.getElementById("statusFilter"); if(stf) stf.addEventListener("change", (e) => { currentFilterStatus = e.target.value; renderTable(); });
+
+  document.getElementById("btnCreateEvent").addEventListener("click", () => {
+    document.getElementById("editEventId").value = "";
+    document.getElementById("modalEventTitle").textContent = "Create New Event";
+    document.getElementById("btnSubmitEvent").textContent = "Create Event";
+    document.getElementById("formNewEvent").reset();
+    const today = new Date().toISOString().split('T')[0];
+    const nextWeek = new Date(Date.now()+7*86400000).toISOString().split('T')[0];
+    document.getElementById("eventStartDate").value = today;
+    document.getElementById("eventEndDate").value = nextWeek;
+    document.getElementById("eventDeadline").value = today;
+    populatePrecedingEventSelect();
+    openModal("modalNewEvent");
+  });
+
+  document.getElementById("btnExportCsv").addEventListener("click", exportToCsv);
+  document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+  document.getElementById("btnAddBatchRowModal").addEventListener("click", addBatchRow);
+  document.getElementById("btnImportCsvBatchModal").addEventListener("click", () => document.getElementById("csvFileInputModal").click());
+  document.getElementById("csvFileInputModal").addEventListener("change", handleCsvImport);
+  document.getElementById("formNewEvent").addEventListener("submit", handleCreateEvent);
+  document.getElementById("formNewRequestModal").addEventListener("submit", handleCreateRequestModal);
+  document.getElementById("formTransfer").addEventListener("submit", handleCustodyTransfer);
+  document.getElementById("formPMConfirm").addEventListener("submit", handlePMConfirmSubmit);
+  document.querySelectorAll(".modal-close, .modal-cancel").forEach((btn) => { btn.addEventListener("click", (e) => { const m = e.target.closest(".modal-overlay"); if(m) closeModal(m.id); }); });
+}
+
+function switchTab(viewId) {
+  document.querySelectorAll(".nav-tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".tab-view").forEach(v => v.classList.remove("active"));
+  const at = document.querySelector('.nav-tab[data-target="'+viewId+'"]');
+  const av = document.getElementById(viewId);
+  if(at) at.classList.add("active");
+  if(av) av.classList.add("active");
+}
+
+function renderApp() {
+  renderGanttChart(); renderEventsGrid(); renderMetrics(); populateFilterOptions(); renderTable(); updateBadges();
+}
+
+function updateBadges() {
+  document.getElementById("badgeEventsCount").textContent = eventsData.length;
+  document.getElementById("badgeSamplesCount").textContent = samplesData.length;
+}
+
+function renderGanttChart() {
+  const c = document.getElementById("ganttChartBody"); if(!c) return; c.innerHTML = "";
+  if(eventsData.length === 0) { c.innerHTML = '<div style="text-align:center;padding:2rem 1rem;color:var(--text-tertiary);"><p style="font-size:0.9rem;font-weight:500;">No events yet. Create one to get started!</p></div>'; return; }
+  let minT=Infinity, maxT=-Infinity;
+  eventsData.forEach(ev => { const s=new Date(ev.startDate).getTime(), e=new Date(ev.endDate).getTime(); if(s<minT)minT=s; if(e>maxT)maxT=e; });
+  if(minT>=maxT) { minT=Date.now(); maxT=Date.now()+30*86400000; }
+  const buf=86400000, sR=minT-buf, eR=maxT+buf, tS=eR-sR;
+  const axis = document.createElement("div"); axis.className = "gantt-axis";
+  axis.innerHTML = '<span>'+fmtShort(new Date(sR))+'</span><span>'+fmtShort(new Date(sR+tS/2))+'</span><span>'+fmtShort(new Date(eR))+'</span>';
+  c.appendChild(axis);
+  eventsData.forEach(ev => {
+    const row = document.createElement("div"); row.className = "gantt-row";
+    const s=new Date(ev.startDate).getTime(), e=new Date(ev.endDate).getTime();
+    const lp = Math.max(0,Math.min(100,((s-sR)/tS)*100));
+    const wp = Math.max(10,Math.min(100-lp,((e-s)/tS)*100));
+    row.innerHTML = '<div class="gantt-label" title="'+ev.title+'">'+ev.title+'</div><div class="gantt-track"><div class="gantt-bar" style="left:'+lp.toFixed(1)+'%;width:'+wp.toFixed(1)+'%;" title="'+ev.title+' ('+ev.startDate.slice(5)+' ~ '+ev.endDate.slice(5)+')"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">'+ev.title+' ('+ev.startDate.slice(5)+' ~ '+ev.endDate.slice(5)+')</span></div></div>';
+    c.appendChild(row);
+  });
+}
+function fmtShort(d) { return String(d.getMonth()+1).padStart(2,'0')+'/'+String(d.getDate()).padStart(2,'0'); }
+
+function populateFilterOptions() {
+  const es = document.getElementById("eventFilter"); if(es) { const cv=es.value; es.innerHTML='<option value="ALL">All Events</option>'; eventsData.forEach(ev=>{const o=document.createElement("option");o.value=ev.title;o.textContent=ev.title;es.appendChild(o);}); es.value=cv; }
+  const rs = document.getElementById("reqByFilter"); if(rs) { const cv=rs.value; rs.innerHTML='<option value="ALL">All Requesters</option>'; [...new Set(samplesData.map(s=>s.requestedBy).filter(Boolean))].forEach(r=>{const o=document.createElement("option");o.value=r;o.textContent=r;rs.appendChild(o);}); rs.value=cv; }
+  const ss = document.getElementById("spmFilter"); if(ss) { const cv=ss.value; ss.innerHTML='<option value="ALL">All SPMs</option>'; [...new Set(samplesData.map(s=>s.modelSPM||s.ownerPM).filter(Boolean))].forEach(r=>{const o=document.createElement("option");o.value=r;o.textContent=r;ss.appendChild(o);}); ss.value=cv; }
+}
+
+function renderBatchRows() {
+  const tb = document.getElementById("batchTableBodyModal"); if(!tb) return; tb.innerHTML = "";
+  batchRows.forEach((row, idx) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = '<td><select class="form-select batch-segment"><option value="ProArt" '+(row.segment==='ProArt'?'selected':'')+'>ProArt</option><option value="Zenbook" '+(row.segment==='Zenbook'?'selected':'')+'>Zenbook</option><option value="Vivobook" '+(row.segment==='Vivobook'?'selected':'')+'>Vivobook</option><option value="Zephyrus" '+(row.segment==='Zephyrus'?'selected':'')+'>Zephyrus</option><option value="Strix" '+(row.segment==='Strix'?'selected':'')+'>Strix</option><option value="TUF" '+(row.segment==='TUF'?'selected':'')+'>TUF</option><option value="Flow" '+(row.segment==='Flow'?'selected':'')+'>Flow</option></select></td><td><input type="text" class="form-input batch-model" value="'+row.model+'" placeholder="e.g. UX8200QA" required></td><td><input type="number" class="form-input batch-qty" value="'+row.qty+'" min="1" max="100" required></td><td><input type="text" class="form-input batch-pm" value="'+row.pm+'" placeholder="e.g. David Wang" required></td><td style="text-align:center;">'+(batchRows.length>1?'<button type="button" class="btn btn-secondary btn-sm" onclick="removeBatchRow('+idx+')">✕</button>':'')+'</td>';
+    tb.appendChild(tr);
+  });
+}
+function addBatchRow() { batchRows.push({segment:"Zenbook",model:"",qty:1,pm:""}); renderBatchRows(); }
+function removeBatchRow(idx) { if(batchRows.length>1){batchRows.splice(idx,1);renderBatchRows();} }
+
+function handleCsvImport(e) {
+  const f=e.target.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=function(ev){const lines=ev.target.result.split("\n").map(l=>l.trim()).filter(l=>l.length>0);if(lines.length<=1)return;const nr=[];for(let i=1;i<lines.length;i++){const p=lines[i].split(",").map(x=>x.replace(/^"|"$/g,'').trim());if(p.length>=2)nr.push({segment:p[0]||"Zenbook",model:p[1]||"",qty:parseInt(p[2])||1,pm:p[3]||""});}if(nr.length>0){batchRows=nr;renderBatchRows();showToast("Imported "+nr.length+" items!");}};
+  r.readAsText(f); e.target.value="";
+}
+
+function renderEventsGrid() {
+  const c = document.getElementById("eventsGridContainer"); if(!c) return; c.innerHTML = "";
+  if(eventsData.length===0) { c.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;background:var(--bg-surface);border:1px dashed var(--border-strong);border-radius:var(--radius-lg);"><h3 style="font-size:1.1rem;font-weight:500;margin-bottom:0.5rem;">No Events Yet</h3><p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.25rem;">Create an event to start tracking samples.</p><button type="button" class="btn btn-primary" onclick="document.getElementById(\'btnCreateEvent\').click()">+ Create First Event</button></div>'; return; }
+  eventsData.forEach((evt,idx) => {
+    const card = document.createElement("div"); card.className = "event-card";
+    const ls = samplesData.filter(s=>s.event===evt.title||s.currentEvent===evt.title);
+    const rc = ls.filter(s=>s.status==="使用中"||s.status==="已確認可提供"||s.status==="已回收").length;
+    const pl = evt.precedingEvent?'<div style="font-size:0.75rem;color:var(--google-blue);">Linked: '+evt.precedingEvent+'</div>':'';
+    card.innerHTML = '<div class="event-seq-num">#'+(idx+1)+'</div><div class="event-badge">'+evt.type+'</div><h3 class="event-title">'+evt.title+'</h3>'+pl+'<div class="event-meta" style="margin-top:0.3rem;"><div>Location: '+evt.location+'</div><div>Dates: '+evt.startDate+' ~ '+evt.endDate+'</div><div>Organizer: '+evt.organizer+'</div><div>Deadline: <span style="color:var(--google-red);font-weight:500;">'+evt.deadline+'</span></div><div>Ready: '+rc+' / '+ls.length+'</div></div><div style="display:flex;flex-direction:column;gap:0.4rem;margin-top:auto;"><div style="display:flex;gap:0.4rem;"><button class="btn btn-primary btn-sm" style="flex:1;" onclick="applySampleForEventModal(\''+evt.title+'\')"><svg width="12" height="12" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg> Request</button><button class="btn btn-secondary btn-sm" onclick="filterTrackingByEvent(\''+evt.title+'\')">Assets</button></div><div style="display:flex;gap:0.4rem;"><button class="btn btn-secondary btn-sm" style="flex:1;" onclick="openEditEventModal(\''+evt.id+'\')">Edit</button><button class="btn btn-secondary btn-sm" style="flex:1;color:var(--google-red);border-color:rgba(217,48,37,0.35);" onclick="deleteEvent(\''+evt.id+'\')">Delete</button></div></div>';
+    c.appendChild(card);
+  });
+}
+
+function deleteEvent(id) { const ev=eventsData.find(e=>e.id===id);if(!ev)return;if(confirm('Delete event "'+ev.title+'"?')){eventsData=eventsData.filter(e=>e.id!==id);samplesData=samplesData.filter(s=>s.event!==ev.title&&s.currentEvent!==ev.title);saveEventsData();saveSamplesData();renderApp();showToast("Deleted: "+ev.title);} }
+
+function applySampleForEventModal(t) {
+  const s=document.getElementById("reqModalEventSelect");s.innerHTML="";eventsData.forEach(ev=>{const o=document.createElement("option");o.value=ev.title;o.textContent=ev.title+" ("+ev.location+")";s.appendChild(o);});if(t)s.value=t;
+  const te=eventsData.find(e=>e.title===t);if(te&&te.deadline)document.getElementById("reqModalDate").value=te.deadline;
+  renderBatchRows();openModal("modalBatchRequest");
+}
+
+function openEditEventModal(id) {
+  const ev=eventsData.find(e=>e.id===id);if(!ev)return;
+  document.getElementById("editEventId").value=ev.id;document.getElementById("modalEventTitle").textContent="Edit Event";document.getElementById("btnSubmitEvent").textContent="Save Changes";
+  document.getElementById("eventTitle").value=ev.title;document.getElementById("eventType").value=ev.type;document.getElementById("eventLocation").value=ev.location;document.getElementById("eventStartDate").value=ev.startDate;document.getElementById("eventEndDate").value=ev.endDate;document.getElementById("eventOrganizer").value=ev.organizer;document.getElementById("eventDeadline").value=ev.deadline;document.getElementById("eventNotes").value=ev.notes||"";
+  populatePrecedingEventSelect();document.getElementById("eventPrecedingSelect").value=ev.precedingEvent||"";openModal("modalNewEvent");
+}
+
+function populatePrecedingEventSelect() {
+  const s=document.getElementById("eventPrecedingSelect");if(!s)return;const cid=document.getElementById("editEventId").value;
+  s.innerHTML='<option value="">-- None --</option>';eventsData.forEach(ev=>{if(ev.id!==cid){const o=document.createElement("option");o.value=ev.title;o.textContent=ev.title;s.appendChild(o);}});
+}
+
+function filterTrackingByEvent(t) { switchTab("tabTrackingView");document.getElementById("eventFilter").value=t;currentFilterEvent=t;renderTable(); }
+
+function handleCreateEvent(e) {
+  e.preventDefault();const eid=document.getElementById("editEventId").value;const t=document.getElementById("eventTitle").value.trim();const pe=document.getElementById("eventPrecedingSelect").value;const ty=document.getElementById("eventType").value;const lo=document.getElementById("eventLocation").value.trim();const sd=document.getElementById("eventStartDate").value;const ed=document.getElementById("eventEndDate").value;const og=document.getElementById("eventOrganizer").value.trim();const dl=document.getElementById("eventDeadline").value;const nt=document.getElementById("eventNotes").value.trim();
+  if(!t){alert("Please enter Event Title");return;}
+  if(eid){const ex=eventsData.find(x=>x.id===eid);if(ex){ex.title=t;ex.precedingEvent=pe;ex.type=ty;ex.location=lo;ex.startDate=sd;ex.endDate=ed;ex.organizer=og;ex.deadline=dl;ex.notes=nt;}showToast("Updated: "+t);}
+  else{eventsData.push({id:"EVT-"+String(eventsData.length+1).padStart(3,'0'),title:t,precedingEvent:pe,type:ty,location:lo,startDate:sd,endDate:ed,organizer:og,deadline:dl,status:"Sample Scheduling",notes:nt});showToast("Created: "+t);}
+  saveEventsData();renderApp();closeModal("modalNewEvent");document.getElementById("formNewEvent").reset();
+}
+
+function handleCreateRequestModal(e) {
+  e.preventDefault();const et=document.getElementById("reqModalEventSelect").value;const te=eventsData.find(ev=>ev.title===et);const rb=document.getElementById("reqModalUser").value.trim();const rd=document.getElementById("reqModalDate").value;
+  const segs=document.querySelectorAll("#batchTableBodyModal .batch-segment"),mdls=document.querySelectorAll("#batchTableBodyModal .batch-model"),qtys=document.querySelectorAll("#batchTableBodyModal .batch-qty"),pms=document.querySelectorAll("#batchTableBodyModal .batch-pm");
+  let cnt=0;
+  mdls.forEach((inp,i)=>{const m=inp.value.trim();if(!m)return;const seg=segs[i]?segs[i].value:"Zenbook";const q=parseInt(qtys[i].value)||1;const pm=pms[i].value.trim()||"Unassigned";const nid="SMP-"+String(samplesData.length+1).padStart(3,'0');
+    samplesData.unshift({id:nid,event:et,currentEvent:et,segment:seg,productModel:m,serialNumber:"",quantity:q,confirmedQty:0,sourceRegion:"TW",location:te?te.location:"",modelSPM:pm,requestedBy:rb,status:"待PM確認",currentHolder:pm,readyDate:rd,notes:"Batch request",custodyLogs:[{date:fmtDate(new Date()),action:"Submitted Request",from:rb,to:pm,location:te?te.location:"",condition:"Good",notes:seg+" "+m+" Qty:"+q}]});cnt++;});
+  if(cnt>0){saveSamplesData();renderApp();closeModal("modalBatchRequest");showToast("Created "+cnt+" sample requests!");switchTab("tabTrackingView");}
+}
+
+function renderMetrics() {
+  const t=samplesData.length;document.getElementById("metricTotal").textContent=t;
+  document.getElementById("metricPending").textContent=samplesData.filter(s=>s.status==="待PM確認"||s.status==="需求已提交").length;
+  document.getElementById("metricInUse").textContent=samplesData.filter(s=>s.status==="使用中").length;
+  document.getElementById("metricTransferring").textContent=samplesData.filter(s=>s.status==="轉交中").length;
+  document.getElementById("metricReturned").textContent=samplesData.filter(s=>s.status==="已歸還").length;
+}
+
+function renderTable() {
+  const tb=document.getElementById("tableBody");tb.innerHTML="";
+  const fd=samplesData.filter(item=>{if(currentFilterEvent!=="ALL"&&item.currentEvent!==currentFilterEvent&&item.event!==currentFilterEvent)return false;if(currentFilterReqBy!=="ALL"&&item.requestedBy!==currentFilterReqBy)return false;const spm=item.modelSPM||item.ownerPM;if(currentFilterSPM!=="ALL"&&spm!==currentFilterSPM)return false;if(currentFilterStatus!=="ALL"&&item.status!==currentFilterStatus)return false;if(currentSearchQuery){const ms=(item.id+" "+item.segment+" "+item.productModel+" "+item.serialNumber+" "+item.event+" "+item.currentEvent+" "+spm+" "+item.requestedBy+" "+item.currentHolder+" "+item.notes).toLowerCase();if(!ms.includes(currentSearchQuery))return false;}return true;});
+  if(fd.length===0){tb.innerHTML='<tr><td colspan="9"><div style="padding:3rem 1rem;text-align:center;"><h3 style="font-size:1.05rem;font-weight:500;margin-bottom:0.35rem;">No Results</h3><p style="font-size:0.8rem;color:var(--text-secondary);">Create sample requests from Events Master.</p></div></td></tr>';return;}
+  fd.forEach(item=>{
+    const tr=document.createElement("tr");let bc="badge-pending",sl="Pending SPM";
+    if(item.status==="待PM確認"){bc="badge-pending";sl="Pending SPM";}else if(item.status==="已確認可提供"){bc="badge-confirmed";sl="SPM Confirmed";}else if(item.status==="使用中"){bc="badge-using";sl="In Use";}else if(item.status==="已回收"){bc="badge-reclaimed";sl="Reclaimed";}else if(item.status==="轉交中"){bc="badge-transferring";sl="In Transfer";}else if(item.status==="已歸還"){bc="badge-returned";sl="Returned";}
+    const sn=item.modelSPM||item.ownerPM||"";const pmBtn=item.status==="待PM確認"?'<button class="btn btn-primary btn-sm" onclick="openPMConfirmModal(\''+item.id+'\')">SPM</button>':"";
+    const me=eventsData.find(ev=>ev.title===(item.currentEvent||item.event));const loc=me?(item.sourceRegion||"TW")+" / "+me.location:(item.sourceRegion||"TW");
+    const snD=item.serialNumber?'<div style="font-size:0.75rem;color:var(--text-secondary);font-family:monospace;">SN: '+item.serialNumber+'</div>':'<div style="font-size:0.725rem;color:var(--text-tertiary);font-style:italic;">(Pending SN)</div>';
+    const cq=item.confirmedQty||0,rq=item.quantity||1;let qc="zero";if(cq>=rq)qc="full";else if(cq>0)qc="partial";
+    const rdS=item.readyDate?item.readyDate.slice(5):"-";
+    tr.innerHTML='<td><div style="font-size:0.85rem;font-weight:500;color:var(--google-blue);">'+(item.currentEvent||item.event)+'</div><div style="font-size:0.725rem;color:var(--text-secondary);">Req by: <strong>'+(item.requestedBy||"")+'</strong></div></td><td><div style="font-size:0.8rem;color:var(--text-secondary);">'+loc+'</div></td><td><div style="display:flex;align-items:center;gap:0.35rem;margin-bottom:0.1rem;"><span class="segment-tag">'+(item.segment||"")+'</span><span style="font-weight:500;">'+item.productModel+'</span></div>'+snD+'</td><td><div style="font-size:0.825rem;">'+sn+'</div></td><td><span class="qty-ratio-badge '+qc+'">'+cq+' / '+rq+'</span></td><td><strong style="font-size:0.85rem;">'+rdS+'</strong></td><td><span class="status-badge '+bc+'">'+sl+'</span></td><td><div style="font-size:0.85rem;font-weight:500;">'+(item.currentHolder||"")+'</div></td><td><div class="table-actions">'+pmBtn+'<button class="btn btn-secondary btn-sm" onclick="openTransferModal(\''+item.id+'\')">Transfer</button><button class="btn btn-secondary btn-sm" onclick="openTimelineModal(\''+item.id+'\')">History</button><button class="btn btn-secondary btn-sm" style="color:var(--google-red);border-color:rgba(217,48,37,0.35);" onclick="deleteSampleUnit(\''+item.id+'\')">Del</button></div></td>';
+    tb.appendChild(tr);
+  });
+}
+
+function deleteSampleUnit(id) {const s=samplesData.find(x=>x.id===id);if(!s)return;if(confirm('Delete '+s.productModel+'?')){samplesData=samplesData.filter(x=>x.id!==id);saveSamplesData();renderApp();showToast("Deleted: "+s.productModel);}}
+
+function openPMConfirmModal(id) {
+  selectedSampleId=id;const s=samplesData.find(x=>x.id===id);if(!s)return;const rq=s.quantity||1;
+  document.getElementById("pmConfirmInfo").textContent=s.segment+" "+s.productModel+" (Requested: "+rq+" for "+s.event+")";
+  document.getElementById("pmMaxRequestedQty").textContent=rq;const qi=document.getElementById("pmConfirmedQty");qi.max=rq;qi.value=rq;
+  document.getElementById("pmBackfillSN").value=s.serialNumber||"";document.getElementById("pmReadyDate").value=s.readyDate||"";
+  openModal("modalPMConfirm");
+}
+
+function handlePMConfirmSubmit(e) {
+  e.preventDefault();if(!selectedSampleId)return;const s=samplesData.find(x=>x.id===selectedSampleId);if(!s)return;
+  const dec=document.getElementById("pmDecision").value,sn=document.getElementById("pmBackfillSN").value.trim(),rq=s.quantity||1;
+  let cq=parseInt(document.getElementById("pmConfirmedQty").value)||0;if(cq>rq)cq=rq;
+  const rd=document.getElementById("pmReadyDate").value,nt=document.getElementById("pmNotes").value.trim();
+  s.status=dec;if(sn)s.serialNumber=sn;s.confirmedQty=cq;if(rd)s.readyDate=rd;
+  const pm=s.modelSPM||s.ownerPM;
+  if(!s.custodyLogs)s.custodyLogs=[];
+  s.custodyLogs.unshift({date:fmtDate(new Date()),action:"SPM Confirm ("+dec+")",from:pm,to:pm,location:"SPM Portal",condition:"Good",notes:"SN:"+( sn||"N/A")+". Confirmed:"+cq+"/"+rq+". "+nt});
+  saveSamplesData();renderApp();closeModal("modalPMConfirm");showToast("Confirmed "+cq+"/"+rq+" units!");
+}
+
+function openTransferModal(id) {
+  selectedSampleId=id;const s=samplesData.find(x=>x.id===id);if(!s)return;
+  const ts=document.getElementById("transTargetEventSelect");ts.innerHTML='<option value="">-- Keep Current --</option>';eventsData.forEach(ev=>{const o=document.createElement("option");o.value=ev.title;o.textContent=ev.title;ts.appendChild(o);});
+  document.getElementById("transSampleInfo").textContent=s.segment+" "+s.productModel+" ("+( s.currentEvent||s.event)+")";
+  document.getElementById("transFromPerson").value=s.currentHolder||s.modelSPM||"";
+  document.getElementById("transTargetEventSelect").value=s.currentEvent||s.event;
+  openModal("modalTransfer");
+}
+
+function handleCustodyTransfer(e) {
+  e.preventDefault();if(!selectedSampleId)return;const s=samplesData.find(x=>x.id===selectedSampleId);if(!s)return;
+  const act=document.getElementById("transAction").value,fp=document.getElementById("transFromPerson").value.trim(),tp=document.getElementById("transToPerson").value.trim(),te=document.getElementById("transTargetEventSelect").value,cond=document.getElementById("transCondition").value,nt=document.getElementById("transNotes").value.trim();
+  if(act==="轉交"){s.status="轉交中";s.currentHolder=tp;if(te)s.currentEvent=te;}else if(act==="交付"){s.status="使用中";s.currentHolder=tp;if(te)s.currentEvent=te;}else if(act==="回收"){s.status="已回收";s.currentHolder=tp||s.requestedBy;}else if(act==="歸還"){s.status="已歸還";s.currentHolder=tp||s.modelSPM||"";s.currentEvent="Depot Return";}
+  if(!s.custodyLogs)s.custodyLogs=[];
+  s.custodyLogs.unshift({date:fmtDate(new Date()),action:te&&te!==s.event?"Cross-Event Transfer ("+te+")":act,from:fp,to:tp,location:te||"",condition:cond,notes:nt});
+  saveSamplesData();renderApp();closeModal("modalTransfer");document.getElementById("formTransfer").reset();showToast("Transferred "+s.productModel+" → "+tp);
+}
+
+function openTimelineModal(id) {
+  const s=samplesData.find(x=>x.id===id);if(!s)return;
+  document.getElementById("timelineTitle").textContent=s.segment+" "+s.productModel+" Timeline";
+  const c=document.getElementById("timelineContainer");c.innerHTML="";
+  if(!s.custodyLogs||s.custodyLogs.length===0){c.innerHTML='<p style="color:var(--text-tertiary);">No history yet.</p>';}
+  else{s.custodyLogs.forEach(log=>{const it=document.createElement("div");it.className="timeline-item";const ct=log.condition&&log.condition!=="Good"?'<span style="color:var(--google-red);font-weight:500;font-size:0.75rem;"> [⚠️ '+log.condition+']</span>':"";
+    it.innerHTML='<div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-header"><span class="timeline-action">'+log.action+ct+'</span><span class="timeline-date">'+log.date+'</span></div><div class="timeline-details"><div><strong>From:</strong> '+log.from+' ➔ <strong>To:</strong> '+log.to+'</div>'+(log.location?'<div><strong>Location:</strong> '+log.location+'</div>':'')+(log.notes?'<div style="margin-top:0.2rem;color:var(--text-tertiary);">'+log.notes+'</div>':'')+'</div></div>';
+    c.appendChild(it);});}
+  openModal("modalTimeline");
+}
+
+function exportToCsv() {
+  if(samplesData.length===0){showToast("No data to export!");return;}
+  let csv="\uFEFF"+"Segment,Model,SN,Event,Current Event,Region,Location,Status,Custodian,SPM,Requested By,Confirmed Qty,Requested Qty,Ready Date,Notes\n";
+  samplesData.forEach(s=>{csv+=[esc(s.segment),esc(s.productModel),esc(s.serialNumber||""),esc(s.event),esc(s.currentEvent),s.sourceRegion||"TW",esc(s.location||""),s.status,esc(s.currentHolder),esc(s.modelSPM||s.ownerPM),esc(s.requestedBy),s.confirmedQty||0,s.quantity||1,s.readyDate,esc(s.notes)].join(",")+"\n";});
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="Sample_Tracking_"+fmtDateFile(new Date())+".csv";document.body.appendChild(a);a.click();document.body.removeChild(a);showToast("Exported CSV!");
+}
+function esc(s){if(!s)return '""';return '"'+String(s).replace(/"/g,'""')+'"';}
+function openModal(id){const m=document.getElementById(id);if(m){m.classList.add("active");m.style.display="flex";}}
+function closeModal(id){const m=document.getElementById(id);if(m){m.classList.remove("active");m.style.display="none";}}
+function toggleTheme(){const c=document.body.getAttribute("data-theme")||"light";document.body.setAttribute("data-theme",c==="light"?"dark":"light");updateThemeToggleButton();}
+function updateThemeToggleButton(){const b=document.getElementById("themeToggle");if(!b)return;const t=document.body.getAttribute("data-theme")||"light";b.innerHTML=t==="light"?'<svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.40 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg> Dark Mode':'<svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1z"/></svg> Light Mode';}
+function showToast(msg){let c=document.querySelector(".toast-container");if(!c){c=document.createElement("div");c.className="toast-container";document.body.appendChild(c);}const t=document.createElement("div");t.className="toast";t.textContent=msg;c.appendChild(t);setTimeout(()=>{t.remove();},3500);}
+function fmtDate(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,'0')+"-"+String(d.getDate()).padStart(2,'0')+" "+String(d.getHours()).padStart(2,'0')+":"+String(d.getMinutes()).padStart(2,'0');}
+function fmtDateFile(d){return d.getFullYear()+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0');}
+</script>
+</body>
+</html>

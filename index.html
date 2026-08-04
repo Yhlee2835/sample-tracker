@@ -62,8 +62,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font);background:var(--bg);color:var(--text-1);line-height:1.47;font-size:14px;letter-spacing:-0.01em;min-height:100vh;-webkit-font-smoothing:antialiased}
-svg{display:inline-block;vertical-align:middle;fill:none;stroke-linecap:round;stroke-linejoin:round}
-.app{display:flex;flex-direction:column;min-height:100vh;width:100%;overflow-x:hidden}
+svg{display:inline-block;vertical-align:middle;fill:none}
+.app{display:flex;flex-direction:column;min-height:100vh;width:100%}
 
 /* --- Header --- */
 .hdr{position:sticky;top:0;z-index:1000;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border-sub);padding:.75rem 2rem}
@@ -79,7 +79,7 @@ svg{display:inline-block;vertical-align:middle;fill:none;stroke-linecap:round;st
 @keyframes pulse{from{opacity:.3}to{opacity:1}}
 
 /* --- Nav --- */
-.nav{background:var(--surface);border-bottom:1px solid var(--border-sub);padding:.4rem 2rem;display:flex;justify-content:center}
+.nav{position:sticky;top:51px;z-index:999;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border-sub);padding:.4rem 2rem;display:flex;justify-content:center}
 .nav-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.35rem}
 .tab{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem 1.1rem;color:var(--text-2);font-weight:500;font-size:.83rem;border-radius:var(--r-pill);cursor:pointer;transition:var(--ease);border:1px solid transparent}
 .tab:hover{color:var(--text-1);background:var(--surface-alt)}
@@ -88,82 +88,104 @@ svg{display:inline-block;vertical-align:middle;fill:none;stroke-linecap:round;st
 .tab.on .tab-n{background:var(--blue);color:#fff}
 
 /* --- Buttons --- */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.3rem;height:30px;padding:0 .8rem;border-radius:var(--r-pill);font-size:.76rem;font-weight:500;font-family:var(--font);cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text-1);transition:var(--ease);text-decoration:none;white-space:nowrap}
-.btn:hover{background:var(--surface-alt)}
-.btn-p{background:var(--blue);color:#fff;border-color:var(--blue)}
-.btn-p:hover{background:var(--blue-hover);border-color:var(--blue-hover)}
-.btn-s{background:var(--surface-alt);border-color:var(--border-sub)}
-.btn-d{color:var(--red);border-color:rgba(217,48,37,.25)}
-.btn-d:hover{background:rgba(217,48,37,.08)}
-.btn-icon{padding:0 .4rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.35rem;height:32px;padding:0 .85rem;border-radius:var(--r-pill);font-size:.78rem;font-weight:500;font-family:var(--font);cursor:pointer;border:1px solid var(--border-sub);background:var(--surface);color:var(--text-1);transition:var(--ease);text-decoration:none;white-space:nowrap}
+.btn:hover{background:var(--surface-alt);border-color:var(--border)}
+.btn-p{background:var(--blue-bg);color:var(--blue);border-color:rgba(0,102,204,.2)}
+.btn-p:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-s{background:var(--surface-alt);color:var(--text-1);border-color:var(--border-sub)}
+.btn-s:hover{background:var(--border-sub)}
+.btn-d{color:var(--red);border-color:rgba(217,48,37,.25);background:rgba(217,48,37,.04)}
+.btn-d:hover{background:rgba(217,48,37,.12);border-color:var(--red)}
+.btn-icon{padding:0 .45rem}
+.btn-reset{height:32px;font-size:.76rem;padding:0 .8rem;transition:opacity .15s ease, background .15s ease}
+.btn-reset.off{opacity:.4;pointer-events:none;background:var(--surface-alt);color:var(--text-3);border-color:var(--border-sub)}
+
+/* --- Back To Top Button --- */
+.btn-top{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;border-radius:50%;background:var(--blue);color:#fff;border:none;box-shadow:0 4px 16px rgba(0,102,204,0.4);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:99999;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease}
+.btn-top.on{opacity:1;pointer-events:auto}
+.btn-top:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,102,204,0.55);background:#0052a3}
 
 /* --- Main Content --- */
-.main{flex:1;max-width:1360px;width:100%;margin:0 auto;padding:1.5rem 2rem 3rem}
+.main{flex:1;max-width:1360px;width:100%;margin:0 auto;padding:1.5rem 2rem 4rem}
 .view{display:none}.view.on{display:block;animation:fadeIn .18s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(2px)}to{opacity:1;transform:translateY(0)}}
 
 /* --- Section Header --- */
-.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.75rem}
-.sec-hdr h2{font-size:1.15rem;font-weight:600;letter-spacing:-0.015em}
-.sec-hdr p{font-size:.8rem;color:var(--text-2);margin-top:.1rem}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:1rem}
+.sec-hdr h2{font-size:1.2rem;font-weight:600;letter-spacing:-0.015em}
+.sec-hdr p{font-size:.83rem;color:var(--text-2);margin-top:.15rem}
 
-/* --- Control Bar --- */
-.ctrl{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:.5rem .8rem;margin-bottom:1.1rem;display:flex;align-items:center;flex-wrap:wrap;gap:.55rem;justify-content:space-between;box-shadow:var(--shadow)}
-.search{position:relative;flex:1;min-width:200px}
-.search svg{position:absolute;left:.8rem;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none}
-.search input{width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-pill);padding:.42rem .8rem .42rem 2.1rem;color:var(--text-1);font-size:.8rem;font-family:var(--font);transition:var(--ease)}
+/* --- Control Bar (Sticky) --- */
+.ctrl{position:sticky;top:92px;z-index:998;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:.7rem 1rem;margin-bottom:1.2rem;display:flex;align-items:center;flex-wrap:wrap;gap:.75rem;justify-content:space-between;box-shadow:var(--shadow-md)}
+.search{position:relative;flex:1;min-width:220px;display:flex;align-items:center}
+.search svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none}
+.search input{width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-pill);padding:.5rem 1rem .5rem 2.3rem;color:var(--text-1);font-size:.82rem;font-family:var(--font);transition:var(--ease)}
 .search input:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 3px rgba(0,102,204,.12)}
-.filters{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
-.flt,.fg-sel{background-color:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-pill);padding:.38rem 1.9rem .38rem .85rem;color:var(--text-1);font-size:.78rem;font-family:var(--font);cursor:pointer;transition:var(--ease);font-weight:500;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2386868B' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .65rem center;background-size:10px}
-[data-theme="dark"] .flt,[data-theme="dark"] .fg-sel{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23A1A1A6' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")}
-.flt:focus,.fg-sel:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 3px rgba(0,102,204,.12)}
+
+.filters{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
+.flt,.fg-sel{background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-pill);padding:.45rem 1.8rem .45rem .85rem;color:var(--text-1);font-size:.8rem;font-family:var(--font);cursor:pointer;transition:var(--ease);font-weight:500;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%2370757A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center}
+.flt:focus,.fg-sel:focus{outline:none;border-color:var(--focus)}
+.flt option,.fg-sel option{background:var(--surface);color:var(--text-1);padding:8px 12px;border-radius:8px;font-size:.82rem}
 
 /* --- Gantt Timeline --- */
-.gantt{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1rem;margin-bottom:1.4rem;overflow-x:auto;box-shadow:var(--shadow)}
-.gantt-title{font-size:.88rem;font-weight:600;display:flex;align-items:center;gap:.4rem;margin-bottom:.8rem}
-.gantt-body{display:flex;flex-direction:column;gap:.55rem;min-width:600px}
-.gantt-axis{display:flex;justify-content:space-between;font-size:.68rem;color:var(--text-3);border-bottom:1px dashed var(--border);padding-bottom:.3rem;margin-bottom:.2rem}
-.gantt-row{display:flex;align-items:center;gap:.8rem}
-.gantt-lbl{width:160px;font-size:.78rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0}
-.gantt-track{flex:1;background:var(--surface-alt);height:22px;border-radius:var(--r-pill);position:relative;overflow:hidden;border:1px solid var(--border-sub)}
-.gantt-bar{position:absolute;top:2px;bottom:2px;background:var(--blue);border-radius:var(--r-pill);display:flex;align-items:center;padding:0 .6rem;font-size:.68rem;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gantt{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin-bottom:1.6rem;overflow-x:auto;box-shadow:var(--shadow)}
+.gantt-title{font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:.4rem;margin-bottom:.9rem}
+.gantt-body{display:flex;flex-direction:column;gap:.65rem;min-width:600px}
+.gantt-axis{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-3);border-bottom:1px dashed var(--border);padding-bottom:.4rem;margin-bottom:.3rem}
+.gantt-row{display:flex;align-items:center;gap:1rem}
+.gantt-lbl{width:160px;font-size:.8rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0}
+.gantt-track{flex:1;background:var(--surface-alt);height:24px;border-radius:var(--r-pill);position:relative;overflow:hidden;border:1px solid var(--border-sub)}
+.gantt-bar{position:absolute;top:2px;bottom:2px;background:var(--blue);border-radius:var(--r-pill);display:flex;align-items:center;padding:0 .75rem;font-size:.7rem;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* --- Metrics --- */
-.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-bottom:1.1rem}
-.met{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:.85rem 1rem;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
-.met h4{font-size:.68rem;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.15rem}
-.met-val{font-size:1.4rem;font-weight:600;line-height:1.1;letter-spacing:-0.02em}
-.met-ico{width:30px;height:30px;border-radius:50%;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:1.4rem}
+.met{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
+.met h4{font-size:.72rem;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.2rem}
+.met-val{font-size:1.45rem;font-weight:600;line-height:1.1;letter-spacing:-0.02em}
+.met-ico{width:32px;height:32px;border-radius:50%;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0}
 
 /* --- Events Grid --- */
-.ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
-.ev-card{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1.1rem;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:var(--ease)}
+.ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem}
+.ev-card{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1.35rem 1.45rem;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:var(--ease)}
 .ev-card:hover{border-color:var(--border)}
-.ev-pills{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;margin-bottom:.5rem}
-.ev-tag{display:inline-flex;align-items:center;gap:.25rem;height:22px;padding:0 .55rem;border-radius:var(--r-pill);font-size:.7rem;font-weight:500;white-space:nowrap;border:1px solid transparent}
-.ev-tag-s{background:var(--surface-alt);color:var(--text-2);border-color:var(--border-sub);font-weight:600}
-.ev-tag-t{background:var(--surface-alt);color:var(--text-1);border-color:var(--border-sub)}
-.ev-tag-l{background:rgba(107,33,168,0.08);color:var(--purple);border-color:rgba(107,33,168,0.18)}
-[data-theme="dark"] .ev-tag-l{background:rgba(191,90,242,0.15);color:#D8B4FE;border-color:rgba(191,90,242,0.25)}
-.ev-tag-soon{background:rgba(180,83,9,0.08);color:var(--amber);border-color:rgba(180,83,9,0.2)}
-[data-theme="dark"] .ev-tag-soon{background:rgba(255,214,10,0.12);color:#FFD60A;border-color:rgba(255,214,10,0.22)}
-.ev-tag-date{background:rgba(16,124,65,0.08);color:var(--green);border-color:rgba(16,124,65,0.2)}
-[data-theme="dark"] .ev-tag-date{background:rgba(48,209,88,0.12);color:#30D158;border-color:rgba(48,209,88,0.22)}
-.ev-tag-past{background:var(--surface-alt);color:var(--text-3);border-color:var(--border-sub)}
-.ev-title{font-size:1rem;font-weight:600;margin-bottom:.4rem;letter-spacing:-0.01em}
-.ev-meta{font-size:.78rem;color:var(--text-2);display:flex;flex-direction:column;gap:.2rem;margin-bottom:.9rem}
-.ev-meta-r{display:flex;align-items:center;gap:.35rem}
-.ev-meta-l{font-weight:500;min-width:80px;color:var(--text-3);font-size:.73rem}
-.ev-acts{display:grid;grid-template-columns:1fr 1fr;gap:.3rem;margin-top:auto}
+.ev-pills{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem}
+.ev-tag{display:inline-flex;align-items:center;gap:.25rem;height:22px;padding:0 .55rem;border-radius:var(--r-pill);font-size:.7rem;font-weight:500;white-space:nowrap}
+.ev-tag-t{background:var(--blue-bg);color:var(--blue)}
+.ev-tag-s{background:var(--surface-alt);color:var(--text-2)}
+.ev-tag-l{background:var(--s-transfer-bg);color:var(--purple)}
+.ev-tag-date{background:var(--s-using-bg);color:var(--s-using-tx)}
+.ev-tag-past{background:var(--s-returned-bg);color:var(--s-returned-tx)}
+.ev-tag-soon{background:var(--s-pending-bg);color:var(--s-pending-tx)}
+.ev-title{font-size:1.05rem;font-weight:600;margin-bottom:.5rem;letter-spacing:-0.01em;line-height:1.35}
+.ev-meta{font-size:.8rem;color:var(--text-2);display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.1rem;line-height:1.4}
+.ev-meta-r{display:flex;align-items:center;gap:.4rem}
+.ev-meta-l{font-weight:500;min-width:85px;color:var(--text-3);font-size:.75rem}
+.ev-acts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;margin-top:auto}
 
-/* --- Data Table (Desktop) --- */
-.tbl-wrap{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);overflow-x:auto;box-shadow:var(--shadow)}
-.tbl{width:100%;border-collapse:collapse;text-align:left;font-size:.8rem;min-width:980px}
-.tbl th{background:var(--surface-alt);color:var(--text-2);font-weight:500;font-size:.7rem;padding:.65rem .9rem;border-bottom:1px solid var(--border-sub);white-space:nowrap;user-select:none;text-transform:uppercase;letter-spacing:.03em}
-.th-sort{cursor:pointer;display:inline-flex;align-items:center;gap:.2rem}
+/* --- Data Table & Group Cards (Desktop) --- */
+.evt-grp-card{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);margin-bottom:1.25rem;box-shadow:var(--shadow);overflow:hidden;transition:var(--ease)}
+.evt-grp-card:hover{border-color:var(--border)}
+.evt-grp-hdr{background:var(--surface-alt);padding:.75rem 1.1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;cursor:pointer;user-select:none;border-bottom:1px solid var(--border-sub);transition:var(--ease)}
+.evt-grp-hdr:hover{background:var(--border-sub)}
+.evt-grp-left{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}
+.evt-grp-chevron{font-size:.7rem;color:var(--text-3);transition:transform .2s ease;display:inline-block}
+.evt-grp-card.collapsed .evt-grp-chevron{transform:rotate(-90deg)}
+.evt-grp-title{font-weight:700;font-size:.95rem;color:var(--blue);display:flex;align-items:center;gap:.4rem}
+.evt-grp-org{font-size:.75rem;color:var(--text-2);display:inline-flex;align-items:center;gap:.25rem}
+.evt-grp-right{display:flex;align-items:center;gap:.85rem;font-size:.75rem;color:var(--text-2);flex-wrap:wrap}
+.evt-grp-stat{display:inline-flex;align-items:center;gap:.3rem}
+.evt-grp-body{display:block;transition:var(--ease)}
+.evt-grp-card.collapsed .evt-grp-body{display:none!important}
+
+.tbl-wrap{background:var(--surface);border-top:0;overflow-x:hidden}
+.tbl{width:100%;border-collapse:collapse;text-align:left;font-size:.82rem;table-layout:auto}
+.tbl th{background:var(--surface-alt);color:var(--text-2);font-weight:500;font-size:.72rem;padding:.75rem 1rem;border-bottom:1px solid var(--border-sub);white-space:nowrap;user-select:none;text-transform:uppercase;letter-spacing:.03em}
+.th-sort{cursor:pointer;display:inline-flex;align-items:center;gap:.25rem}
 .th-sort:hover{color:var(--text-1)}
-.tbl td{padding:.75rem .9rem;border-bottom:1px solid var(--border-sub);vertical-align:middle}
-.tbl tbody tr.mr:hover{background:var(--surface-alt)}
+.tbl td{padding:.9rem 1.1rem;border-bottom:1px solid var(--border-sub);vertical-align:middle;line-height:1.4}
+.tbl tbody tr.mr{transition:background .18s ease,box-shadow .18s ease}
+.tbl tbody tr.mr:hover{background:rgba(0,102,204,0.08)!important;box-shadow:inset 3px 0 0 var(--blue)}
+body.dark .tbl tbody tr.mr:hover{background:rgba(41,151,255,0.16)!important;box-shadow:inset 3px 0 0 var(--blue)}
 .seg{display:inline-flex;align-items:center;padding:.06rem .4rem;background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-pill);font-size:.66rem;font-weight:500;margin-right:.2rem}
 .qty-c{white-space:nowrap!important}
 .qty{display:inline-flex;align-items:center;padding:.1rem .55rem;border-radius:var(--r-pill);font-size:.73rem;font-weight:600;font-family:monospace;background:var(--surface-alt);border:1px solid var(--border-sub);white-space:nowrap!important}
@@ -180,7 +202,9 @@ svg{display:inline-block;vertical-align:middle;fill:none;stroke-linecap:round;st
 
 /* --- Mobile Sample Cards --- */
 .cards{display:none}
-.s-card{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:.9rem 1rem;margin-bottom:.6rem;box-shadow:var(--shadow)}
+.s-card{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:.9rem 1rem;margin-bottom:.6rem;box-shadow:var(--shadow);transition:var(--ease)}
+.s-card:hover{background:rgba(0,102,204,0.05);border-color:var(--blue)}
+body.dark .s-card:hover{background:rgba(41,151,255,0.12);border-color:var(--blue)}
 .s-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.5rem;margin-bottom:.5rem}
 .s-card-model{font-weight:600;font-size:.88rem}
 .s-card-variant{font-size:.72rem;color:var(--text-3)}
@@ -192,11 +216,11 @@ svg{display:inline-block;vertical-align:middle;fill:none;stroke-linecap:round;st
 /* --- Inline History --- */
 tr.hist-row{display:none;background:var(--surface-alt)}
 tr.hist-row.on{display:table-row}
-.hist-box{padding:.75rem 1rem;border-bottom:1px solid var(--border-sub)}
-.hist-hdr{font-size:.76rem;font-weight:600;color:var(--blue);margin-bottom:.5rem;display:flex;align-items:center;gap:.3rem}
-.hist-list{display:flex;flex-direction:column;gap:.4rem;padding-left:.3rem}
-.hist-item{display:flex;align-items:flex-start;gap:.6rem;background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.4rem .7rem;font-size:.76rem}
-.hist-dot{width:7px;height:7px;border-radius:50%;background:var(--blue);margin-top:.32rem;flex-shrink:0}
+tr.hist-row td{padding:.4rem 0!important;max-width:0;width:100%}
+.hist-box{width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;padding:.4rem .75rem;border-bottom:1px solid var(--border-sub)}
+.hist-list{display:flex;flex-direction:column;gap:.4rem}
+.hist-item{display:flex;align-items:flex-start;gap:.65rem;background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.55rem .75rem;font-size:.76rem}
+.hist-num{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:20px;padding:0 5px;border-radius:var(--r-pill);background:var(--blue-bg);color:var(--blue);font-size:.68rem;font-weight:700;flex-shrink:0;margin-top:1px}
 .hist-main{flex:1;display:flex;flex-direction:column;gap:.08rem}
 .hist-top{display:flex;align-items:center;justify-content:space-between;gap:.4rem}
 .hist-act{font-weight:600}
@@ -207,6 +231,29 @@ tr.hist-row.on{display:table-row}
 .hist-cond-warn{background:var(--s-pending-bg);color:var(--s-pending-tx)}
 .hist-cond-bad{background:var(--s-unavail-bg);color:var(--s-unavail-tx)}
 .hist-notes{font-size:.7rem;color:var(--text-3);font-style:italic}
+
+/* --- Pure Horizontal Timeline Stream --- */
+.hist-h-stream{display:flex;align-items:stretch;gap:.85rem;overflow-x:auto;width:100%;box-sizing:border-box;padding:.5rem 1rem;scrollbar-width:thin;scroll-behavior:smooth}
+.hist-h-stream::after{content:'';padding-right:2rem;flex-shrink:0}
+.hist-h-stream::-webkit-scrollbar{height:6px}
+.hist-h-stream::-webkit-scrollbar-track{background:var(--surface-alt);border-radius:4px}
+.hist-h-stream::-webkit-scrollbar-thumb{background:var(--blue);border-radius:4px}
+
+.h-card{min-width:230px;max-width:300px;background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.7rem .85rem;display:flex;flex-direction:column;gap:.4rem;box-shadow:var(--shadow-sm);flex-shrink:0;position:relative;transition:var(--ease)}
+.h-card:hover{border-color:var(--blue);box-shadow:var(--shadow-md)}
+.h-card.latest{border:1.5px solid var(--blue);background:var(--surface);box-shadow:0 0 0 1px var(--blue),var(--shadow-md)}
+body[data-theme="dark"] .h-card.latest{background:rgba(0,102,204,0.14);border-color:#3399ff}
+
+.h-card-top{display:flex;align-items:center;justify-content:space-between;gap:.4rem}
+.h-card-badge{font-size:.68rem;font-weight:700;background:var(--blue-bg);color:var(--blue);padding:.1rem .45rem;border-radius:var(--r-pill)}
+.h-card.latest .h-card-badge{background:var(--blue);color:#fff}
+.h-card-date{font-size:.68rem;color:var(--text-2);font-weight:500}
+.h-card-act{font-size:.82rem;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;word-break:break-word}
+.h-card-flow{font-size:.73rem;color:var(--text-1);line-height:1.35;background:var(--surface-alt);padding:.35rem .55rem;border-radius:var(--r-sm);border:1px solid var(--border-sub);word-break:break-word}
+body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:var(--text-1)}
+.h-card-notes{font-size:.7rem;color:var(--text-2);font-style:italic;line-height:1.3;margin-top:auto;word-break:break-word}
+
+.h-stream-arrow{display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1rem;font-weight:700;flex-shrink:0;opacity:.8}
 
 /* Mobile history card version */
 .hist-card-box{background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.7rem .8rem;margin-top:.5rem;display:none}
@@ -281,6 +328,9 @@ tr.hist-row.on{display:table-row}
       <div class="hdr-actions">
         <div class="sync syncing" id="syncBadge"><span class="sync-dot"></span><span id="syncTxt">Connecting</span></div>
         <button id="btnExport" class="btn btn-s"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="hdr-lbl">Export</span></button>
+        <button id="btnBackup" class="btn btn-s" onclick="exportFullBackup()" title="Backup full database to JSON file"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> <span class="hdr-lbl">Backup</span></button>
+        <button id="btnRestore" class="btn btn-s" onclick="document.getElementById('fRestoreFile').click()" title="Restore database from JSON backup file"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg> <span class="hdr-lbl">Restore</span></button>
+        <input type="file" id="fRestoreFile" accept=".json" style="display:none" onchange="restoreBackup(event)">
         <button id="btnTheme" class="btn btn-s" title="Toggle Theme"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="hdr-lbl" id="themeLbl">Dark</span></button>
       </div>
     </div>
@@ -305,14 +355,38 @@ tr.hist-row.on{display:table-row}
       </div>
       <!-- Events Filter Bar -->
       <div class="ctrl" id="evCtrl">
-        <div class="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="evSearch" placeholder="Search events..."></div>
+        <div class="search">
+          <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="evSearch" placeholder="Search events, organizers, locations...">
+        </div>
         <div class="filters">
           <select id="evTypeFilter" class="flt"><option value="ALL">All Types</option><option value="Customer Visiting">Customer Visiting</option><option value="Retail Summit">Retail Summit</option><option value="PreG">PreG</option><option value="Other">Other</option></select>
           <select id="evOrgFilter" class="flt"><option value="ALL">All Organizers</option></select>
           <select id="evStatusFilter" class="flt"><option value="ALL">All Statuses</option><option value="Upcoming">Upcoming</option><option value="Ongoing">Ongoing</option><option value="Completed">Completed</option></select>
+          <button class="btn btn-s btn-reset off" id="btnEvReset" onclick="resetEvFilters()" title="Reset all filters">✕ Reset</button>
         </div>
       </div>
-      <div class="gantt"><div class="gantt-title"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Timeline</div><div class="gantt-body" id="ganttBody"></div></div>
+
+      <!-- Gantt Timeline -->
+      <div class="gantt">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.8rem;flex-wrap:wrap;gap:.5rem">
+          <div class="gantt-title" style="margin-bottom:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Event Schedule Timeline
+          </div>
+          <div style="display:flex;align-items:center;gap:.35rem">
+            <button type="button" class="btn btn-s" style="height:28px;padding:0 .55rem;font-size:.72rem" onclick="scrollGantt(-260)" title="Scroll Left (Earlier)">◀</button>
+            <button type="button" class="btn btn-s" style="height:28px;padding:0 .55rem;font-size:.72rem" onclick="scrollGantt(260)" title="Scroll Right (Later)">▶</button>
+            <span style="font-size:.73rem;color:var(--text-3);font-weight:500;margin-left:.2rem">Range:</span>
+            <select id="ganttRangeSelect" class="flt" onchange="renderGantt()" style="padding:.25rem 1.6rem .25rem .7rem;font-size:.75rem;height:28px">
+              <option value="ALL" selected>Earliest to Latest</option>
+              <option value="30">30 Days</option>
+              <option value="60">60 Days</option>
+              <option value="90">90 Days</option>
+            </select>
+          </div>
+        </div>
+        <div class="gantt-body" id="ganttBody"></div>
+      </div>
       <div class="ev-grid" id="evGrid"></div>
     </section>
 
@@ -321,32 +395,26 @@ tr.hist-row.on{display:table-row}
       <div class="metrics">
         <div class="met"><div><h4>Total</h4><div class="met-val" id="mTotal">0</div></div><div class="met-ico"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div></div>
         <div class="met"><div><h4>Pending</h4><div class="met-val" id="mPend">0</div></div><div class="met-ico"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div></div>
-        <div class="met"><div><h4>In Use</h4><div class="met-val" id="mUse">0</div></div><div class="met-ico"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div></div>
-        <div class="met"><div><h4>Transfer</h4><div class="met-val" id="mTrans">0</div></div><div class="met-ico"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div></div>
+        <div class="met"><div><h4>Confirmed</h4><div class="met-val" id="mConfCount">0</div></div><div class="met-ico"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div></div>
+        <div class="met"><div><h4>In Use</h4><div class="met-val" id="mUse">0</div></div><div class="met-ico"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div></div>
         <div class="met"><div><h4>Closed</h4><div class="met-val" id="mClosed">0</div></div><div class="met-ico"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div></div>
       </div>
       <div class="ctrl">
-        <div class="search"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="sSearch" placeholder="Search model, SN, event, SPM, custodian..."></div>
+        <div class="search">
+          <svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="sSearch" placeholder="Search model, SN, event, SPM, custodian...">
+        </div>
         <div class="filters">
+          <select id="fSeg" class="flt"><option value="ALL">All Segments</option><option value="Zenbook">Zenbook</option><option value="ProArt">ProArt</option><option value="Vivobook">Vivobook</option><option value="Zephyrus">Zephyrus</option><option value="Strix">Strix</option><option value="TUF">TUF</option><option value="Flow">Flow</option></select>
           <select id="fEvt" class="flt"><option value="ALL">All Events</option></select>
           <select id="fReq" class="flt"><option value="ALL">All Requesters</option></select>
           <select id="fSpm" class="flt"><option value="ALL">All SPMs</option></select>
-          <select id="fSt" class="flt"><option value="ALL">All Statuses</option><option value="pending">Pending SPM</option><option value="confirmed">Confirmed</option><option value="partial">Partial</option><option value="unavail">Unavailable</option><option value="using">In Use</option><option value="transfer">In Transfer</option><option value="reclaimed">Reclaimed</option><option value="returned">Returned</option></select>
+          <select id="fSt" class="flt"><option value="ALL">All Statuses</option><option value="pending">Pending SPM</option><option value="confirmed">Confirmed</option><option value="partial">Partial</option><option value="using">In Use</option><option value="reclaimed">Reclaimed</option><option value="returned">Returned</option><option value="unavail">Unavailable</option></select>
+          <button class="btn btn-s btn-reset off" id="btnSmReset" onclick="resetSmFilters()" title="Reset all filters">✕ Reset</button>
         </div>
       </div>
-      <!-- Desktop Table -->
-      <div class="tbl-wrap">
-        <table class="tbl"><thead><tr>
-          <th><span class="th-sort" data-col="event">Event <span class="arrow">↕</span></span></th>
-          <th><span class="th-sort" data-col="model">Model <span class="arrow">↕</span></span></th>
-          <th><span class="th-sort" data-col="spm">SPM <span class="arrow">↕</span></span></th>
-          <th><span class="th-sort" data-col="qty">Qty <span class="arrow">↕</span></span></th>
-          <th><span class="th-sort" data-col="ready">Ready <span class="arrow">↕</span></span></th>
-          <th><span class="th-sort" data-col="status">Status <span class="arrow">↕</span></span></th>
-          <th><span class="th-sort" data-col="holder">Custodian <span class="arrow">↕</span></span></th>
-          <th>Actions</th>
-        </tr></thead><tbody id="tBody"></tbody></table>
-      </div>
+      <!-- Desktop Table Container (Independent Collapsible Event Cards) -->
+      <div id="tblContainer"></div>
       <!-- Mobile Cards -->
       <div class="cards" id="mCards"></div>
     </section>
@@ -366,7 +434,7 @@ tr.hist-row.on{display:table-row}
   <div class="fg-item"><label class="fg-lbl">Sample Deadline <span class="req">*</span></label><input type="date" id="eDL" class="fg-in" required></div>
   <div class="fg-item"><label class="fg-lbl">Linked Event</label><select id="eLink" class="fg-sel"><option value="">None</option></select></div>
   <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="eNotes" class="fg-ta" rows="2"></textarea></div>
-</div></div><div class="modal-f"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p" id="eSubmit">Save</button></div></form></div></div>
+</div></div><div class="modal-f" style="justify-content:space-between"><button type="button" class="btn btn-d" id="btnDelEvtModal" onclick="delEvtFromModal()" style="display:none">Delete Event</button><div style="display:flex;gap:.4rem;margin-left:auto"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p" id="eSubmit">Save</button></div></div></form></div></div>
 
 <!-- Batch Request Modal -->
 <div id="mReq" class="modal"><div class="modal-c" style="max-width:720px"><div class="modal-h"><h3 class="modal-t">Batch Sample Request</h3><button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
@@ -393,9 +461,9 @@ tr.hist-row.on{display:table-row}
   <div class="fg-item"><label class="fg-lbl">Custodian</label><input type="text" id="xHolder" class="fg-in"></div>
   <div class="fg-item"><label class="fg-lbl">Location</label><input type="text" id="xLoc" class="fg-in"></div>
   <div class="fg-item"><label class="fg-lbl">Ready Date</label><input type="date" id="xReady" class="fg-in"></div>
-  <div class="fg-item"><label class="fg-lbl">Status <span class="req">*</span></label><select id="xStatus" class="fg-sel" required><option value="pending">Pending SPM</option><option value="confirmed">Confirmed</option><option value="partial">Partially Confirmed</option><option value="unavail">Unavailable</option><option value="using">In Use</option><option value="transfer">In Transfer</option><option value="reclaimed">Reclaimed</option><option value="returned">Returned</option></select></div>
+  <div class="fg-item"><label class="fg-lbl">Status <span class="req">*</span></label><select id="xStatus" class="fg-sel" required><option value="pending">Pending SPM</option><option value="confirmed">Confirmed</option><option value="partial">Partially Confirmed</option><option value="using">In Use</option><option value="reclaimed">Reclaimed</option><option value="returned">Returned</option><option value="unavail">Unavailable</option></select></div>
   <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="xNotes" class="fg-ta" rows="2"></textarea></div>
-</div></div><div class="modal-f"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Save</button></div></form></div></div>
+</div></div><div class="modal-f" style="justify-content:space-between"><button type="button" class="btn btn-d" id="btnDelSmModal" onclick="delSmFromModal()" style="display:none">Delete Sample</button><div style="display:flex;gap:.4rem;margin-left:auto"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Save</button></div></div></form></div></div>
 
 <!-- SPM Confirm Modal -->
 <div id="mSPM" class="modal"><div class="modal-c"><div class="modal-h"><h3 class="modal-t">SPM Response</h3><button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
@@ -418,6 +486,9 @@ tr.hist-row.on{display:table-row}
   <div class="fg-item fg-full"><label class="fg-lbl">Condition</label><select id="trCond" class="fg-sel"><option value="Good">Good</option><option value="Minor Scratch">Minor Scratch</option><option value="Needs Repair">Needs Repair</option><option value="Missing Accessories">Missing Accessories</option></select></div>
   <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="trNotes" class="fg-ta" rows="2"></textarea></div>
 </div></div><div class="modal-f"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Save</button></div></form></div></div>
+
+<!-- Back To Top Button -->
+<button id="btnBackToTop" class="btn-top" onclick="scrollToTop()" title="Back to Top"><svg width="18" height="18" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" fill="none"><polyline points="18 15 12 9 6 15"/></svg></button>
 
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
@@ -473,7 +544,7 @@ const evRef = db.ref("tracker/events");
 const smRef = db.ref("tracker/samples");
 
 let evs = [], sms = [], writing = false;
-let fEvt = "ALL", fReq = "ALL", fSpm = "ALL", fSt = "ALL", sq = "";
+let fEvt = "ALL", fReq = "ALL", fSpm = "ALL", fSeg = "ALL", fSt = "ALL", sq = "";
 let selId = null, sortCol = "event", sortDir = "asc";
 let expanded = new Set();
 let bRows = [{ seg: "Zenbook", model: "", variant: "", qty: 1, spm: "" }];
@@ -487,22 +558,123 @@ function syncUI(cls, txt) {
   if (t) t.textContent = txt;
 }
 
+// LocalStorage keys for offline persistence
+const LS_EV = "tracker_local_events";
+const LS_SM = "tracker_local_samples";
+const LS_SPM = "tracker_local_spm_master";
+
+// Load from LocalStorage on startup for instant zero-downtime offline availability
+try {
+  const localEv = localStorage.getItem(LS_EV);
+  if (localEv) evs = JSON.parse(localEv);
+  const localSm = localStorage.getItem(LS_SM);
+  if (localSm) sms = JSON.parse(localSm);
+  const localSpm = localStorage.getItem(LS_SPM);
+  if (localSpm) Object.assign(modelSpmMaster, JSON.parse(localSpm));
+} catch(e) {}
+
 db.ref(".info/connected").on("value", snap => {
-  syncUI(snap.val() ? "connected" : "offline", snap.val() ? "Synced" : "Offline");
+  const isOnline = !!snap.val();
+  syncUI(isOnline ? "connected" : "offline", isOnline ? "Cloud Synced" : "Local Mode");
 });
 
-evRef.on("value", snap => { if (writing) return; evs = snap.val() || []; render(); });
-smRef.on("value", snap => { if (writing) return; sms = snap.val() || []; render(); });
+evRef.on("value", snap => {
+  if (writing) return;
+  const val = snap.val();
+  if (val && Array.isArray(val) && val.length) {
+    evs = val;
+    try { localStorage.setItem(LS_EV, JSON.stringify(evs)); } catch(e) {}
+  }
+  render();
+});
+
+smRef.on("value", snap => {
+  if (writing) return;
+  const val = snap.val();
+  if (val && Array.isArray(val) && val.length) {
+    sms = val;
+    try { localStorage.setItem(LS_SM, JSON.stringify(sms)); } catch(e) {}
+  }
+  render();
+});
+
+window.addEventListener("scroll", () => {
+  const b = document.getElementById("btnBackToTop");
+  if (b) b.classList.toggle("on", window.scrollY > 250);
+});
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function saveLocal() {
+  try {
+    localStorage.setItem(LS_EV, JSON.stringify(evs));
+    localStorage.setItem(LS_SM, JSON.stringify(sms));
+    localStorage.setItem(LS_SPM, JSON.stringify(modelSpmMaster));
+    const snap = { date: new Date().toISOString(), events: evs, samples: sms };
+    localStorage.setItem("tracker_auto_backup_latest", JSON.stringify(snap));
+  } catch(e) {}
+}
 
 function saveEv() {
   writing = true; syncUI("syncing", "Saving...");
-  evRef.set(evs).then(() => { writing = false; syncUI("connected", "Synced"); })
-    .catch(err => { writing = false; syncUI("offline", "Error"); toast("Save failed: " + err.message); });
+  saveLocal();
+  evRef.set(evs).then(() => { writing = false; syncUI("connected", "Cloud Synced"); })
+    .catch(err => { writing = false; syncUI("offline", "Local Mode"); toast("Saved locally (Cloud offline)"); });
 }
+
 function saveSm() {
   writing = true; syncUI("syncing", "Saving...");
-  smRef.set(sms).then(() => { writing = false; syncUI("connected", "Synced"); })
-    .catch(err => { writing = false; syncUI("offline", "Error"); toast("Save failed: " + err.message); });
+  saveLocal();
+  smRef.set(sms).then(() => { writing = false; syncUI("connected", "Cloud Synced"); })
+    .catch(err => { writing = false; syncUI("offline", "Local Mode"); toast("Saved locally (Cloud offline)"); });
+}
+
+function exportFullBackup() {
+  if (!sms.length && !evs.length) { toast("No data to backup"); return; }
+  const backupData = {
+    appName: "ASUS Sample Custody Tracker",
+    version: "2.0",
+    exportDate: new Date().toISOString(),
+    events: evs,
+    samples: sms,
+    modelSpmMaster: modelSpmMaster
+  };
+  const jsonStr = JSON.stringify(backupData, null, 2);
+  const blob = new Blob([jsonStr], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "SampleTracker_FullBackup_" + fmtFile(new Date()) + ".json";
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  toast("Full database backup downloaded");
+}
+
+function restoreBackup(e) {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (!data.events || !data.samples) {
+        toast("Error: Invalid backup file format");
+        return;
+      }
+      if (!confirm("⚠️ Restore Confirmation:\nThis will overwrite current Cloud & Local data with " + data.samples.length + " sample(s) and " + data.events.length + " event(s) from backup. Proceed?")) return;
+      
+      evs = data.events || [];
+      sms = data.samples || [];
+      if (data.modelSpmMaster) {
+        Object.assign(modelSpmMaster, data.modelSpmMaster);
+      }
+      saveEv();
+      saveSm();
+      render();
+      toast("Successfully restored database from backup!");
+    } catch (err) {
+      toast("Restore failed: " + err.message);
+    }
+  };
+  r.readAsText(f); e.target.value = "";
 }
 
 /* ======================================================================
@@ -514,11 +686,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Sample filters
   const bind = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener("input" in el ? "input" : "change", fn); };
-  bind("sSearch", e => { sq = e.target.value.trim().toLowerCase(); renderTable(); });
-  bind("fEvt", e => { fEvt = e.target.value; renderTable(); });
-  bind("fReq", e => { fReq = e.target.value; renderTable(); });
-  bind("fSpm", e => { fSpm = e.target.value; renderTable(); });
-  bind("fSt", e => { fSt = e.target.value; renderTable(); });
+  bind("sSearch", e => { sq = e.target.value.trim().toLowerCase(); renderTable(); updateResetBtns(); });
+  bind("fSeg", e => { fSeg = e.target.value; renderTable(); updateResetBtns(); });
+  bind("fEvt", e => { fEvt = e.target.value; renderTable(); updateResetBtns(); });
+  bind("fReq", e => { fReq = e.target.value; renderTable(); updateResetBtns(); });
+  bind("fSpm", e => { fSpm = e.target.value; renderTable(); updateResetBtns(); });
+  bind("fSt", e => { fSt = e.target.value; renderTable(); updateResetBtns(); });
 
   // Event filters
   document.getElementById("evSearch").addEventListener("input", e => { evSearchQ = e.target.value.trim().toLowerCase(); renderEvGrid(); });
@@ -560,6 +733,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateThemeBtn();
   renderBatch();
+
+  const ganttEl = document.querySelector(".gantt");
+  if (ganttEl) {
+    ganttEl.addEventListener("wheel", e => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        ganttEl.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+  }
 });
 
 function switchView(id) {
@@ -580,44 +763,139 @@ function updateBadges() {
 /* ======================================================================
    Rendering — Events
    ====================================================================== */
+function scrollGantt(offset) {
+  const el = document.querySelector(".gantt");
+  if (el) el.scrollBy({ left: offset, behavior: "smooth" });
+}
+
+function getMonday(d) {
+  const dt = new Date(d);
+  const day = dt.getDay();
+  const diff = dt.getDate() - day + (day === 0 ? -6 : 1);
+  dt.setDate(diff);
+  dt.setHours(0, 0, 0, 0);
+  return dt;
+}
+
 function renderGantt() {
-  const c = document.getElementById("ganttBody"); c.innerHTML = "";
+  const c = document.getElementById("ganttBody"); if (!c) return; c.innerHTML = "";
   if (!evs.length) { c.innerHTML = '<div style="text-align:center;padding:1.2rem;color:var(--text-3);font-size:.8rem">No events scheduled.</div>'; return; }
-  let mn = Infinity, mx = -Infinity;
-  evs.forEach(e => { const s = new Date(e.startDate).getTime(), d = new Date(e.endDate).getTime(); if (s < mn) mn = s; if (d > mx) mx = d; });
-  if (mn >= mx) { mn = Date.now(); mx = Date.now() + 30 * 864e5; }
-  const buf = 864e5, sR = mn - buf, eR = mx + buf, tS = eR - sR;
-  const ax = document.createElement("div"); ax.className = "gantt-axis";
-  ax.innerHTML = "<span>" + fmtShort(new Date(sR)) + "</span><span>" + fmtShort(new Date(sR + tS / 2)) + "</span><span>" + fmtShort(new Date(eR)) + "</span>";
-  c.appendChild(ax);
+
+  let minMs = Infinity, maxMs = -Infinity;
+  evs.forEach(e => {
+    if (e.startDate) { const s = new Date(e.startDate).getTime(); if (s < minMs) minMs = s; }
+    if (e.endDate) { const d = new Date(e.endDate).getTime(); if (d > maxMs) maxMs = d; }
+  });
+  if (minMs === Infinity) minMs = Date.now();
+  if (maxMs === -Infinity || maxMs <= minMs) maxMs = minMs + 30 * 864e5;
+
+  const rangeVal = document.getElementById("ganttRangeSelect") ? document.getElementById("ganttRangeSelect").value : "ALL";
+  let sR, eR;
+
+  const minMonday = getMonday(new Date(minMs));
+  sR = minMonday.getTime();
+
+  if (rangeVal === "ALL") {
+    eR = maxMs + 3 * 864e5;
+  } else {
+    const days = parseInt(rangeVal) || 60;
+    eR = sR + days * 864e5;
+  }
+
+  const totalMs = Math.max(864e5, eR - sR);
+  const weekStep = 7 * 864e5;
+  let currMs = sR;
+  const numWeeks = Math.ceil(totalMs / weekStep);
+
+  const canvasMinWidth = Math.max(750, numWeeks * 135);
+  c.style.minWidth = canvasMinWidth + "px";
+
+  let ticksHtml = "";
+  while (currMs < eR) {
+    const dt = new Date(currMs);
+    const leftPct = Math.min(100, Math.max(0, ((currMs - sR) / totalMs) * 100));
+    const mStr = String(dt.getMonth() + 1).padStart(2, '0');
+    const dStr = String(dt.getDate()).padStart(2, '0');
+    const label = mStr + '/' + dStr;
+    ticksHtml += '<div style="position:absolute;left:' + leftPct.toFixed(2) + '%;transform:translateX(-50%);white-space:nowrap;font-size:.68rem;color:var(--text-2);font-weight:600">' + label + '<div style="width:1px;height:6px;background:var(--border);margin:2px auto 0 auto"></div></div>';
+    currMs += weekStep;
+  }
+
+  const hdrRow = document.createElement("div");
+  hdrRow.style.display = "flex";
+  hdrRow.style.alignItems = "center";
+  hdrRow.style.gap = "1rem";
+  hdrRow.style.marginBottom = ".6rem";
+
+  const spacer = document.createElement("div");
+  spacer.style.width = "160px";
+  spacer.style.flexShrink = "0";
+
+  const ax = document.createElement("div");
+  ax.className = "gantt-axis";
+  ax.style.flex = "1";
+  ax.style.position = "relative";
+  ax.style.height = "26px";
+  ax.style.borderBottom = "1px solid var(--border-sub)";
+  ax.innerHTML = ticksHtml;
+
+  hdrRow.appendChild(spacer);
+  hdrRow.appendChild(ax);
+  c.appendChild(hdrRow);
+
   evs.forEach(e => {
     const s = new Date(e.startDate).getTime(), d = new Date(e.endDate).getTime();
-    const l = Math.max(0, Math.min(100, ((s - sR) / tS) * 100));
-    const w = Math.max(8, Math.min(100 - l, ((d - s) / tS) * 100));
+    const isOutBefore = d < sR;
+    const isOutAfter = s > eR;
+    const startsBefore = s < sR;
+    const endsAfter = d > eR;
+
+    const leftPct = Math.max(0, Math.min(100, ((s - sR) / totalMs) * 100));
+    const rightPct = Math.max(0, Math.min(100, ((d - sR) / totalMs) * 100));
+    const widthPct = Math.max(4, rightPct - leftPct);
+
     const r = document.createElement("div"); r.className = "gantt-row";
-    r.innerHTML = '<div class="gantt-lbl" title="' + esc(e.title) + '">' + esc(e.title) + '</div><div class="gantt-track"><div class="gantt-bar" style="left:' + l.toFixed(1) + '%;width:' + w.toFixed(1) + '%">' + esc(e.title) + " (" + e.startDate.slice(5) + " ~ " + e.endDate.slice(5) + ")</div></div>";
+    
+    let barLabel = e.startDate.slice(5) + " ~ " + e.endDate.slice(5);
+    if (startsBefore) barLabel = "◀ " + barLabel;
+    if (endsAfter) barLabel = barLabel + " ▶";
+
+    let trackHtml = '';
+    if (isOutBefore) {
+      trackHtml = '<div class="gantt-track"><div class="gantt-bar gantt-bar-out" style="left:0%;width:18%;background:var(--surface-alt);color:var(--text-3);border:1px dashed var(--border-sub)">◀ ' + e.startDate.slice(5) + '</div></div>';
+    } else if (isOutAfter) {
+      trackHtml = '<div class="gantt-track"><div class="gantt-bar gantt-bar-out" style="right:0%;width:18%;background:var(--surface-alt);color:var(--text-3);border:1px dashed var(--border-sub)">' + e.startDate.slice(5) + ' ▶</div></div>';
+    } else {
+      if (widthPct < 14) {
+        trackHtml = '<div class="gantt-track" style="position:relative"><div class="gantt-bar" style="left:' + leftPct.toFixed(1) + '%;width:' + widthPct.toFixed(1) + '%"></div><span style="position:absolute;left:' + (leftPct + widthPct + 1).toFixed(1) + '%;top:3px;font-size:.7rem;font-weight:600;color:var(--text-1);white-space:nowrap">' + barLabel + '</span></div>';
+      } else {
+        trackHtml = '<div class="gantt-track"><div class="gantt-bar" style="left:' + leftPct.toFixed(1) + '%;width:' + widthPct.toFixed(1) + '%">' + barLabel + '</div></div>';
+      }
+    }
+
+    r.innerHTML = '<div class="gantt-lbl" title="' + esc(e.title) + '">' + esc(e.title) + '</div>' + trackHtml;
     c.appendChild(r);
   });
 }
 
 function getEvDateTag(ev) {
-  const now = Date.now(), s = new Date(ev.startDate).getTime(), e = new Date(ev.endDate).getTime();
-  if (now < s) return { cls: "ev-tag-soon", txt: "Upcoming" };
-  if (now >= s && now <= e) return { cls: "ev-tag-date", txt: "Ongoing" };
-  return { cls: "ev-tag-past", txt: "Completed" };
+  const today = new Date().toISOString().split("T")[0];
+  if (ev.endDate && ev.endDate < today) return { cls: "ev-tag-past", txt: "Completed" };
+  if (ev.startDate && ev.startDate <= today && (ev.endDate >= today || !ev.endDate)) return { cls: "ev-tag-date", txt: "Ongoing" };
+  return { cls: "ev-tag-soon", txt: "Upcoming" };
 }
 
 function renderEvGrid() {
   const c = document.getElementById("evGrid"); c.innerHTML = "";
   if (!evs.length) { c.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2.5rem 1rem;background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg)"><h3 style="font-size:.95rem;font-weight:600;margin-bottom:.3rem">No Events</h3><p style="font-size:.8rem;color:var(--text-2);margin-bottom:1rem">Create your first event to start tracking.</p><button class="btn btn-p" onclick="openNewEvt()"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> New Event</button></div>'; return; }
 
-  let filtered = evs;
+  let filtered = [...evs];
   if (evTypeF !== "ALL") filtered = filtered.filter(e => e.type === evTypeF);
   if (evOrgF !== "ALL") filtered = filtered.filter(e => e.organizer === evOrgF);
   if (evStatusF !== "ALL") filtered = filtered.filter(e => getEvDateTag(e).txt === evStatusF);
   if (evSearchQ) filtered = filtered.filter(e => (e.title + " " + e.organizer + " " + e.location + " " + e.type + " " + (e.precedingEvent || "") + " " + (e.notes || "")).toLowerCase().includes(evSearchQ));
 
-  if (!filtered.length) { c.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--text-3);font-size:.82rem">No events match your filters.</div>'; return; }
+  if (!filtered.length) { c.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2.5rem;color:var(--text-3);font-size:.85rem;background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg)">No events match your selected filters.</div>'; return; }
 
   filtered.forEach((ev, idx) => {
     const card = document.createElement("div"); card.className = "ev-card";
@@ -625,9 +903,10 @@ function renderEvGrid() {
     const ready = ls.filter(s => ["confirmed", "partial", "using", "reclaimed"].includes(s.status)).length;
     const linked = ev.precedingEvent ? '<span class="ev-tag ev-tag-l"><svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> ' + esc(ev.precedingEvent) + "</span>" : "";
     const dtag = getEvDateTag(ev);
-    card.innerHTML = '<div class="ev-pills"><span class="ev-tag ev-tag-s">#' + (evs.indexOf(ev) + 1) + '</span><span class="ev-tag ev-tag-t">' + esc(ev.type) + '</span><span class="ev-tag ' + dtag.cls + '">' + dtag.txt + "</span>" + linked + '</div><h3 class="ev-title">' + esc(ev.title) + '</h3><div class="ev-meta"><div class="ev-meta-r"><span class="ev-meta-l">Location</span>' + esc(ev.location || "-") + '</div><div class="ev-meta-r"><span class="ev-meta-l">Organizer</span>' + esc(ev.organizer || "-") + '</div><div class="ev-meta-r"><span class="ev-meta-l">Schedule</span>' + ev.startDate + " ~ " + ev.endDate + '</div><div class="ev-meta-r"><span class="ev-meta-l">Deadline</span><span style="color:var(--red);font-weight:600">' + ev.deadline + '</span></div><div class="ev-meta-r"><span class="ev-meta-l">Ready</span>' + ready + " / " + ls.length + ' units</div></div><div class="ev-acts"><button class="btn btn-p" onclick="openReqFor(\'' + esc(ev.title).replace(/'/g, "\\'") + '\')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Request</button><button class="btn btn-s" onclick="filterByEv(\'' + esc(ev.title).replace(/'/g, "\\'") + '\')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> Assets</button><button class="btn btn-s" onclick="openEditEvt(\'' + ev.id + '\')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Edit</button><button class="btn btn-d" onclick="delEvt(\'' + ev.id + '\')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg> Delete</button></div>';
+    card.innerHTML = '<div class="ev-pills"><span class="ev-tag ev-tag-t">' + esc(ev.type) + '</span><span class="ev-tag ' + dtag.cls + '">' + dtag.txt + "</span>" + linked + '</div><h3 class="ev-title">' + esc(ev.title) + '</h3><div class="ev-meta"><div class="ev-meta-r"><span class="ev-meta-l">Location</span>' + esc(ev.location || "-") + '</div><div class="ev-meta-r"><span class="ev-meta-l">Organizer</span>' + esc(ev.organizer || "-") + '</div><div class="ev-meta-r"><span class="ev-meta-l">Schedule</span>' + ev.startDate + " ~ " + ev.endDate + '</div><div class="ev-meta-r"><span class="ev-meta-l">Deadline</span><span style="color:var(--red);font-weight:600">' + ev.deadline + '</span></div><div class="ev-meta-r"><span class="ev-meta-l">Ready</span>' + ready + " / " + ls.length + ' units</div></div><div class="ev-acts"><button class="btn btn-p" onclick="openReqFor(\'' + esc(ev.title).replace(/'/g, "\\'") + '\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Request</button><button class="btn btn-s" onclick="filterByEv(\'' + esc(ev.title).replace(/'/g, "\\'") + '\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg> Assets</button><button class="btn btn-s" onclick="openEditEvt(\'' + ev.id + '\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg> Edit</button></div>';
     c.appendChild(card);
   });
+  updateResetBtns();
 }
 
 /* ======================================================================
@@ -636,9 +915,9 @@ function renderEvGrid() {
 function renderMetrics() {
   document.getElementById("mTotal").textContent = sms.length;
   document.getElementById("mPend").textContent = sms.filter(s => s.status === "pending").length;
+  document.getElementById("mConfCount").textContent = sms.filter(s => s.status === "confirmed" || s.status === "partial").length;
   document.getElementById("mUse").textContent = sms.filter(s => s.status === "using").length;
-  document.getElementById("mTrans").textContent = sms.filter(s => s.status === "transfer").length;
-  document.getElementById("mClosed").textContent = sms.filter(s => s.status === "returned" || s.status === "unavail").length;
+  document.getElementById("mClosed").textContent = sms.filter(s => s.status === "returned" || s.status === "unavail" || s.status === "reclaimed").length;
 }
 
 function populateFilters() {
@@ -647,6 +926,58 @@ function populateFilters() {
   setOpts("fReq", "All Requesters", [...new Set(sms.map(s => s.requestedBy).filter(Boolean))]);
   setOpts("fSpm", "All SPMs", [...new Set(sms.map(s => s.modelSPM).filter(Boolean))]);
   setOpts("evOrgFilter", "All Organizers", [...new Set(evs.map(e => e.organizer).filter(Boolean))]);
+  updateResetBtns();
+}
+
+function clearFlt(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (id === "evSearch") evSearchQ = "";
+  else if (id === "evTypeFilter") evTypeF = "ALL";
+  else if (id === "evOrgFilter") evOrgF = "ALL";
+  else if (id === "evStatusFilter") evStatusF = "ALL";
+  else if (id === "sSearch") sq = "";
+  else if (id === "fSeg") fSeg = "ALL";
+  else if (id === "fEvt") fEvt = "ALL";
+  else if (id === "fReq") fReq = "ALL";
+  else if (id === "fSpm") fSpm = "ALL";
+  else if (id === "fSt") fSt = "ALL";
+
+  if (el.tagName === "INPUT") el.value = "";
+  else el.value = "ALL";
+
+  renderEvGrid();
+  renderTable();
+}
+
+function resetEvFilters() {
+  evSearchQ = ""; evTypeF = "ALL"; evOrgF = "ALL"; evStatusF = "ALL";
+  document.getElementById("evSearch").value = "";
+  document.getElementById("evTypeFilter").value = "ALL";
+  const evOrgEl = document.getElementById("evOrgFilter"); if (evOrgEl) evOrgEl.value = "ALL";
+  const evStEl = document.getElementById("evStatusFilter"); if (evStEl) evStEl.value = "ALL";
+  renderEvGrid();
+}
+
+function resetSmFilters() {
+  sq = ""; fSeg = "ALL"; fEvt = "ALL"; fReq = "ALL"; fSpm = "ALL"; fSt = "ALL";
+  document.getElementById("sSearch").value = "";
+  const fSegEl = document.getElementById("fSeg"); if (fSegEl) fSegEl.value = "ALL";
+  document.getElementById("fEvt").value = "ALL";
+  document.getElementById("fReq").value = "ALL";
+  document.getElementById("fSpm").value = "ALL";
+  document.getElementById("fSt").value = "ALL";
+  renderTable();
+}
+
+function updateResetBtns() {
+  const isEvActive = !!(evSearchQ || evTypeF !== "ALL" || evOrgF !== "ALL" || evStatusF !== "ALL");
+  const btnEv = document.getElementById("btnEvReset");
+  if (btnEv) btnEv.classList.toggle("off", !isEvActive);
+
+  const isSmActive = !!(sq || fSeg !== "ALL" || fEvt !== "ALL" || fReq !== "ALL" || fSpm !== "ALL" || fSt !== "ALL");
+  const btnSm = document.getElementById("btnSmReset");
+  if (btnSm) btnSm.classList.toggle("off", !isSmActive);
 }
 
 /* ======================================================================
@@ -663,6 +994,7 @@ function doSort(col) {
 
 function renderTable() {
   let fd = sms.filter(it => {
+    if (fSeg !== "ALL" && (it.segment || "Zenbook") !== fSeg) return false;
     if (fEvt !== "ALL" && it.currentEvent !== fEvt && it.event !== fEvt) return false;
     if (fReq !== "ALL" && it.requestedBy !== fReq) return false;
     if (fSpm !== "ALL" && it.modelSPM !== fSpm) return false;
@@ -690,42 +1022,122 @@ function renderTable() {
   renderMobileCards(fd);
 }
 
+const collapsedGrps = new Set();
+function toggleEvtGrp(grpId) {
+  if (collapsedGrps.has(grpId)) collapsedGrps.delete(grpId);
+  else collapsedGrps.add(grpId);
+  const card = document.getElementById("card_" + grpId);
+  if (card) card.classList.toggle("collapsed", collapsedGrps.has(grpId));
+}
+
 function renderDesktopTable(fd) {
-  const tb = document.getElementById("tBody"); tb.innerHTML = "";
-  if (!fd.length) { tb.innerHTML = '<tr><td colspan="8"><div style="padding:2rem;text-align:center"><h3 style="font-size:.9rem;font-weight:600;margin-bottom:.2rem">No items found</h3><p style="font-size:.76rem;color:var(--text-2)">Create requests from Events tab.</p></div></td></tr>'; return; }
+  const container = document.getElementById("tblContainer"); if (!container) return; container.innerHTML = "";
+  if (!fd.length) {
+    container.innerHTML = '<div style="padding:3rem 1rem;text-align:center;background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg)"><h3 style="font-size:.92rem;font-weight:600;margin-bottom:.25rem">No items found</h3><p style="font-size:.78rem;color:var(--text-2)">Create requests from Events tab.</p></div>';
+    return;
+  }
 
+  // Group items by current Event
+  const groups = {};
   fd.forEach(it => {
-    const si = sInfo(it.status);
-    const cq = it.confirmedQty || 0, rq = it.quantity || 1;
-    const qCls = cq >= rq ? "full" : cq > 0 ? "part" : "zero";
-    const snHtml = it.serialNumber ? '<div style="font-size:.7rem;color:var(--text-2);font-family:monospace">SN: ' + esc(it.serialNumber) + "</div>" : "";
-    const varHtml = it.variant ? '<div style="font-size:.7rem;color:var(--text-3)">' + esc(it.variant) + "</div>" : "";
-    const rdS = it.readyDate ? it.readyDate.slice(5) : "-";
-    const evName = it.event || it.currentEvent || "-";
+    const evKey = it.currentEvent || it.event || "Unassigned";
+    if (!groups[evKey]) groups[evKey] = [];
+    groups[evKey].push(it);
+  });
 
-    const isPending = it.status === "pending";
-    const isFinal = it.status === "unavail" || it.status === "returned";
-    const spmBtn = isPending ? '<button class="btn btn-p" style="height:26px;font-size:.7rem" onclick="openSPM(\'' + it.id + '\')">SPM</button>' : "";
-    const trBtn = !isPending && !isFinal ? '<button class="btn btn-s" style="height:26px;font-size:.7rem" onclick="openTrans(\'' + it.id + '\')">Transfer</button>' : "";
+  Object.entries(groups).forEach(([evName, items], idx) => {
+    const grpId = "grp_" + idx;
+    const evObj = evs.find(e => e.title === evName);
+    const evType = evObj ? evObj.type : "";
+    const evOrg = evObj ? (evObj.organizer || "") : "";
+    const usingCount = items.filter(s => s.status === "using").length;
+    const pendingCount = items.filter(s => s.status === "pending").length;
+    const isCollapsed = collapsedGrps.has(grpId);
 
-    const tr = document.createElement("tr"); tr.className = "mr";
-    tr.innerHTML = '<td><div style="font-size:.8rem;font-weight:600;color:var(--blue)">' + esc(evName) + '</div><div style="font-size:.68rem;color:var(--text-2)">by ' + esc(it.requestedBy || "") + "</div></td>" +
-      '<td><div style="display:flex;align-items:center;gap:.25rem"><span class="seg">' + esc(it.segment || "Zenbook") + '</span><span style="font-weight:600">' + esc(it.productModel) + "</span></div>" + varHtml + snHtml + "</td>" +
-      "<td>" + esc(it.modelSPM) + "</td>" +
-      '<td class="qty-c"><span class="qty ' + qCls + '">' + cq + " / " + rq + "</span></td>" +
-      '<td><strong style="font-size:.8rem">' + rdS + "</strong></td>" +
-      '<td><span class="st ' + si.css + '">' + si.label + "</span></td>" +
-      '<td style="font-weight:600">' + esc(it.currentHolder || "") + "</td>" +
-      '<td><div class="acts">' + spmBtn + trBtn +
-      '<button class="btn btn-s btn-icon" style="height:26px" onclick="toggleHist(\'' + it.id + '\')" title="History"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></button>' +
-      '<button class="btn btn-s btn-icon" style="height:26px" onclick="openEdit(\'' + it.id + '\')" title="Edit"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>' +
-      '<button class="btn btn-d btn-icon" style="height:26px" onclick="delSm(\'' + it.id + '\')" title="Delete"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button></div></td>';
-    tb.appendChild(tr);
+    const grpCard = document.createElement("div");
+    grpCard.className = "evt-grp-card" + (isCollapsed ? " collapsed" : "");
+    grpCard.id = "card_" + grpId;
 
-    // History row
-    const hr = document.createElement("tr"); hr.className = "hist-row" + (expanded.has(it.id) ? " on" : ""); hr.id = "h_" + it.id;
-    hr.innerHTML = '<td colspan="8">' + buildHistHtml(it) + "</td>";
-    tb.appendChild(hr);
+    let rowsHtml = "";
+    items.forEach(it => {
+      const si = sInfo(it.status);
+      const cq = it.confirmedQty || 0, rq = it.quantity || 1;
+      const qCls = cq >= rq ? "full" : cq > 0 ? "part" : "zero";
+      const rdS = it.readyDate ? it.readyDate.slice(5) : "-";
+
+      const isPending = it.status === "pending";
+      const isFinal = it.status === "unavail" || it.status === "returned";
+      const spmBtn = isPending ? '<button class="btn btn-p" style="height:26px;font-size:.7rem" onclick="openSPM(\'' + it.id + '\')">SPM</button>' : "";
+      const trBtn = !isPending && !isFinal ? '<button class="btn btn-s" style="height:26px;font-size:.7rem" onclick="openTrans(\'' + it.id + '\')">Transfer</button>' : "";
+
+      let metaParts = [];
+      if (it.variant) metaParts.push(esc(it.variant));
+      if (it.serialNumber) metaParts.push('SN: ' + esc(it.serialNumber));
+      const subMetaHtml = metaParts.length ? '<div style="font-size:.73rem;color:var(--text-3);margin-top:.1rem">' + metaParts.join(' · ') + '</div>' : '';
+
+      const modelHtml = '<div style="display:flex;flex-direction:column;gap:.05rem">' +
+        '<div style="display:flex;align-items:center;gap:.35rem;flex-wrap:wrap"><span class="seg">' + esc(it.segment || "Zenbook") + '</span><span style="font-weight:600;font-size:.88rem;color:var(--text-1);letter-spacing:-0.01em">' + esc(it.productModel) + '</span></div>' +
+        subMetaHtml +
+        '</div>';
+
+      const latestLog = (it.custodyLogs && it.custodyLogs.length) ? it.custodyLogs[0] : null;
+      let condBadge = "";
+      if (latestLog && latestLog.condition && latestLog.condition !== "Good") {
+        const cc = latestLog.condition === "Needs Repair" ? "st-unavail" : "st-partial";
+        condBadge = ' <span class="st ' + cc + '" style="font-size:.65rem;padding:.08rem .35rem">⚠️ ' + esc(latestLog.condition) + '</span>';
+      }
+
+      const curEvtObj = evs.find(e => e.title === (it.currentEvent || it.event));
+      const todayStr = new Date().toISOString().split("T")[0];
+      let overdueBadge = "";
+      if (curEvtObj && curEvtObj.endDate && curEvtObj.endDate < todayStr && it.status === "using") {
+        overdueBadge = ' <span class="st st-unavail" style="font-size:.65rem;padding:.08rem .35rem">⚠️ Overdue</span>';
+      }
+
+      const histCount = it.custodyLogs ? it.custodyLogs.length : 0;
+      const histSummaryText = histCount ? ('#' + histCount + ' steps · ' + (latestLog ? latestLog.action : '')) : 'No history';
+
+      rowsHtml += '<tr class="mr" style="cursor:pointer" onclick="if(!event.target.closest(\'button,a,input\')) toggleHist(\'' + it.id + '\')">' +
+        '<td>' + modelHtml + '</td>' +
+        '<td><div style="font-weight:500;display:flex;align-items:center;gap:.3rem"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ' + esc(it.modelSPM) + '</div></td>' +
+        '<td class="qty-c"><span class="qty ' + qCls + '">' + cq + " / " + rq + '</span></td>' +
+        '<td><strong style="font-size:.8rem">' + rdS + '</strong></td>' +
+        '<td><div style="display:flex;align-items:center;gap:.25rem;flex-wrap:wrap"><span class="st ' + si.css + '">' + si.label + '</span>' + condBadge + overdueBadge + '</div></td>' +
+        '<td><div style="font-weight:600">' + esc(it.currentHolder || "") + '</div><div style="font-size:.66rem;color:var(--text-3);line-height:1.2;margin-top:.1rem">' + esc(histSummaryText) + '</div></td>' +
+        '<td><div class="acts">' + spmBtn + trBtn +
+        '<button class="btn btn-s btn-icon" style="height:26px" onclick="openEdit(\'' + it.id + '\')" title="Edit"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>' +
+        '</div></td>' +
+        '</tr>' +
+        '<tr class="hist-row' + (expanded.has(it.id) ? " on" : "") + '" id="h_' + it.id + '"><td colspan="7">' + buildHistHtml(it) + '</td></tr>';
+    });
+
+    grpCard.innerHTML = '<div class="evt-grp-hdr" onclick="toggleEvtGrp(\'' + grpId + '\')">' +
+      '<div class="evt-grp-left">' +
+        '<span class="evt-grp-chevron" id="chv_' + grpId + '">▼</span>' +
+        '<span class="evt-grp-title"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> ' + esc(evName) + '</span>' +
+        (evType ? '<span class="st st-confirmed" style="font-size:.65rem;padding:.1rem .45rem">' + esc(evType) + '</span>' : '') +
+        (evOrg ? '<span class="evt-grp-org"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ' + esc(evOrg) + '</span>' : '') +
+      '</div>' +
+      '<div class="evt-grp-right">' +
+        '<span class="evt-grp-stat"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> Total: <strong>' + items.length + ' units</strong></span>' +
+        '<span class="evt-grp-stat" style="color:var(--green)"><span class="sync-dot" style="background:var(--green)"></span> In Use: <strong>' + usingCount + '</strong></span>' +
+        (pendingCount ? '<span class="evt-grp-stat" style="color:var(--amber)"><span class="sync-dot" style="background:var(--amber)"></span> Pending: <strong>' + pendingCount + '</strong></span>' : '') +
+        '<button class="btn btn-p" style="height:26px;font-size:.68rem;padding:0 .65rem" onclick="event.stopPropagation(); openReqFor(\'' + esc(evName).replace(/'/g, "\\'") + '\')">+ Request</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="evt-grp-body" id="grp_' + grpId + '">' +
+      '<div class="tbl-wrap"><table class="tbl"><thead><tr>' +
+        '<th style="width:18%">MODEL & VARIANT</th>' +
+        '<th style="width:12%">MODEL SPM</th>' +
+        '<th style="width:7%">QTY</th>' +
+        '<th style="width:8%">READY</th>' +
+        '<th style="width:18%">STATUS & CONDITION</th>' +
+        '<th style="width:22%">CUSTODIAN & STEP</th>' +
+        '<th style="width:15%">ACTIONS</th>' +
+      '</tr></thead><tbody>' + rowsHtml + '</tbody></table></div>' +
+    '</div>';
+
+    container.appendChild(grpCard);
   });
 }
 
@@ -740,25 +1152,46 @@ function renderMobileCards(fd) {
     const isPending = it.status === "pending";
     const isFinal = it.status === "unavail" || it.status === "returned";
 
+    const latestLog = (it.custodyLogs && it.custodyLogs.length) ? it.custodyLogs[0] : null;
+    let condBadge = "";
+    if (latestLog && latestLog.condition && latestLog.condition !== "Good") {
+      const cc = latestLog.condition === "Needs Repair" ? "st-unavail" : "st-partial";
+      condBadge = ' <span class="st ' + cc + '" style="font-size:.65rem;padding:.08rem .35rem">⚠️ ' + esc(latestLog.condition) + '</span>';
+    }
+
+    const curEvtObj = evs.find(e => e.title === (it.currentEvent || it.event));
+    const todayStr = new Date().toISOString().split("T")[0];
+    let overdueBadge = "";
+    if (curEvtObj && curEvtObj.endDate && curEvtObj.endDate < todayStr && it.status === "using") {
+      overdueBadge = ' <span class="st st-unavail" style="font-size:.65rem;padding:.08rem .35rem">⚠️ Overdue</span>';
+    }
+
+    const histCount = it.custodyLogs ? it.custodyLogs.length : 0;
+    const histSummaryText = histCount ? ('#' + histCount + ' steps · ' + (latestLog ? latestLog.action : '')) : 'No history';
+
     const card = document.createElement("div"); card.className = "s-card";
-    let html = '<div class="s-card-top"><div><div class="s-card-model"><span class="seg">' + esc(it.segment) + "</span> " + esc(it.productModel) + "</div>";
-    if (it.variant) html += '<div class="s-card-variant">' + esc(it.variant) + "</div>";
-    if (it.serialNumber) html += '<div class="s-card-sn">SN: ' + esc(it.serialNumber) + "</div>";
-    html += '</div><span class="st ' + si.css + '">' + si.label + "</span></div>";
+    card.style.cursor = "pointer";
+    card.onclick = (e) => { if (e.target.closest("button") || e.target.closest("a") || e.target.closest("input")) return; toggleHistCard(it.id); };
+
+    let metaParts = [];
+    if (it.variant) metaParts.push(esc(it.variant));
+    if (it.serialNumber) metaParts.push('SN: ' + esc(it.serialNumber));
+    const subMetaHtml = metaParts.length ? '<div style="font-size:.73rem;color:var(--text-3);margin-top:.1rem">' + metaParts.join(' · ') + '</div>' : '';
+
+    let html = '<div class="s-card-top"><div style="display:flex;flex-direction:column;gap:.05rem"><div style="display:flex;align-items:center;gap:.35rem;flex-wrap:wrap"><span class="seg">' + esc(it.segment || "Zenbook") + "</span> <span style=\"font-weight:600;font-size:.9rem;color:var(--text-1)\">" + esc(it.productModel) + "</span></div>" + subMetaHtml;
+    html += '</div><div style="display:flex;align-items:center;gap:.25rem;flex-wrap:wrap"><span class="st ' + si.css + '">' + si.label + "</span>" + condBadge + overdueBadge + "</div></div>";
     html += '<div class="s-card-grid">';
     html += '<div><div class="s-card-label">Event</div><div style="font-weight:600;color:var(--blue)">' + esc(it.event || "-") + "</div></div>";
     html += '<div><div class="s-card-label">Qty</div><span class="qty ' + qCls + '">' + cq + " / " + rq + "</span></div>";
     html += '<div><div class="s-card-label">SPM</div>' + esc(it.modelSPM) + "</div>";
-    html += '<div><div class="s-card-label">Custodian</div><strong>' + esc(it.currentHolder || "-") + "</strong></div>";
+    html += '<div><div class="s-card-label">Custodian</div><strong>' + esc(it.currentHolder || "-") + '</strong><div style="font-size:.66rem;color:var(--text-3)">' + esc(histSummaryText) + '</div></div>';
     html += '<div><div class="s-card-label">Ready</div>' + (it.readyDate ? it.readyDate.slice(5) : "-") + "</div>";
     html += '<div><div class="s-card-label">Requester</div>' + esc(it.requestedBy || "-") + "</div>";
     html += "</div>";
     html += '<div class="s-card-acts">';
     if (isPending) html += '<button class="btn btn-p" style="height:28px;font-size:.72rem" onclick="openSPM(\'' + it.id + '\')">SPM Response</button>';
     if (!isPending && !isFinal) html += '<button class="btn btn-s" style="height:28px;font-size:.72rem" onclick="openTrans(\'' + it.id + '\')">Transfer</button>';
-    html += '<button class="btn btn-s" style="height:28px;font-size:.72rem" onclick="toggleHistCard(\'' + it.id + '\')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> History</button>';
     html += '<button class="btn btn-s btn-icon" style="height:28px" onclick="openEdit(\'' + it.id + '\')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>';
-    html += '<button class="btn btn-d btn-icon" style="height:28px" onclick="delSm(\'' + it.id + '\')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>';
     html += "</div>";
     // Mobile history (hidden by default)
     html += '<div class="hist-card-box' + (expanded.has(it.id) ? " on" : "") + '" id="hc_' + it.id + '">' + buildHistHtml(it) + "</div>";
@@ -771,38 +1204,92 @@ function renderMobileCards(fd) {
    History Builder
    ====================================================================== */
 function buildHistHtml(it) {
-  const hdr = esc(it.segment || "") + " " + esc(it.productModel) + (it.variant ? " — " + esc(it.variant) : "") + (it.serialNumber ? " (SN: " + esc(it.serialNumber) + ")" : "");
-  let h = '<div class="hist-box"><div class="hist-hdr"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ' + hdr + '</div><div class="hist-list">';
   if (!it.custodyLogs || !it.custodyLogs.length) {
-    h += '<div style="color:var(--text-3);font-size:.76rem;padding:.15rem 0">No history recorded.</div>';
-  } else {
-    it.custodyLogs.forEach(log => {
-      let condHtml = "";
-      if (log.condition) {
-        const cc = log.condition === "Good" ? "hist-cond-good" : (log.condition === "Needs Repair" ? "hist-cond-bad" : "hist-cond-warn");
-        condHtml = ' <span class="hist-cond ' + cc + '">' + esc(log.condition) + "</span>";
-      }
-      const flowParts = [];
-      if (log.from) flowParts.push("From: <strong>" + esc(log.from) + "</strong>");
-      if (log.to) flowParts.push("To: <strong>" + esc(log.to) + "</strong>");
-      if (log.targetEvent) flowParts.push("Event: <strong>" + esc(log.targetEvent) + "</strong>");
-      h += '<div class="hist-item"><div class="hist-dot"></div><div class="hist-main"><div class="hist-top"><span class="hist-act">' + esc(log.action) + condHtml + '</span><span class="hist-date">' + esc(log.date) + '</span></div>';
-      if (flowParts.length) h += '<div class="hist-flow">' + flowParts.join(" · ") + "</div>";
-      if (log.notes) h += '<div class="hist-notes">' + esc(log.notes) + "</div>";
-      h += "</div></div>";
-    });
+    return '<div class="hist-box"><div style="color:var(--text-3);font-size:.76rem;padding:.5rem;text-align:center">No custody history recorded yet.</div></div>';
   }
-  h += "</div></div>";
-  return h;
+
+  const logs = it.custodyLogs;
+  // Chronological order: #1 -> #2 -> #3...
+  const chronLogs = [...logs].reverse();
+  
+  let streamHtml = '<div class="hist-h-stream" onwheel="handleHistWheel(event)" title="Scroll horizontally or use mouse wheel to navigate timeline">';
+  
+  chronLogs.forEach((log, idx) => {
+    const stepNum = idx + 1;
+    const isLatest = idx === chronLogs.length - 1;
+    
+    let condHtml = "";
+    if (log.condition) {
+      const cc = log.condition === "Good" ? "hist-cond-good" : (log.condition === "Needs Repair" ? "hist-cond-bad" : "hist-cond-warn");
+      condHtml = ' <span class="hist-cond ' + cc + '">' + esc(log.condition) + '</span>';
+    }
+
+    const flowParts = [];
+    if (log.from && log.to && log.from === log.to) {
+      flowParts.push('Custodian: <strong>' + esc(log.to) + '</strong>');
+    } else {
+      if (log.from) flowParts.push('From: <strong>' + esc(log.from) + '</strong>');
+      if (log.to) flowParts.push('To: <strong>' + esc(log.to) + '</strong>');
+    }
+    if (log.targetEvent) flowParts.push('Target: <strong>' + esc(log.targetEvent) + '</strong>');
+
+    streamHtml += '<div class="h-card' + (isLatest ? ' latest' : '') + '">' +
+      '<div class="h-card-top"><span class="h-card-badge">#' + stepNum + (isLatest ? ' Current' : '') + '</span><span class="h-card-date">' + esc(log.date) + '</span></div>' +
+      '<div class="h-card-act">' + esc(log.action) + condHtml + '</div>' +
+      (flowParts.length ? '<div class="h-card-flow">' + flowParts.join(' · ') + '</div>' : '') +
+      (log.notes ? '<div class="h-card-notes">' + esc(log.notes) + '</div>' : '') +
+      '</div>';
+
+    if (idx < chronLogs.length - 1) {
+      streamHtml += '<div class="h-stream-arrow">➔</div>';
+    }
+  });
+
+  streamHtml += '</div>';
+  return '<div class="hist-box" style="padding:.2rem 0">' + streamHtml + '</div>';
 }
 
-function toggleHist(id) { expanded.has(id) ? expanded.delete(id) : expanded.add(id); renderTable(); }
+function handleHistWheel(e) {
+  if (e.deltaY !== 0) {
+    e.preventDefault();
+    e.currentTarget.scrollLeft += e.deltaY;
+  }
+}
+
+function scrollHistToLatest(id) {
+  setTimeout(() => {
+    const streamEl = document.querySelector("#h_" + id + " .hist-h-stream") || document.querySelector("#hc_" + id + " .hist-h-stream");
+    if (streamEl) {
+      streamEl.scrollLeft = streamEl.scrollWidth;
+    }
+  }, 40);
+}
+
+function toggleHist(id) {
+  if (expanded.has(id)) {
+    expanded.delete(id);
+    renderTable();
+  } else {
+    expanded.add(id);
+    renderTable();
+    scrollHistToLatest(id);
+  }
+}
+
 function toggleHistCard(id) {
-  expanded.has(id) ? expanded.delete(id) : expanded.add(id);
+  if (expanded.has(id)) {
+    expanded.delete(id);
+  } else {
+    expanded.add(id);
+  }
   const el = document.getElementById("hc_" + id);
   if (el) el.classList.toggle("on", expanded.has(id));
   const hr = document.getElementById("h_" + id);
   if (hr) hr.classList.toggle("on", expanded.has(id));
+  
+  if (expanded.has(id)) {
+    scrollHistToLatest(id);
+  }
 }
 
 /* ======================================================================
@@ -821,11 +1308,26 @@ function openNewEvt() {
   document.getElementById("mEvt").classList.add("on");
 }
 
+function openNewEvt() {
+  document.getElementById("eId").value = "";
+  document.getElementById("mEvtTitle").textContent = "New Event";
+  document.getElementById("eSubmit").textContent = "Create Event";
+  document.getElementById("fEvtForm").reset();
+  const today = new Date().toISOString().split("T")[0];
+  document.getElementById("eStart").value = today;
+  document.getElementById("eEnd").value = new Date(Date.now() + 7 * 864e5).toISOString().split("T")[0];
+  document.getElementById("eDL").value = today;
+  populateLinkSelect();
+  const btnDel = document.getElementById("btnDelEvtModal");
+  if (btnDel) btnDel.style.display = "none";
+  document.getElementById("mEvt").classList.add("on");
+}
+
 function openEditEvt(id) {
   const ev = evs.find(e => e.id === id); if (!ev) return;
   document.getElementById("eId").value = ev.id;
   document.getElementById("mEvtTitle").textContent = "Edit Event";
-  document.getElementById("eSubmit").textContent = "Save";
+  document.getElementById("eSubmit").textContent = "Save Changes";
   document.getElementById("eTitle").value = ev.title;
   document.getElementById("eType").value = ev.type;
   document.getElementById("eLoc").value = ev.location;
@@ -836,7 +1338,21 @@ function openEditEvt(id) {
   document.getElementById("eNotes").value = ev.notes || "";
   populateLinkSelect();
   document.getElementById("eLink").value = ev.precedingEvent || "";
+  const btnDel = document.getElementById("btnDelEvtModal");
+  if (btnDel) btnDel.style.display = "inline-flex";
   document.getElementById("mEvt").classList.add("on");
+}
+
+function delEvtFromModal() {
+  const id = document.getElementById("eId").value; if (!id) return;
+  const ev = evs.find(e => e.id === id); if (!ev) return;
+  if (!confirm('⚠️ Delete Confirmation (1/2):\nAre you sure you want to delete event "' + ev.title + '"?')) return;
+  if (!confirm('⚠️ Double Confirmation (2/2):\nThis action is permanent and will un-link all associated sample tracking records. Confirm deletion?')) return;
+  evs = evs.filter(e => e.id !== id);
+  sms = sms.filter(s => s.event !== ev.title && s.currentEvent !== ev.title);
+  saveEv(); saveSm(); render();
+  document.getElementById("mEvt").classList.remove("on");
+  toast("Deleted event: " + ev.title);
 }
 
 function populateLinkSelect() {
@@ -852,14 +1368,6 @@ function submitEvt(e) {
   if (id) { const ex = evs.find(x => x.id === id); if (ex) Object.assign(ex, data); toast("Updated: " + data.title); }
   else { evs.push({ id: genId("EV"), ...data }); toast("Created: " + data.title); }
   saveEv(); render(); document.getElementById("mEvt").classList.remove("on");
-}
-
-function delEvt(id) {
-  const ev = evs.find(e => e.id === id); if (!ev) return;
-  if (!confirm('Delete "' + ev.title + '"?')) return;
-  evs = evs.filter(e => e.id !== id);
-  sms = sms.filter(s => s.event !== ev.title && s.currentEvent !== ev.title);
-  saveEv(); saveSm(); render(); toast("Deleted: " + ev.title);
 }
 
 function filterByEv(t) { switchView("vTrack"); document.getElementById("fEvt").value = t; fEvt = t; renderTable(); }
@@ -880,11 +1388,322 @@ function openReqFor(t) {
   document.getElementById("mReq").classList.add("on");
 }
 
+const modelSpmMaster = {
+  "ga605wi": "Mike_Cho/ Chester1_Lee",
+  "ga605wv": "Mike_Cho/ Chester1_Lee",
+  "rc72la": "Andy1_Su/ Christy_Hsu/ Rebecca2_Huang",
+  "fx608jp": "Irene3_Huang/ Jamie_Lee",
+  "fx608jm": "Irene3_Huang/ Jamie_Lee",
+  "fx608jh": "Irene3_Huang/ Jamie_Lee",
+  "fx608jmr": "Irene3_Huang/ Jamie_Lee",
+  "fx608jhr": "Irene3_Huang/ Jamie_Lee",
+  "g635lx": "Dianne_Wu",
+  "g635lw": "Dianne_Wu",
+  "g635lr": "Dianne_Wu",
+  "g835lx": "Jace Lee",
+  "g835lw": "Jace Lee",
+  "g615lr": "Dianne_Wu",
+  "fa401km": "Nickie Chen",
+  "fa401kh": "Nickie Chen",
+  "fa401um": "Nickie Chen",
+  "fa401uh": "Nickie Chen",
+  "fa401ea": "Angela3 Wu",
+  "gu605cx": "Junciao Chen",
+  "gu605cw": "Junciao Chen",
+  "gu605cr": "Junciao Chen",
+  "gu605cp": "Junciao Chen",
+  "gu605cm": "Junciao Chen",
+  "fa608wm": "Benny Chang/ Jocie Chen",
+  "fa608wp": "Benny Chang/ Jocie Chen",
+  "ga605kp": "Mike_Cho",
+  "ga605km": "Mike_Cho",
+  "ga605kh": "Mike_Cho",
+  "fx607vu": "Irene3 Huang",
+  "fa706nfr": "Benny Chang/ Jocie Chen",
+  "fa607nu": "Kyle Lin/ Jamie Lee",
+  "fa707nvr": "Kyle Lin/ Jamie Lee",
+  "fa707nur": "Kyle Lin/ Jamie Lee",
+  "fx607vb": "Nickie_Chen",
+  "fa808uh": "Debbi Chen/ Jocie Chen",
+  "fa808um": "Debbi Chen/ Jocie Chen",
+  "fa808up": "Debbi Chen/ Jocie Chen",
+  "fx607vj": "Nickie_Chen",
+  "fx707vj": "Nickie_Chen",
+  "fa506ncg": "Benny Chang/ Jocie Chen",
+  "fa607nug": "Kyle Lin/ Jamie Lee",
+  "fa707nug": "Lynn1 Kuo/ Jamie Lee",
+  "rc73xa": "Rebecca2 Huang",
+  "rc73ya": "Rebecca2 Huang",
+  "fx607vjb": "Nickie_Chen",
+  "fx707vjb": "Nickie_Chen",
+  "gz302eac": "Angela3_wu",
+  "gc34x": "Angela3 Wu",
+  "gc34r": "Angela3 Wu",
+  "v3607vu": "Benny Chang",
+  "v3607vj": "Benny Chang",
+  "v3607vm": "Benny Chang",
+  "v3607vh": "Benny Chang",
+  "v3607vp": "Benny Chang",
+  "fx608jpr": "Irene3_Huang/ Jamie_Lee",
+  "fx608lp": "Irene3_Huang/ Jamie_Lee",
+  "fx608lm": "Irene3_Huang/ Jamie_Lee",
+  "g615lw": "Dianne_Wu",
+  "g615lp": "Dianne_Wu",
+  "g615lm": "Dianne_Wu",
+  "g615lh": "Dianne_Wu",
+  "g815lw": "Jace Lee",
+  "g815lr": "Jace Lee",
+  "g815lp": "Jace Lee",
+  "g815lm": "Jace Lee",
+  "g614pr": "Lillian Chien",
+  "g614pp": "Lillian Chien",
+  "g614pm": "Lillian Chien",
+  "g614ph": "Lillian Chien",
+  "g614fr": "Lillian Chien",
+  "g614fp": "Lillian Chien",
+  "g614fm": "Lillian Chien",
+  "g614fh": "Lillian Chien",
+  "g814pp": "Even Hung",
+  "g814pm": "Even Hung",
+  "g814ph": "Even Hung",
+  "g814fp": "Even Hung",
+  "g814fm": "Even Hung",
+  "fa608uh": "Debbi Chen/ Jocie Chen",
+  "fa608um": "Debbi Chen/ Jocie Chen",
+  "fa608up": "Debbi Chen/ Jocie Chen",
+  "fa608fm": "Kyle Lin/ Jamie_Lee",
+  "fa608fp": "Kyle Lin/ Jamie_Lee",
+  "fa608pm": "Kyle Lin/ Jamie_Lee",
+  "fa608pp": "Kyle Lin/ Jamie_Lee",
+  "fx609ba": "Benny Chang",
+  "gu606ax": "Junciao Chen / Jerry2 Hung",
+  "gu606aw": "Junciao Chen / Jerry2 Hung",
+  "gu606ar": "Junciao Chen / Jerry2 Hung",
+  "gu606ap": "Junciao Chen / Jerry2 Hung",
+  "gu606am": "Junciao Chen / Jerry2 Hung",
+  "gx651ax": "Claireyc_lee",
+  "gx651ar": "Claireyc_lee",
+  "gu405aw": "Reese Wang/ Aria Huang",
+  "gu405ar": "Reese Wang/ Aria Huang",
+  "gu405ap": "Reese Wang/ Aria Huang",
+  "gu405am": "Reese Wang/ Aria Huang",
+  "fa617ntq": "Irene3 Huang/ Ashley2 Chiu",
+  "fa808pr": "Debbi Chen/ Stella Chou",
+  "fa808fr": "Debbi Chen/ Stella Chou",
+  "fa808pp": "Debbi Chen/ Stella Chou",
+  "fa808fp": "Debbi Chen/ Stella Chou",
+  "fa808pm": "Debbi Chen/ Stella Chou",
+  "fa808fm": "Debbi Chen/ Stella Chou",
+  "g614pw": "Eileen Lu",
+  "g615lmg": "Dianne_Wu",
+  "fa506ncq": "Benny Chang",
+  "fa607nuq": "Kyle Lin",
+  "fa707nuq": "Kyle Lin",
+  "fx608lpg": "Irene3 Huang/ Jamie Lee",
+  "fx608lmg": "Irene3 Huang/ Jamie Lee",
+  "fa401gm": "Leslie Lee",
+  "ga403gm": "Reese Wang/ Aria Huang",
+  "g635lxg": "Dianne_Wu",
+  "g635lwg": "Dianne_Wu",
+  "g615lwg": "Dianne_Wu",
+  "g615lrg": "Dianne_Wu",
+  "g615lpg": "Dianne_Wu",
+  "g835lxg": "Jace Lee",
+  "g835lwg": "Jace Lee",
+  "g815lwg": "Jace Lee",
+  "g815lrg": "Jace Lee",
+  "g815lpg": "Jace Lee",
+  "g815lmg": "Jace Lee",
+  "fx608jmi": "Irene3 Huang/ Jamie Lee",
+  "fx608jhi": "Irene3 Huang/ Jamie Lee",
+  "fa608umi": "Kyle Lin/ Jamie Lee",
+  "fa608uhi": "Kyle Lin/ Jamie Lee",
+  "fx610jh": "Angela3 Wu",
+  "fx610jm": "Angela3 Wu",
+  "fx610jp": "Angela3 Wu",
+  "fx608lh": "Irene3 Huang/ Jamie Lee",
+  "fx610up": "Benny1 chang",
+  "fx610um": "Benny1 chang",
+  "fx610uh": "Benny1 chang",
+  "fx607vjr": "Benny1 chang",
+  "fx610uj": "Benny1 chang",
+  "v3607uh": "Leslie Lee",
+  "fx607vjg": "Angela3 Wu",
+  "gu606hx": "Jerry2 Hung/Junciao Chen",
+  "gu606hw": "Jerry2 Hung/Junciao Chen",
+  "gu606hr": "Jerry2 Hung/Junciao Chen",
+  "gu606hm": "Jerry2 Hung/Junciao Chen",
+  "gu606hp": "Jerry2 Hung/Junciao Chen",
+  "rc774xa": "Chinying Lin",
+  "fx607vua": "Irene3 Huang, Ashley Chiu",
+  "g636hx": "Diann Wu",
+  "g636hw": "Diann Wu",
+  "gu405zw": "Claireyc_Lee",
+  "gu405zr": "Claireyc_Lee",
+  "gu405zp": "Claireyc_Lee",
+  "gu405zm": "Claireyc_Lee",
+  "g616hw": "Diann Wu",
+  "g616hr": "Diann Wu",
+  "m1407ka": "Katie Liu, Jeremy Hung",
+  "m1607ka": "Katie Liu",
+  "m1807ha": "Ian1_Chen",
+  "m3407ha": "Cindy3_Yang/Sally_Lai",
+  "m3607ha": "Eric1_Wu",
+  "s3407va": "Cindy3_Yang/Sally_Lai",
+  "s3607va": "Eric1_Wu",
+  "s3407ca": "Cindy3_Yang/Sally_Lai",
+  "s3607ca": "Eric1_Wu",
+  "s3407qa": "Rico_Liang",
+  "s3607qa": "Rico_Liang",
+  "e1404gaf": "Sally_Lai",
+  "e1404faf": "Sally_Lai",
+  "e1504gaf": "Ian1_Chen",
+  "e1504faf": "Ian1_Chen",
+  "e410kab": "Ian1_Chen",
+  "e410kabf": "Ian1_Chen",
+  "e510kab": "Ian1_Chen",
+  "e510kabf": "Ian1_Chen",
+  "h7606wp": "Ann2_Lu",
+  "h7606wm": "Ann2_Lu",
+  "x1404vapf": "Katie_Liu",
+  "x1504vapf": "Ian1_Chen",
+  "x1704vapf": "Andy_Lu",
+  "tp3607sh": "Sam2 Lin",
+  "m3407ka": "Cindy3 yang",
+  "m3607ka": "Eric1_Wu",
+  "h7606wr": "Ann2_Lu",
+  "h7606ww": "Ann2_Lu",
+  "h7606wx": "Ann2_Lu",
+  "ux5406aa": "VickyPS_Hung",
+  "ux8407aa": "Chester Chien/ Nin Chiang",
+  "m3407ga": "Cindy3_Yang",
+  "m3607ga": "Eric1_Wu",
+  "m1407ga": "Katie Liu, Jeremy Hung",
+  "m1607ga": "Katie_Liu",
+  "m1807ga": "Ian1_Chen",
+  "um3406ga": "TiffanyYN Huang",
+  "e1404ta": "Sally Lai",
+  "e1504ta": "Ian1_Chen",
+  "um5606ga": "JasonYC_Huang",
+  "s3407aa": "Cindy3_Yang",
+  "s3607aa": "Eric1_Wu",
+  "x1407aa": "Katie Liu, Jeremy Hung",
+  "x1607aa": "Katie_Liu",
+  "um5406ga": "ChloeLL_Chang",
+  "hn7306ea": "Penny1 Yang/Ann2 Lu",
+  "tp3407aa": "Ivy2 Lin",
+  "tp3607aa": "Ivy2 Lin",
+  "ux3407na": "Thomas Huang",
+  "s3607na": "Rico_Liang",
+  "ux3607oa": "Nina2_Chang",
+  "x1404vap": "Katie Liu",
+  "x1504vap": "Andrea Huang",
+  "m1405naq": "Andrea Huang",
+  "m1502naq": "Rico Liang",
+  "m1605naq": "Ian1 Chen",
+  "x1605vapbf": "Ivy2 Lin",
+  "hn7306eac": "Penny1 Yang/Ann2 Lu",
+  "ux3607qa": "Jessie Cai/Nina2_Chang",
+  "x1504ma": "Cindy3_Yang",
+  "x1504maf": "Cindy3_Yang",
+  "ht7407na": "Penny1 Yang/Ann2 Lu",
+  "n3607nhq": "Lesile Lee",
+  "n3607nmq": "Lesile Lee",
+  "h7407ba": "Elaine Liang",
+  "h7607ba": "Han Chiang",
+  "t3201m5a": "Jimmy1 Hsieh/Charlie Liao",
+  "um3405ga": "TiffanyYN Huang",
+  "x1404ma": "Cindy3_Yang/Emma_Hung",
+  "x1404maf": "Cindy3_Yang/Emma_Hung",
+  "x1704maf": "Cindy3_Yang/Emma_Hung",
+  "s5406sal": "Sam2 Lin",
+  "s5408qa": "Cindy3_Yang",
+  "s5608qa": "Ian1_Chen/NinaPA_Hsieh",
+  "ux3480qa": "ChloeCW Wang",
+  "ux3480aa": "TiffanyYN Huang",
+  "x1652xa": "Joy3 Chou / Nickie Chen",
+  "x1652da": "Joy3 Chou / Nickie Chen",
+  "m1502xa": "Andrea Huang",
+  "h7606gp": "Ann2_Lu",
+  "h7606gm": "Ann2_Lu",
+  "s5452ma": "Jessie Yeh/Claire Jian",
+  "s5652ma": "Jessie Yeh/Claire Jian",
+  "tp5408qa": "Ivy2_Lin",
+  "tp5608qa": "BryanPE_Chou",
+  "h7407ia": "Vincent2_Li",
+  "tp5408ya": "Ivy2_Lin",
+  "tp5608ya": "BryanPE_Chou",
+  "ux3407qa": "Thomas Huang",
+  "s5408ya": "Eric1_Wu",
+  "s5608ya": "Sally_Lai",
+  "m1405ua": "Andrea Huang",
+  "m1502ua": "Andrea Huang",
+  "m1605ua": "BryanPE_Chou",
+  "um5606za": "VickyPS_Hung",
+  "ux3480ka": "TiffanyYN Huang",
+  "s5408ua": "Eric1_Wu",
+  "s5608ua": "Sally_Lai",
+  "ux3680qa": "ChloeLL_Chang",
+  "ux3407da": "Thomas Huang",
+  "ux8200qa": "Chester Chien",
+  "s5406ia": "Andrea Huang",
+  "ux3480ya": "TiffanyYN Huang",
+  "x1480ma": "BryanPE_Chou",
+  "x1680ma": "BryanPE_Chou",
+  "x1480ua": "Ivy2_Lin",
+  "x1680ua": "Jeremy_Hung",
+  "x1480pa": "NinaPA_Hsieh",
+  "x1680pa": "Ian1_Chen",
+  "x1780pa": "Ian1_Chen"
+};
+
+function lookupSPM(modelName) {
+  if (!modelName) return "";
+  const k = modelName.trim().toLowerCase();
+  let rawSpm = "";
+  if (modelSpmMaster[k]) {
+    rawSpm = modelSpmMaster[k];
+  } else {
+    for (const [m, spm] of Object.entries(modelSpmMaster)) {
+      if (m && (k.startsWith(m) || m.startsWith(k) || k.includes(m) || m.includes(k))) {
+        rawSpm = spm;
+        break;
+      }
+    }
+  }
+  if (!rawSpm) {
+    const found = sms.find(s => s.productModel && (s.productModel.trim().toLowerCase() === k || s.productModel.trim().toLowerCase().includes(k)) && s.modelSPM);
+    if (found && found.modelSPM) rawSpm = found.modelSPM;
+  }
+  if (!rawSpm) return "";
+  const parts = rawSpm.split(/[\/,]/);
+  return parts[0].trim();
+}
+
+function handleBatchModelInput(i, val) {
+  bRows[i].model = val;
+  const matchedSpm = lookupSPM(val);
+  if (matchedSpm) {
+    bRows[i].spm = matchedSpm;
+    const spmIn = document.getElementById("bSpm_" + i);
+    if (spmIn) spmIn.value = matchedSpm;
+  }
+}
+
 function renderBatch() {
   const tb = document.getElementById("bBody"); if (!tb) return; tb.innerHTML = "";
   bRows.forEach((r, i) => {
+    if (!r.spm && r.model) {
+      const auto = lookupSPM(r.model);
+      if (auto) r.spm = auto;
+    }
     const tr = document.createElement("tr");
-    tr.innerHTML = '<td><select class="fg-sel bSeg"><option' + (r.seg === "Zenbook" ? " selected" : "") + '>Zenbook</option><option' + (r.seg === "ProArt" ? " selected" : "") + '>ProArt</option><option' + (r.seg === "Vivobook" ? " selected" : "") + '>Vivobook</option><option' + (r.seg === "Zephyrus" ? " selected" : "") + '>Zephyrus</option><option' + (r.seg === "Strix" ? " selected" : "") + '>Strix</option><option' + (r.seg === "TUF" ? " selected" : "") + '>TUF</option><option' + (r.seg === "Flow" ? " selected" : "") + '>Flow</option></select></td><td><input type="text" class="fg-in bMod" value="' + esc(r.model) + '" placeholder="e.g. UX8200QA" required></td><td><input type="text" class="fg-in bVar" value="' + esc(r.variant) + '" placeholder="e.g. Black"></td><td><input type="number" class="fg-in bQty" value="' + r.qty + '" min="1" inputmode="numeric" required style="width:50px"></td><td><input type="text" class="fg-in bSpm" value="' + esc(r.spm) + '" placeholder="SPM name" required></td><td>' + (bRows.length > 1 ? '<button type="button" class="btn btn-d btn-icon" style="height:24px" onclick="rmBRow(' + i + ')"><svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>' : "") + "</td>";
+    tr.innerHTML = '<td><select class="fg-sel bSeg" onchange="bRows[' + i + '].seg=this.value"><option' + (r.seg === "Zenbook" ? " selected" : "") + '>Zenbook</option><option' + (r.seg === "ProArt" ? " selected" : "") + '>ProArt</option><option' + (r.seg === "Vivobook" ? " selected" : "") + '>Vivobook</option><option' + (r.seg === "Zephyrus" ? " selected" : "") + '>Zephyrus</option><option' + (r.seg === "Strix" ? " selected" : "") + '>Strix</option><option' + (r.seg === "TUF" ? " selected" : "") + '>TUF</option><option' + (r.seg === "Flow" ? " selected" : "") + '>Flow</option></select></td>' +
+      '<td><input type="text" class="fg-in bMod" value="' + esc(r.model) + '" placeholder="e.g. UX8200QA" oninput="handleBatchModelInput(' + i + ', this.value)" required></td>' +
+      '<td><input type="text" class="fg-in bVar" value="' + esc(r.variant) + '" placeholder="e.g. Black" oninput="bRows[' + i + '].variant=this.value"></td>' +
+      '<td><input type="number" class="fg-in bQty" value="' + r.qty + '" min="1" inputmode="numeric" oninput="bRows[' + i + '].qty=parseInt(this.value)||1" required style="width:50px"></td>' +
+      '<td><input type="text" id="bSpm_' + i + '" class="fg-in bSpm" value="' + esc(r.spm) + '" placeholder="e.g. TiffanyYN Huang" oninput="bRows[' + i + '].spm=this.value" required></td>' +
+      '<td>' + (bRows.length > 1 ? '<button type="button" class="btn btn-d btn-icon" style="height:24px" onclick="rmBRow(' + i + ')"><svg width="10" height="10" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>' : "") + "</td>";
     tb.appendChild(tr);
   });
 }
@@ -900,9 +1719,19 @@ function importCSV(e) {
     const nr = [];
     for (let i = 1; i < lines.length; i++) {
       const p = lines[i].split(",").map(x => x.replace(/^"|"$/g, "").trim());
-      if (p.length >= 2) nr.push({ seg: p[0] || "Zenbook", model: p[1] || "", variant: p[2] || "", qty: parseInt(p[3]) || 1, spm: p[4] || "" });
+      if (p.length >= 2) {
+        const seg = p[0] || "Zenbook";
+        const model = p[1] || "";
+        const variant = p[2] || "";
+        const qty = parseInt(p[3]) || 1;
+        const spm = p[4] || (p.length === 2 ? p[1] : "");
+        if (model && spm) {
+          modelSpmMaster[model.toLowerCase()] = spm;
+        }
+        nr.push({ seg, model, variant, qty, spm });
+      }
     }
-    if (nr.length) { bRows = nr; renderBatch(); toast("Imported " + nr.length + " rows"); }
+    if (nr.length) { bRows = nr; renderBatch(); toast("Imported " + nr.length + " rows & updated SPM mappings"); }
   };
   r.readAsText(f); e.target.value = "";
 }
@@ -945,25 +1774,75 @@ function openEdit(id) {
   document.getElementById("xReady").value = s.readyDate || "";
   document.getElementById("xStatus").value = s.status || "pending";
   document.getElementById("xNotes").value = s.notes || "";
+  const btnDel = document.getElementById("btnDelSmModal");
+  if (btnDel) btnDel.style.display = "inline-flex";
   document.getElementById("mEdit").classList.add("on");
+}
+
+function delSmFromModal() {
+  const id = document.getElementById("xId").value; if (!id) return;
+  const s = sms.find(x => x.id === id); if (!s) return;
+  if (!confirm('⚠️ Delete Confirmation (1/2):\nAre you sure you want to delete sample "' + s.productModel + '"?')) return;
+  if (!confirm('⚠️ Double Confirmation (2/2):\nThis action is permanent and will remove sample "' + s.productModel + '" from tracking history. Confirm deletion?')) return;
+  sms = sms.filter(x => x.id !== id); saveSm(); render();
+  document.getElementById("mEdit").classList.remove("on");
+  toast("Deleted sample: " + s.productModel);
 }
 
 function submitEdit(e) {
   e.preventDefault();
   const s = sms.find(x => x.id === document.getElementById("xId").value); if (!s) return;
-  s.segment = document.getElementById("xSeg").value;
-  s.productModel = document.getElementById("xModel").value.trim();
-  s.variant = document.getElementById("xVar").value.trim();
-  s.serialNumber = document.getElementById("xSN").value.trim();
-  s.modelSPM = document.getElementById("xSPM").value.trim();
-  s.quantity = parseInt(document.getElementById("xReqQ").value) || 1;
-  s.confirmedQty = parseInt(document.getElementById("xConQ").value) || 0;
-  s.requestedBy = document.getElementById("xReqBy").value.trim();
-  s.currentHolder = document.getElementById("xHolder").value.trim();
-  s.location = document.getElementById("xLoc").value.trim();
-  s.readyDate = document.getElementById("xReady").value;
-  s.status = document.getElementById("xStatus").value;
-  s.notes = document.getElementById("xNotes").value.trim();
+
+  const oldSN = s.serialNumber || "";
+  const oldStatus = s.status;
+  const oldHolder = s.currentHolder || "";
+  const oldVar = s.variant || "";
+
+  const newSeg = document.getElementById("xSeg").value;
+  const newModel = document.getElementById("xModel").value.trim();
+  const newVar = document.getElementById("xVar").value.trim();
+  const newSN = document.getElementById("xSN").value.trim();
+  const newSpm = document.getElementById("xSPM").value.trim();
+  const newReqQ = parseInt(document.getElementById("xReqQ").value) || 1;
+  const newConQ = parseInt(document.getElementById("xConQ").value) || 0;
+  const newReqBy = document.getElementById("xReqBy").value.trim();
+  const newHolder = document.getElementById("xHolder").value.trim();
+  const newLoc = document.getElementById("xLoc").value.trim();
+  const newReady = document.getElementById("xReady").value;
+  const newStatus = document.getElementById("xStatus").value;
+  const newNotes = document.getElementById("xNotes").value.trim();
+
+  const changes = [];
+  if (oldSN !== newSN) changes.push("SN: " + (oldSN || "None") + " → " + (newSN || "None"));
+  if (oldStatus !== newStatus) changes.push("Status: " + sInfo(oldStatus).label + " → " + sInfo(newStatus).label);
+  if (oldHolder !== newHolder) changes.push("Custodian: " + (oldHolder || "None") + " → " + (newHolder || "None"));
+  if (oldVar !== newVar) changes.push("Variant: " + (oldVar || "None") + " → " + (newVar || "None"));
+
+  s.segment = newSeg;
+  s.productModel = newModel;
+  s.variant = newVar;
+  s.serialNumber = newSN;
+  s.modelSPM = newSpm;
+  s.quantity = newReqQ;
+  s.confirmedQty = newConQ;
+  s.requestedBy = newReqBy;
+  s.currentHolder = newHolder;
+  s.location = newLoc;
+  s.readyDate = newReady;
+  s.status = newStatus;
+  s.notes = newNotes;
+
+  if (changes.length) {
+    if (!s.custodyLogs) s.custodyLogs = [];
+    s.custodyLogs.unshift({
+      date: fmtDt(new Date()),
+      action: "Details Edited",
+      from: oldHolder || s.modelSPM,
+      to: newHolder || s.modelSPM,
+      notes: changes.join(" · ")
+    });
+  }
+
   saveSm(); render(); document.getElementById("mEdit").classList.remove("on"); toast("Updated: " + s.productModel);
 }
 
@@ -1042,16 +1921,19 @@ function submitTrans(e) {
   const nt = document.getElementById("trNotes").value.trim();
 
   const actionMap = { transfer: "Cross-Event Transfer", handover: "Handover", reclaim: "Reclaim", return: "Return" };
-  const statusMap = { transfer: "transfer", handover: "using", reclaim: "reclaimed", return: "returned" };
+  const statusMap = { transfer: "using", handover: "using", reclaim: "reclaimed", return: "returned" };
   s.status = statusMap[act];
   s.currentHolder = tp || (act === "return" ? s.modelSPM || "Depot" : s.requestedBy);
-  if (te && (act === "transfer" || act === "handover")) s.currentEvent = te;
+  if (te && act === "transfer") {
+    s.currentEvent = te;
+    s.event = te;
+  }
 
   if (!s.custodyLogs) s.custodyLogs = [];
   s.custodyLogs.unshift({ date: fmtDt(new Date()), action: actionMap[act], from: fp, to: tp, condition: cond, targetEvent: (te && te !== s.event) ? te : "", notes: nt });
 
   saveSm(); render(); document.getElementById("mTrans").classList.remove("on"); document.getElementById("fTransForm").reset();
-  toast(s.productModel + " → " + tp);
+  toast(s.productModel + " → " + (te ? te : tp));
 }
 
 /* ======================================================================
@@ -1078,25 +1960,50 @@ function buildXLSX() {
 
   // Sheet 1: Events
   const evRows = evs.map(e => ({
-    ID: e.id, Title: e.title, Type: e.type, Location: e.location, Organizer: e.organizer,
-    Start: e.startDate, End: e.endDate, Deadline: e.deadline, "Linked Event": e.precedingEvent || "", Notes: e.notes || ""
+    "Event ID": e.id,
+    "Title": e.title,
+    "Type": e.type,
+    "Location": e.location || "",
+    "Organizer": e.organizer || "",
+    "Start Date": e.startDate || "",
+    "End Date": e.endDate || "",
+    "Deadline": e.deadline || "",
+    "Preceding Linked Event": e.precedingEvent || "",
+    "Notes": e.notes || ""
   }));
-  const ws1 = XLSX.utils.json_to_sheet(evRows.length ? evRows : [{ ID: "(no events)" }]);
+  const ws1 = XLSX.utils.json_to_sheet(evRows.length ? evRows : [{ "Event ID": "(no events)" }]);
   XLSX.utils.book_append_sheet(wb, ws1, "Events");
 
-  // Sheet 2: Samples
-  const smRows = sms.map(s => ({
-    ID: s.id, Event: s.event, "Current Event": s.currentEvent, Segment: s.segment, Model: s.productModel,
-    Variant: s.variant || "", SN: s.serialNumber || "", SPM: s.modelSPM,
-    "Requested By": s.requestedBy, "Qty Requested": s.quantity || 1, "Qty Confirmed": s.confirmedQty || 0,
-    Status: sInfo(s.status).label, Custodian: s.currentHolder, Location: s.location || "",
-    "Ready Date": s.readyDate || "", Notes: s.notes || ""
-  }));
-  const ws2 = XLSX.utils.json_to_sheet(smRows.length ? smRows : [{ ID: "(no samples)" }]);
-  XLSX.utils.book_append_sheet(wb, ws2, "Samples");
+  // Sheet 2: Tracking (Samples)
+  const smRows = sms.map(s => {
+    const latestLog = (s.custodyLogs && s.custodyLogs.length) ? s.custodyLogs[0] : null;
+    const histSummary = (s.custodyLogs || []).map((l, i) => `#${s.custodyLogs.length - i} ${l.action} (${l.date})`).join(" | ");
+    return {
+      "Sample ID": s.id,
+      "Current Event": s.currentEvent || s.event,
+      "Original Request Event": s.event,
+      "Segment": s.segment || "Zenbook",
+      "Product Model": s.productModel,
+      "Variant / Color": s.variant || "",
+      "Serial Number (SN)": s.serialNumber || "",
+      "SPM": s.modelSPM || "",
+      "Requested By": s.requestedBy || "",
+      "Qty Requested": s.quantity || 1,
+      "Qty Confirmed": s.confirmedQty || 0,
+      "Status": sInfo(s.status).label,
+      "Current Custodian": s.currentHolder || "",
+      "Location": s.location || "",
+      "Ready Date": s.readyDate || "",
+      "Latest Condition": latestLog ? (latestLog.condition || "Good") : "Good",
+      "Custody History Summary": histSummary || "No history",
+      "Notes": s.notes || ""
+    };
+  });
+  const ws2 = XLSX.utils.json_to_sheet(smRows.length ? smRows : [{ "Sample ID": "(no samples)" }]);
+  XLSX.utils.book_append_sheet(wb, ws2, "Tracking");
 
-  XLSX.writeFile(wb, "Sample_Tracker_" + fmtFile(new Date()) + ".xlsx");
-  toast("Exported XLSX with 2 sheets");
+  XLSX.writeFile(wb, "Sample_Logistics_Report_" + fmtFile(new Date()) + ".xlsx");
+  toast("Exported XLSX (Events & Tracking sheets)");
 }
 
 function exportCSV() {

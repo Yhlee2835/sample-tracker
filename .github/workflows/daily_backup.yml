@@ -15,9 +15,24 @@ jobs:
       - name: Native Git Clone & Firebase Backup (Zero Node Dependency)
         run: |
           git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git .
+      - name: Fetch and Format Firebase JSON Backup (Identical to Web App Format)
+        run: |
           mkdir -p backups
           DATE_STR=$(date +'%Y-%m-%d')
-          curl -s "https://sample-tracker-3a23c-default-rtdb.asia-southeast1.firebasedatabase.app/tracker.json" -o "backups/SampleTracker_Backup_${DATE_STR}.json"
+          ISODATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+          curl -s "https://sample-tracker-3a23c-default-rtdb.asia-southeast1.firebasedatabase.app/tracker.json" | python3 -c "
+import sys, json
+raw = json.load(sys.stdin)
+formatted = {
+  'appName': 'ASUS Sample Custody Tracker',
+  'version': '2.0',
+  'exportDate': '${ISODATE}',
+  'events': raw.get('events', []),
+  'samples': raw.get('samples', []),
+  'modelSpmMaster': raw.get('modelSpmMaster', {})
+}
+print(json.dumps(formatted, indent=2, ensure_ascii=False))
+" > "backups/SampleTracker_Backup_${DATE_STR}.json"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add backups/

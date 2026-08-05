@@ -12,24 +12,30 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Fetch and Format Firebase JSON Backup
+      - name: Direct GitHub API Backup (Zero Node.js Actions - 100% No Warning)
         run: |
-          mkdir -p backups
           DATE_STR=$(date +'%Y-%m-%d')
           ISODATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-          curl -s "https://sample-tracker-3a23c-default-rtdb.asia-southeast1.firebasedatabase.app/tracker.json" | jq --arg app "ASUS Sample Custody Tracker" --arg ver "2.0" --arg dt "$ISODATE" '{appName: $app, version: $ver, exportDate: $dt, events: (.events // []), samples: (.samples // []), modelSpmMaster: (.modelSpmMaster // {})}' > "backups/SampleTracker_Backup_${DATE_STR}.json"
-
-      - name: Commit and Push Backup
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add backups/
-          if git diff --staged --quiet; then
-            echo "No changes in database backup today."
+          FILE_PATH="backups/SampleTracker_Backup_${DATE_STR}.json"
+          
+          # Fetch and format JSON backup matching website structure
+          FORMATTED_JSON=$(curl -s "https://sample-tracker-3a23c-default-rtdb.asia-southeast1.firebasedatabase.app/tracker.json" | jq --arg app "ASUS Sample Custody Tracker" --arg ver "2.0" --arg dt "$ISODATE" '{appName: $app, version: $ver, exportDate: $dt, events: (.events // []), samples: (.samples // []), modelSpmMaster: (.modelSpmMaster // {})}')
+          
+          # Base64 encode content for GitHub REST API
+          B64_CONTENT=$(echo "$FORMATTED_JSON" | base64 -w 0)
+          
+          # Check if file already exists to get its SHA (for updating)
+          EXISTING_SHA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/contents/${FILE_PATH}" | jq -r '.sha // empty')
+          
+          if [ -n "$EXISTING_SHA" ]; then
+            PAYLOAD=$(jq -n --arg msg "🤖 Auto Backup: ${FILE_PATH}" --arg cnt "$B64_CONTENT" --arg sha "$EXISTING_SHA" '{message: $msg, content: $cnt, sha: $sha}')
           else
-            git commit -m "🤖 Auto Backup: SampleTracker_Backup_$(date +'%Y-%m-%d').json"
-            git push
+            PAYLOAD=$(jq -n --arg msg "🤖 Auto Backup: ${FILE_PATH}" --arg cnt "$B64_CONTENT" '{message: $msg, content: $cnt}')
           fi
+          
+          # Direct API Commit (No Checkout action required)
+          curl -s -X PUT \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${{ github.repository }}/contents/${FILE_PATH}" \
+            -d "$PAYLOAD"

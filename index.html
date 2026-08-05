@@ -428,7 +428,19 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.06);border-co
   <div class="fg-item fg-full"><label class="fg-lbl">Title <span class="req">*</span></label><input type="text" id="eTitle" class="fg-in" placeholder="e.g. BBY Visiting" required></div>
   <div class="fg-item"><label class="fg-lbl">Type <span class="req">*</span></label><select id="eType" class="fg-sel" required><option value="Customer Visiting">Customer Visiting</option><option value="Retail Summit">Retail Summit</option><option value="PreG">PreG</option><option value="Other">Other</option></select></div>
   <div class="fg-item"><label class="fg-lbl">Location <span class="req">*</span></label><input type="text" id="eLoc" class="fg-in" placeholder="e.g. TW / LiGong" required></div>
-  <div class="fg-item"><label class="fg-lbl">Organizer <span class="req">*</span></label><input type="text" id="eOrg" class="fg-in" placeholder="e.g. Sarah Lee" required></div>
+  <div class="fg-item"><label class="fg-lbl">Organizer (CM) <span class="req">*</span></label><input type="text" id="eOrg" class="fg-in" list="cmList" placeholder="Select or type CM name..." required>
+    <datalist id="cmList">
+      <option value="Rod Wang"></option>
+      <option value="JessicaIW Chen"></option>
+      <option value="Annie Ho"></option>
+      <option value="Iris1 Chen"></option>
+      <option value="Scarlett Lan"></option>
+      <option value="Jonathan Lee"></option>
+      <option value="AngelWJ Hsu"></option>
+      <option value="Rachel1 Chou"></option>
+      <option value="Tony Zheng"></option>
+    </datalist>
+  </div>
   <div class="fg-item"><label class="fg-lbl">Start <span class="req">*</span></label><input type="date" id="eStart" class="fg-in" required></div>
   <div class="fg-item"><label class="fg-lbl">End <span class="req">*</span></label><input type="date" id="eEnd" class="fg-in" required></div>
   <div class="fg-item"><label class="fg-lbl">Sample Deadline <span class="req">*</span></label><input type="date" id="eDL" class="fg-in" required></div>
@@ -440,7 +452,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.06);border-co
 <div id="mReq" class="modal"><div class="modal-c" style="max-width:720px"><div class="modal-h"><h3 class="modal-t">Batch Sample Request</h3><button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
 <form id="fReqForm"><div class="modal-b"><div class="fg">
   <div class="fg-item fg-full"><label class="fg-lbl">Event <span class="req">*</span></label><select id="rEvt" class="fg-sel" required></select></div>
-  <div class="fg-item"><label class="fg-lbl">Requested By <span class="req">*</span></label><input type="text" id="rBy" class="fg-in" placeholder="e.g. Sarah Lee" autocapitalize="words" required></div>
+  <div class="fg-item"><label class="fg-lbl">Requested By (CM) <span class="req">*</span></label><input type="text" id="rBy" class="fg-in" list="cmList" placeholder="Select or type CM name..." autocapitalize="words" required></div>
   <div class="fg-item"><label class="fg-lbl">Ready Date <span class="req">*</span></label><input type="date" id="rDate" class="fg-in" required></div>
 </div>
 <div style="margin-top:1rem"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.3rem"><label class="fg-lbl">Samples <span class="req">*</span></label><div style="display:flex;gap:.3rem"><button type="button" id="bCSV" class="btn btn-s" style="height:26px;font-size:.7rem">Import CSV</button><input type="file" id="bFile" accept=".csv" style="display:none"><button type="button" id="bAdd" class="btn btn-s" style="height:26px;font-size:.7rem">+ Add Row</button></div></div>

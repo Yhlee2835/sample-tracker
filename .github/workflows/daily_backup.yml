@@ -1,0 +1,36 @@
+name: 🔄 Daily Firebase Database Backup
+
+on:
+  schedule:
+    # 每天台灣時間 23:00 (15:00 UTC) 自動執行
+    - cron: '0 15 * * *'
+  workflow_dispatch: # 支援在 GitHub 網頁手動點擊執行
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Create Backups Directory
+        run: mkdir -p backups
+
+      - name: Fetch Latest Firebase JSON Backup
+        run: |
+          DATE_STR=$(date +'%Y-%m-%d')
+          curl -s "https://sample-tracker-3a23c-default-rtdb.asia-southeast1.firebasedatabase.app/tracker.json" -o "backups/SampleTracker_Backup_${DATE_STR}.json"
+
+      - name: Commit and Push Backup
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add backups/
+          if git diff --staged --quiet; then
+            echo "No changes in database backup today."
+          else
+            git commit -m "🤖 Auto Backup: SampleTracker_Backup_$(date +'%Y-%m-%d').json"
+            git push
+          fi

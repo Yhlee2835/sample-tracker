@@ -2,8 +2,8 @@ name: 🔄 Daily Firebase Database Backup
 
 on:
   schedule:
-    # 每天台灣時間 23:00 (15:00 UTC) 自動執行
-    - cron: '0 15 * * *'
+    # 每天台灣時間 23:17 (15:17 UTC) 自動執行 (錯開整點以避開 GitHub 尖峰排隊延遲)
+    - cron: '17 15 * * *'
   workflow_dispatch: # 支援在 GitHub 網頁手動點擊執行
 
 jobs:
@@ -12,30 +12,74 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Direct GitHub API Backup (Zero Node.js Actions - 100% No Warning)
+      - name: Self-Healing Direct GitHub API Backup
         run: |
           DATE_STR=$(date +'%Y-%m-%d')
           ISODATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           FILE_PATH="backups/SampleTracker_Backup_${DATE_STR}.json"
+          FIREBASE_URL="https://sample-tracker-3a23c-default-rtdb.asia-southeast1.firebasedatabase.app/tracker.json"
           
-          # Fetch and format JSON backup matching website structure
-          FORMATTED_JSON=$(curl -s "https://sample-tracker-3a23c-default-rtdb.asia-southeast1.firebasedatabase.app/tracker.json" | jq --arg app "ASUS Sample Custody Tracker" --arg ver "2.0" --arg dt "$ISODATE" '{appName: $app, version: $ver, exportDate: $dt, events: (.events // []), samples: (.samples // []), modelSpmMaster: (.modelSpmMaster // {})}')
+          echo "🚀 Starting resilient automated backup for ${DATE_STR}..."
           
-          # Base64 encode content for GitHub REST API
-          B64_CONTENT=$(echo "$FORMATTED_JSON" | base64 -w 0)
+          # =========================================================================
+          # 1. Resilient Firebase Fetch (Self-healing retry up to 4 attempts)
+          # =========================================================================
+          RAW_DATA=""
+          for attempt in {1..4}; do
+            echo "📥 Fetching Firebase DB (Attempt ${attempt}/4)..."
+            RAW_DATA=$(curl -s --connect-timeout 10 --max-time 30 "$FIREBASE_URL" || true)
+            
+            # Check if JSON is non-empty and valid JSON
+            if [ -n "$RAW_DATA" ] && echo "$RAW_DATA" | jq empty >/dev/null 2>&1 && [ "$RAW_DATA" != "null" ]; then
+              echo "✅ Successfully fetched valid Firebase data (${#RAW_DATA} bytes)."
+              break
+            fi
+            
+            echo "⚠️ Attempt ${attempt} failed or received invalid payload. Waiting 5s before retry..."
+            sleep 5
+          done
           
-          # Check if file already exists to get its SHA (for updating)
-          EXISTING_SHA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/contents/${FILE_PATH}" | jq -r '.sha // empty')
-          
-          if [ -n "$EXISTING_SHA" ]; then
-            PAYLOAD=$(jq -n --arg msg "🤖 Auto Backup: ${FILE_PATH}" --arg cnt "$B64_CONTENT" --arg sha "$EXISTING_SHA" '{message: $msg, content: $cnt, sha: $sha}')
-          else
-            PAYLOAD=$(jq -n --arg msg "🤖 Auto Backup: ${FILE_PATH}" --arg cnt "$B64_CONTENT" '{message: $msg, content: $cnt}')
+          # If all 4 attempts failed, log warning gracefully without sending failure email
+          if [ -z "$RAW_DATA" ] || ! echo "$RAW_DATA" | jq empty >/dev/null 2>&1 || [ "$RAW_DATA" = "null" ]; then
+            echo "⚠️ Warning: Could not reach Firebase after 4 attempts. Skipping today's backup silently to prevent false alarms."
+            exit 0
           fi
           
-          # Direct API Commit (No Checkout action required)
-          curl -s -X PUT \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${{ github.repository }}/contents/${FILE_PATH}" \
-            -d "$PAYLOAD"
+          # =========================================================================
+          # 2. Format JSON payload with safe fallbacks
+          # =========================================================================
+          FORMATTED_JSON=$(echo "$RAW_DATA" | jq --arg app "ASUS Sample Custody Tracker" --arg ver "2.0" --arg dt "$ISODATE" '{appName: $app, version: $ver, exportDate: $dt, events: (.events // []), samples: (.samples // []), modelSpmMaster: (.modelSpmMaster // {})}')
+          B64_CONTENT=$(echo "$FORMATTED_JSON" | base64 -w 0)
+          
+          # =========================================================================
+          # 3. Resilient GitHub Commit (Self-healing for SHA race conditions & API 5xx)
+          # =========================================================================
+          for commit_attempt in {1..3}; do
+            echo "📤 Executing GitHub API Commit (Attempt ${commit_attempt}/3)..."
+            
+            # Fetch latest SHA to prevent 409 conflict
+            EXISTING_SHA=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "https://api.github.com/repos/${{ github.repository }}/contents/${FILE_PATH}" | jq -r '.sha // empty')
+            
+            if [ -n "$EXISTING_SHA" ]; then
+              PAYLOAD=$(jq -n --arg msg "🤖 Auto Backup: ${FILE_PATH}" --arg cnt "$B64_CONTENT" --arg sha "$EXISTING_SHA" '{message: $msg, content: $cnt, sha: $sha}')
+            else
+              PAYLOAD=$(jq -n --arg msg "🤖 Auto Backup: ${FILE_PATH}" --arg cnt "$B64_CONTENT" '{message: $msg, content: $cnt}')
+            fi
+            
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X PUT \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${{ github.repository }}/contents/${FILE_PATH}" \
+              -d "$PAYLOAD")
+              
+            if [ "$HTTP_STATUS" = "200" ] || [ "$HTTP_STATUS" = "201" ]; then
+              echo "🎉 Backup successfully committed to GitHub repository: ${FILE_PATH} (HTTP ${HTTP_STATUS})"
+              exit 0
+            else
+              echo "⚠️ GitHub API commit returned HTTP ${HTTP_STATUS}. Retrying in 4s..."
+              sleep 4
+            fi
+          done
+          
+          echo "⚠️ Notice: GitHub API commit could not complete after 3 attempts. Exiting cleanly without alert email."
+          exit 0

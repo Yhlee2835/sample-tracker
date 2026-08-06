@@ -47,17 +47,17 @@
 [data-theme="dark"] {
   --bg: #000; --surface: #1C1C1E; --surface-alt: #2C2C2E;
   --surface-glass: rgba(28,28,30,0.82); --input-bg: #1C1C1E;
-  --border: #38383A; --border-sub: #2C2C2E; --focus: #2997FF;
-  --text-1: #F5F5F7; --text-2: #A1A1A6; --text-3: #86868B;
-  --blue: #2997FF; --blue-hover: #52ABFF; --blue-bg: rgba(41,151,255,0.12);
-  --green: #30D158; --amber: #FFD60A; --red: #FF453A; --purple: #BF5AF2;
-  --s-pending-bg: rgba(255,159,10,0.12); --s-pending-tx: #FF9F0A;
-  --s-confirmed-bg: rgba(41,151,255,0.12); --s-confirmed-tx: #64D2FF;
-  --s-partial-bg: rgba(255,214,10,0.12); --s-partial-tx: #FFD60A;
-  --s-using-bg: rgba(48,209,88,0.12); --s-using-tx: #30D158;
-  --s-transfer-bg: rgba(191,90,242,0.12); --s-transfer-tx: #BF5AF2;
-  --s-returned-bg: rgba(142,142,147,0.16); --s-returned-tx: #E5E5EA;
-  --s-unavail-bg: rgba(255,69,58,0.12); --s-unavail-tx: #FF453A;
+  --border: #334155; --border-sub: #1E293B; --focus: #3B82F6;
+  --text-1: #F8FAFC; --text-2: #94A3B8; --text-3: #64748B;
+  --blue: #60A5FA; --blue-hover: #93C5FD; --blue-bg: rgba(96,165,250,0.12);
+  --green: #34D399; --amber: #FBBF24; --red: #F87171; --purple: #A78BFA;
+  --s-pending-bg: rgba(251,191,36,0.10); --s-pending-tx: #FBBF24;
+  --s-confirmed-bg: rgba(96,165,250,0.10); --s-confirmed-tx: #60A5FA;
+  --s-partial-bg: rgba(251,191,36,0.10); --s-partial-tx: #FBBF24;
+  --s-using-bg: rgba(52,211,153,0.10); --s-using-tx: #34D399;
+  --s-transfer-bg: rgba(167,139,250,0.10); --s-transfer-tx: #A78BFA;
+  --s-returned-bg: rgba(148,163,184,0.10); --s-returned-tx: #94A3B8;
+  --s-unavail-bg: rgba(248,113,113,0.10); --s-unavail-tx: #F87171;
   --shadow: 0 1px 3px rgba(0,0,0,0.4); --shadow-lg: 0 16px 36px rgba(0,0,0,0.65);
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -119,34 +119,34 @@ svg{display:inline-block;vertical-align:middle;fill:none}
 .ctrl{position:sticky;top:92px;z-index:998;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:.7rem 1rem;margin-bottom:1.2rem;display:flex;align-items:center;flex-wrap:wrap;gap:.75rem;justify-content:space-between;box-shadow:var(--shadow-md)}
 .search{position:relative;flex:1;min-width:220px;display:flex;align-items:center}
 .search svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none}
-.search input{width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-pill);padding:.5rem 1rem .5rem 2.3rem;color:var(--text-1);font-size:.82rem;font-family:var(--font);transition:var(--ease)}
+.search input{width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-md);padding:.5rem 1rem .5rem 2.3rem;color:var(--text-1);font-size:.82rem;font-family:var(--font);transition:var(--ease)}
 .search input:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 3px rgba(0,102,204,.12)}
 
 .filters{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
-.flt,.fg-sel{background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-pill);padding:.45rem 1.8rem .45rem .85rem;color:var(--text-1);font-size:.8rem;font-family:var(--font);cursor:pointer;transition:var(--ease);font-weight:500;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%2370757A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center}
-.flt:focus,.fg-sel:focus{outline:none;border-color:var(--focus)}
-.flt option,.fg-sel option{background:var(--surface);color:var(--text-1);padding:8px 12px;border-radius:8px;font-size:.82rem}
+.flt,.fg-sel,select{background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-md)!important;padding:.45rem 1.8rem .45rem .85rem;color:var(--text-1);font-size:.8rem;font-family:var(--font);cursor:pointer;transition:var(--ease);font-weight:500;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='none' stroke='%2370757A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M1 1l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center}
+.flt:focus,.fg-sel:focus,select:focus{outline:none;border-color:var(--focus)}
+.flt option,.fg-sel option,select option{background:var(--surface);color:var(--text-1);padding:8px 12px;border-radius:var(--r-md)!important;font-size:.82rem}
 
 /* --- Gantt Timeline --- */
-.gantt{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin-bottom:1.6rem;overflow-x:auto;box-shadow:var(--shadow)}
-.gantt-title{font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:.4rem;margin-bottom:.9rem}
-.gantt-body{display:flex;flex-direction:column;gap:.65rem;min-width:600px}
+.gantt{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1.2rem 1.4rem;margin-bottom:1.6rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.gantt-title{font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:.4rem;margin-bottom:0}
+.gantt-body{display:flex;flex-direction:column;gap:.65rem;min-width:600px;overflow-x:auto;width:100%;box-sizing:border-box;padding-top:.4rem;padding-bottom:.4rem;position:relative}
 .gantt-axis{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-3);border-bottom:1px dashed var(--border);padding-bottom:.4rem;margin-bottom:.3rem}
 .gantt-row{display:flex;align-items:center;gap:1rem}
-.gantt-lbl{width:160px;font-size:.8rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0}
+.gantt-lbl{width:160px;font-size:.8rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:0;position:sticky;left:0;z-index:5;background:var(--surface);padding-right:.5rem}
 .gantt-track{flex:1;background:var(--surface-alt);height:24px;border-radius:var(--r-pill);position:relative;overflow:hidden;border:1px solid var(--border-sub)}
 .gantt-bar{position:absolute;top:2px;bottom:2px;background:var(--blue);border-radius:var(--r-pill);display:flex;align-items:center;padding:0 .75rem;font-size:.7rem;font-weight:500;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* --- Metrics --- */
 .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:1.4rem}
-.met{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--shadow)}
-.met h4{font-size:.72rem;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.2rem}
-.met-val{font-size:1.45rem;font-weight:600;line-height:1.1;letter-spacing:-0.02em}
-.met-ico{width:32px;height:32px;border-radius:50%;background:var(--surface-alt);display:flex;align-items:center;justify-content:center;color:var(--text-2);flex-shrink:0}
+.met{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:.9rem 1.15rem;display:flex;align-items:center;justify-content:space-between;box-shadow:none}
+.met h4{font-size:.7rem;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.25rem}
+.met-val{font-size:1.55rem;font-weight:700;line-height:1.1;letter-spacing:-0.02em}
+.met-ico{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:var(--text-3);flex-shrink:0;background:transparent}
 
 /* --- Events Grid --- */
 .ev-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.25rem}
-.ev-card{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1.35rem 1.45rem;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:var(--ease)}
+.ev-card{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:1.35rem 1.45rem;display:flex;flex-direction:column;box-shadow:none;transition:var(--ease)}
 .ev-card:hover{border-color:var(--border)}
 .ev-pills{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;margin-bottom:.6rem}
 .ev-tag{display:inline-flex;align-items:center;gap:.25rem;height:22px;padding:0 .55rem;border-radius:var(--r-pill);font-size:.7rem;font-weight:500;white-space:nowrap}
@@ -163,9 +163,9 @@ svg{display:inline-block;vertical-align:middle;fill:none}
 .ev-acts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.4rem;margin-top:auto}
 
 /* --- Data Table & Group Cards (Desktop) --- */
-.evt-grp-card{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);margin-bottom:1.25rem;box-shadow:var(--shadow);overflow:hidden;transition:var(--ease)}
+.evt-grp-card{background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-lg);margin-bottom:1.1rem;box-shadow:none;overflow:hidden;transition:var(--ease)}
 .evt-grp-card:hover{border-color:var(--border)}
-.evt-grp-hdr{background:var(--surface-alt);padding:.75rem 1.1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;cursor:pointer;user-select:none;border-bottom:1px solid var(--border-sub);transition:var(--ease)}
+.evt-grp-hdr{background:var(--surface-alt);padding:.65rem 1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;cursor:pointer;user-select:none;border-bottom:1px solid var(--border-sub);transition:var(--ease)}
 .evt-grp-hdr:hover{background:var(--border-sub)}
 .evt-grp-left{display:flex;align-items:center;gap:.65rem;flex-wrap:wrap}
 .evt-grp-chevron{font-size:.7rem;color:var(--text-3);transition:transform .2s ease;display:inline-block}
@@ -179,17 +179,15 @@ svg{display:inline-block;vertical-align:middle;fill:none}
 
 .tbl-wrap{background:var(--surface);border-top:0;overflow-x:hidden}
 .tbl{width:100%;border-collapse:collapse;text-align:left;font-size:.82rem;table-layout:auto}
-.tbl th{background:var(--surface-alt);color:var(--text-2);font-weight:500;font-size:.72rem;padding:.75rem 1rem;border-bottom:1px solid var(--border-sub);white-space:nowrap;user-select:none;text-transform:uppercase;letter-spacing:.03em}
+.tbl th{background:var(--surface-alt);color:var(--text-3);font-weight:600;font-size:.68rem;padding:.65rem .95rem;border-bottom:1px solid var(--border-sub);white-space:nowrap;user-select:none;text-transform:uppercase;letter-spacing:.04em}
 .th-sort{cursor:pointer;display:inline-flex;align-items:center;gap:.25rem}
 .th-sort:hover{color:var(--text-1)}
-.tbl td{padding:.9rem 1.1rem;border-bottom:1px solid var(--border-sub);vertical-align:middle;line-height:1.4}
+.tbl td{padding:.68rem .95rem;border-bottom:1px solid var(--border-sub);vertical-align:middle;line-height:1.38}
 .tbl tbody tr.mr{transition:background .18s ease,box-shadow .18s ease}
 .tbl tbody tr.mr:hover{background:rgba(0,102,204,0.08)!important;box-shadow:inset 3px 0 0 var(--blue)}
 body.dark .tbl tbody tr.mr:hover{background:rgba(41,151,255,0.16)!important;box-shadow:inset 3px 0 0 var(--blue)}
 .seg{display:inline-flex;align-items:center;padding:.06rem .4rem;background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-pill);font-size:.66rem;font-weight:500;margin-right:.2rem}
-.qty-c{white-space:nowrap!important}
-.qty{display:inline-flex;align-items:center;padding:.1rem .55rem;border-radius:var(--r-pill);font-size:.73rem;font-weight:600;font-family:monospace;background:var(--surface-alt);border:1px solid var(--border-sub);white-space:nowrap!important}
-.qty.full{color:var(--green)}.qty.part{color:var(--amber)}.qty.zero{color:var(--red)}
+.qty{display:inline-flex;align-items:center;padding:.1rem .55rem;border-radius:var(--r-pill);font-size:.75rem;font-weight:600;font-family:monospace;background:var(--surface-alt);border:1px solid var(--border-sub);color:var(--text-1);white-space:nowrap!important}
 .st{display:inline-flex;align-items:center;padding:.15rem .6rem;border-radius:var(--r-pill);font-size:.7rem;font-weight:500;white-space:nowrap}
 .st-pending{background:var(--s-pending-bg);color:var(--s-pending-tx)}
 .st-confirmed{background:var(--s-confirmed-bg);color:var(--s-confirmed-tx)}
@@ -199,6 +197,7 @@ body.dark .tbl tbody tr.mr:hover{background:rgba(41,151,255,0.16)!important;box-
 .st-transfer{background:var(--s-transfer-bg);color:var(--s-transfer-tx)}
 .st-unavail{background:var(--s-unavail-bg);color:var(--s-unavail-tx)}
 .acts{display:flex;align-items:center;gap:.25rem;flex-wrap:nowrap}
+
 
 /* --- Mobile Sample Cards --- */
 .cards{display:none}
@@ -280,7 +279,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
 .fg-full{grid-column:span 2}
 .fg-lbl{font-size:.73rem;font-weight:500;color:var(--text-2)}
 .fg-lbl .req{color:var(--red)}
-.fg-in,.fg-sel,.fg-ta{background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-sm);padding:.38rem .65rem;color:var(--text-1);font-family:var(--font);font-size:.8rem;transition:var(--ease);width:100%}
+.fg-in,.fg-sel,.fg-ta{background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-md)!important;padding:.38rem .65rem;color:var(--text-1);font-family:var(--font);font-size:.8rem;transition:var(--ease);width:100%}
 .fg-in:focus,.fg-sel:focus,.fg-ta:focus{outline:none;border-color:var(--focus);box-shadow:0 0 0 3px rgba(0,102,204,.12)}
 .batch-w{overflow-x:auto;margin-top:.5rem;border:1px solid var(--border-sub);border-radius:var(--r-md)}
 .batch{width:100%;border-collapse:collapse;min-width:540px}
@@ -333,7 +332,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
       </div>
       <div class="hdr-actions">
         <div class="sync syncing" id="syncBadge"><span class="sync-dot"></span><span id="syncTxt">Connecting</span></div>
-        <button id="btnExport" class="btn btn-s" onclick="doExport()"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="hdr-lbl">Export</span></button>
+        <button id="btnExport" class="btn btn-s" onclick="openExportModal()"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="hdr-lbl">Export</span></button>
         <button id="btnAdminSettings" class="btn btn-s" onclick="openAdminSettings()" title="Admin Settings: Model-SPM dictionary, Backup & Restore"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> <span class="hdr-lbl">Admin</span></button>
         <button id="btnTheme" class="btn btn-s" title="Toggle Theme"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="hdr-lbl" id="themeLbl">Dark</span></button>
       </div>
@@ -445,11 +444,12 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
       <option value="Tony Zheng"></option>
     </datalist>
   </div>
-  <div class="fg-item"><label class="fg-lbl">Start <span class="req">*</span></label><input type="date" id="eStart" class="fg-in" required></div>
-  <div class="fg-item"><label class="fg-lbl">End <span class="req">*</span></label><input type="date" id="eEnd" class="fg-in" required></div>
+  <div class="fg-item"><label class="fg-lbl">Start <span class="req">*</span></label><input type="date" id="eStart" class="fg-in" onchange="updateEvtRangeHint()" required></div>
+  <div class="fg-item"><label class="fg-lbl">End <span class="req">*</span></label><input type="date" id="eEnd" class="fg-in" onchange="updateEvtRangeHint()" required></div>
   <div class="fg-item"><label class="fg-lbl">Sample Deadline <span class="req">*</span></label><input type="date" id="eDL" class="fg-in" required></div>
+  <div class="fg-item fg-full" id="eRangeInfo" style="display:none;margin-top:-.15rem"></div>
   <div class="fg-item"><label class="fg-lbl">Linked Event</label><select id="eLink" class="fg-sel"><option value="">None</option></select></div>
-  <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="eNotes" class="fg-ta" rows="2"></textarea></div>
+  <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="eNotes" class="fg-ta" rows="2" placeholder="e.g. Special event requirements, delivery contact, accessories needed..."></textarea></div>
 </div></div><div class="modal-f" style="justify-content:space-between"><button type="button" class="btn btn-d" id="btnDelEvtModal" onclick="delEvtFromModal()" style="display:none">Delete Event</button><div style="display:flex;gap:.4rem;margin-left:auto"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p" id="eSubmit">Save</button></div></div></form></div></div>
 
 <!-- Batch Request Modal -->
@@ -478,7 +478,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
   <div class="fg-item"><label class="fg-lbl">Location</label><input type="text" id="xLoc" class="fg-in"></div>
   <div class="fg-item"><label class="fg-lbl">Ready Date</label><input type="date" id="xReady" class="fg-in"></div>
   <div class="fg-item"><label class="fg-lbl">Status <span class="req">*</span></label><select id="xStatus" class="fg-sel" required><option value="pending">Pending SPM</option><option value="confirmed">Confirmed</option><option value="partial">Partially Confirmed</option><option value="using">In Use</option><option value="reclaimed">Reclaimed</option><option value="returned">Returned</option><option value="unavail">Unavailable</option></select></div>
-  <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="xNotes" class="fg-ta" rows="2"></textarea></div>
+  <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="xNotes" class="fg-ta" rows="2" placeholder="e.g. Accompanied with 65W adapter & mouse, minor scratch on lid, special testing notes..."></textarea></div>
 </div></div><div class="modal-f" style="justify-content:space-between"><button type="button" class="btn btn-d" id="btnDelSmModal" onclick="delSmFromModal()" style="display:none">Delete Sample</button><div style="display:flex;gap:.4rem;margin-left:auto"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Save</button></div></div></form></div></div>
 
 <!-- SPM Confirm Modal -->
@@ -490,7 +490,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
   <div id="spmUnitsContainer" class="fg-full" style="display:none"></div>
   <div class="fg-item"><label class="fg-lbl">Confirmed Qty (max: <span id="spmMax">1</span>)</label><input type="number" id="spmQty" class="fg-in" value="1" min="0" inputmode="numeric"></div>
   <div class="fg-item"><label class="fg-lbl">Ready Date</label><input type="date" id="spmReady" class="fg-in"></div>
-  <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="spmNotes" class="fg-ta" rows="2"></textarea></div>
+  <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="spmNotes" class="fg-ta" rows="2" placeholder="e.g. Unit includes 65W adapter & mouse, available for pickup after 08/15..."></textarea></div>
 </div></div><div class="modal-f"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Submit</button></div></form></div></div>
 
 <!-- Admin Settings Modal (Unified Settings & Admin Functions) -->
@@ -505,7 +505,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
     </div>
     <div class="modal-b" style="display:flex;flex-direction:column;gap:1.1rem">
       
-      <!-- Section: Model ↔ SPM Mapping Dictionary -->
+      <!-- Section 1: Model ↔ SPM Mapping Dictionary -->
       <div style="background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:1rem">
         <div style="font-weight:600;font-size:.88rem;color:var(--text-1);margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem">
           <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--blue)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
@@ -521,7 +521,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
         </div>
       </div>
 
-      <!-- Section: Backup & Restore -->
+      <!-- Section 2: Backup & Restore -->
       <div style="background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:1rem">
         <div style="font-weight:600;font-size:.88rem;color:var(--text-1);margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem">
           <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--blue)" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
@@ -537,7 +537,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
         </div>
       </div>
 
-      <!-- Section: Microsoft Teams Notification Webhook -->
+      <!-- Section 3: Microsoft Teams Notification Webhook -->
       <div style="background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:1rem">
         <div style="font-weight:600;font-size:.88rem;color:var(--text-1);margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6264A7" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
@@ -565,6 +565,42 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
   </div>
 </div>
 
+<!-- Customized Export Modal -->
+<div id="mExport" class="modal">
+  <div class="modal-c" style="max-width:480px">
+    <div class="modal-h">
+      <h3 class="modal-t" style="display:flex;align-items:center;gap:.4rem">
+        <svg width="15" height="15" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Excel Report Export
+      </h3>
+      <button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-b" style="display:flex;flex-direction:column;gap:1rem">
+      <div class="fg-item">
+        <label class="fg-lbl">Export Scope</label>
+        <select id="expScope" class="fg-sel" onchange="toggleExportScopeOpts()">
+          <option value="all">Full Database (All Events & Samples)</option>
+          <option value="filtered">Current Filtered View</option>
+          <option value="overdue">Overdue Samples Only</option>
+          <option value="singleEvent">Specific Event Only</option>
+        </select>
+      </div>
+      <div class="fg-item" id="expEvtBox" style="display:none">
+        <label class="fg-lbl">Target Event</label>
+        <select id="expEvtSelect" class="fg-sel"></select>
+      </div>
+      <div style="font-size:.74rem;color:var(--text-3);background:var(--surface-alt);padding:.6rem .8rem;border:1px solid var(--border-sub);border-radius:var(--r-md);display:flex;align-items:center;gap:.4rem">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>Multi-sheet XLSX includes complete event details and custody logs.</span>
+      </div>
+    </div>
+    <div class="modal-f" style="justify-content:flex-end;gap:.4rem">
+      <button type="button" class="btn btn-s modal-cancel">Cancel</button>
+      <button type="button" class="btn btn-p" onclick="processCustomExport()"><svg width="13" height="13" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Export XLSX</button>
+    </div>
+  </div>
+</div>
+
 <!-- Transfer Modal -->
 <div id="mTrans" class="modal"><div class="modal-c"><div class="modal-h"><h3 class="modal-t">Custody Transfer</h3><button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
 <form id="fTransForm"><div class="modal-b"><div class="info-bar"><strong>Target:</strong> <span id="trInfo" style="color:var(--blue);font-weight:600">-</span></div><div class="fg">
@@ -573,7 +609,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
   <div class="fg-item"><label class="fg-lbl">To <span class="req">*</span></label><input type="text" id="trTo" class="fg-in" autocapitalize="words" required></div>
   <div class="fg-item"><label class="fg-lbl">Target Event</label><select id="trEvt" class="fg-sel"></select></div>
   <div class="fg-item fg-full"><label class="fg-lbl">Condition</label><select id="trCond" class="fg-sel"><option value="Good">Good</option><option value="Minor Scratch">Minor Scratch</option><option value="Needs Repair">Needs Repair</option><option value="Missing Accessories">Missing Accessories</option></select></div>
-  <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="trNotes" class="fg-ta" rows="2"></textarea></div>
+  <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="trNotes" class="fg-ta" rows="2" placeholder="e.g. Handover with adapter/mouse, returned with original box, testing completed..."></textarea></div>
 </div></div><div class="modal-f"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Save</button></div></form></div></div>
 
 <!-- Back To Top Button -->
@@ -651,6 +687,12 @@ function syncUI(cls, txt) {
 const LS_EV = "tracker_local_events";
 const LS_SM = "tracker_local_samples";
 const LS_SPM = "tracker_local_spm_master";
+const LS_CM_DIR = "tracker_cm_directory";
+
+let cmDirectory = [
+  "Scarlett Lan", "Jonathan Lee", "AngelWJ Hsu", "Rachel1 Chou", "Tony Zheng",
+  "Mike_Cho", "Chester1_Lee", "Andy1_Su", "Christy_Hsu", "Rebecca2_Huang"
+];
 
 // Load from LocalStorage on startup for instant zero-downtime offline availability
 try {
@@ -660,7 +702,20 @@ try {
   if (localSm) sms = JSON.parse(localSm);
   const localSpm = localStorage.getItem(LS_SPM);
   if (localSpm) Object.assign(modelSpmMaster, JSON.parse(localSpm));
+  const localCmDir = localStorage.getItem(LS_CM_DIR);
+  if (localCmDir) cmDirectory = JSON.parse(localCmDir);
 } catch(e) {}
+
+function updateCmDatalist() {
+  const dl = document.getElementById("cmList");
+  if (!dl) return;
+  dl.innerHTML = "";
+  cmDirectory.forEach(name => {
+    const opt = document.createElement("option");
+    opt.value = name;
+    dl.appendChild(opt);
+  });
+}
 
 function parseFbArray(val) {
   if (!val) return [];
@@ -792,17 +847,17 @@ document.addEventListener("DOMContentLoaded", () => {
   bind("fSt", e => { fSt = e.target.value; renderTable(); updateResetBtns(); });
 
   // Event filters
-  document.getElementById("evSearch").addEventListener("input", e => { evSearchQ = e.target.value.trim().toLowerCase(); renderEvGrid(); });
-  document.getElementById("evTypeFilter").addEventListener("change", e => { evTypeF = e.target.value; renderEvGrid(); });
-  const evOrgEl = document.getElementById("evOrgFilter"); if (evOrgEl) evOrgEl.addEventListener("change", e => { evOrgF = e.target.value; renderEvGrid(); });
-  const evStEl = document.getElementById("evStatusFilter"); if (evStEl) evStEl.addEventListener("change", e => { evStatusF = e.target.value; renderEvGrid(); });
+  document.getElementById("evSearch").addEventListener("input", e => { evSearchQ = e.target.value.trim().toLowerCase(); renderEvGrid(); updateResetBtns(); });
+  document.getElementById("evTypeFilter").addEventListener("change", e => { evTypeF = e.target.value; renderEvGrid(); updateResetBtns(); });
+  const evOrgEl = document.getElementById("evOrgFilter"); if (evOrgEl) evOrgEl.addEventListener("change", e => { evOrgF = e.target.value; renderEvGrid(); updateResetBtns(); });
+  const evStEl = document.getElementById("evStatusFilter"); if (evStEl) evStEl.addEventListener("change", e => { evStatusF = e.target.value; renderEvGrid(); updateResetBtns(); });
 
   // Sort headers
   document.querySelectorAll(".th-sort").forEach(el => el.addEventListener("click", () => doSort(el.dataset.col)));
 
   // Buttons
   document.getElementById("btnNewEvt").addEventListener("click", openNewEvt);
-  document.getElementById("btnExport").addEventListener("click", doExport);
+  document.getElementById("btnExport").addEventListener("click", openExportModal);
   document.getElementById("btnTheme").addEventListener("click", toggleTheme);
   document.getElementById("bAdd").addEventListener("click", addBRow);
   document.getElementById("bCSV").addEventListener("click", () => document.getElementById("bFile").click());
@@ -862,7 +917,7 @@ function updateBadges() {
    Rendering — Events
    ====================================================================== */
 function scrollGantt(offset) {
-  const el = document.querySelector(".gantt");
+  const el = document.getElementById("ganttRightPane");
   if (el) el.scrollBy({ left: offset, behavior: "smooth" });
 }
 
@@ -906,7 +961,6 @@ function renderGantt() {
   const numWeeks = Math.ceil(totalMs / weekStep);
 
   const canvasMinWidth = Math.max(750, numWeeks * 135);
-  c.style.minWidth = canvasMinWidth + "px";
 
   let ticksHtml = "";
   while (currMs < eR) {
@@ -915,33 +969,88 @@ function renderGantt() {
     const mStr = String(dt.getMonth() + 1).padStart(2, '0');
     const dStr = String(dt.getDate()).padStart(2, '0');
     const label = mStr + '/' + dStr;
-    ticksHtml += '<div style="position:absolute;left:' + leftPct.toFixed(2) + '%;transform:translateX(-50%);white-space:nowrap;font-size:.68rem;color:var(--text-2);font-weight:600">' + label + '<div style="width:1px;height:6px;background:var(--border);margin:2px auto 0 auto"></div></div>';
+    
+    let tx = "transform:translateX(-50%);";
+    if (leftPct <= 3) tx = "transform:translateX(0);";
+    else if (leftPct >= 97) tx = "transform:translateX(-100%);";
+
+    ticksHtml += '<div style="position:absolute;left:' + leftPct.toFixed(2) + '%;' + tx + 'white-space:nowrap;font-size:.68rem;color:var(--text-2);font-weight:600">' + label + '<div style="width:1px;height:6px;background:var(--border);margin:2px auto 0 auto"></div></div>';
     currMs += weekStep;
   }
 
-  const hdrRow = document.createElement("div");
-  hdrRow.style.display = "flex";
-  hdrRow.style.alignItems = "center";
-  hdrRow.style.gap = "1rem";
-  hdrRow.style.marginBottom = ".6rem";
+  // Split Container
+  const splitContainer = document.createElement("div");
+  splitContainer.style.display = "flex";
+  splitContainer.style.alignItems = "flex-start";
+  splitContainer.style.width = "100%";
+  splitContainer.style.gap = "0";
 
-  const spacer = document.createElement("div");
-  spacer.style.width = "160px";
-  spacer.style.flexShrink = "0";
+  // Left Fixed Column (Event Names - NEVER SCROLLS)
+  const leftCol = document.createElement("div");
+  leftCol.className = "gantt-left-col";
+  leftCol.style.width = "170px";
+  leftCol.style.flexShrink = "0";
+  leftCol.style.borderRight = "1px solid var(--border-sub)";
+  leftCol.style.paddingRight = ".75rem";
+  leftCol.style.background = "var(--surface)";
+  leftCol.style.zIndex = "3";
 
+  // Top Left Spacer matching Date Axis height
+  const leftSpacer = document.createElement("div");
+  leftSpacer.style.height = "26px";
+  leftSpacer.style.marginBottom = ".6rem";
+  leftCol.appendChild(leftSpacer);
+
+  // Right Scrollable Pane (Date Axis + Gantt Bar Tracks)
+  const rightPane = document.createElement("div");
+  rightPane.id = "ganttRightPane";
+  rightPane.style.flex = "1";
+  rightPane.style.overflowX = "auto";
+  rightPane.style.boxSizing = "border-box";
+  rightPane.style.paddingLeft = ".75rem";
+
+  // Enable Mouse Wheel Horizontal Scrolling
+  rightPane.addEventListener("wheel", (evt) => {
+    if (evt.deltaY !== 0) {
+      evt.preventDefault();
+      rightPane.scrollLeft += evt.deltaY;
+    }
+  }, { passive: false });
+
+  const rightCanvas = document.createElement("div");
+  rightCanvas.style.minWidth = canvasMinWidth + "px";
+  rightCanvas.style.position = "relative";
+  rightCanvas.style.padding = "0 15px";
+  rightCanvas.style.boxSizing = "border-box";
+
+  // Right Top Date Axis
   const ax = document.createElement("div");
   ax.className = "gantt-axis";
-  ax.style.flex = "1";
   ax.style.position = "relative";
   ax.style.height = "26px";
   ax.style.borderBottom = "1px solid var(--border-sub)";
+  ax.style.marginBottom = ".6rem";
   ax.innerHTML = ticksHtml;
+  rightCanvas.appendChild(ax);
 
-  hdrRow.appendChild(spacer);
-  hdrRow.appendChild(ax);
-  c.appendChild(hdrRow);
-
+  // Populate Left Event Labels and Right Gantt Tracks
   evs.forEach(e => {
+    // Left Event Name Label Item
+    const lblItem = document.createElement("div");
+    lblItem.className = "gantt-lbl";
+    lblItem.style.height = "28px";
+    lblItem.style.lineHeight = "28px";
+    lblItem.style.marginBottom = ".65rem";
+    lblItem.style.fontSize = ".8rem";
+    lblItem.style.fontWeight = "600";
+    lblItem.style.overflow = "hidden";
+    lblItem.style.textOverflow = "ellipsis";
+    lblItem.style.whiteSpace = "nowrap";
+    lblItem.title = e.title;
+    lblItem.textContent = e.title;
+    leftCol.appendChild(lblItem);
+
+    // Right Track Row
     const s = new Date(e.startDate).getTime(), d = new Date(e.endDate).getTime();
     const isOutBefore = d < sR;
     const isOutAfter = s > eR;
@@ -952,28 +1061,40 @@ function renderGantt() {
     const rightPct = Math.max(0, Math.min(100, ((d - sR) / totalMs) * 100));
     const widthPct = Math.max(4, rightPct - leftPct);
 
-    const r = document.createElement("div"); r.className = "gantt-row";
-    
     let barLabel = e.startDate.slice(5) + " ~ " + e.endDate.slice(5);
     if (startsBefore) barLabel = "◀ " + barLabel;
     if (endsAfter) barLabel = barLabel + " ▶";
 
+    const rRow = document.createElement("div");
+    rRow.style.height = "28px";
+    rRow.style.marginBottom = ".65rem";
+    rRow.style.display = "flex";
+    rRow.style.alignItems = "center";
+
     let trackHtml = '';
     if (isOutBefore) {
-      trackHtml = '<div class="gantt-track"><div class="gantt-bar gantt-bar-out" style="left:0%;width:18%;background:var(--surface-alt);color:var(--text-3);border:1px dashed var(--border-sub)">◀ ' + e.startDate.slice(5) + '</div></div>';
+      trackHtml = '<div class="gantt-track" style="width:100%"><div class="gantt-bar gantt-bar-out" style="left:0%;width:18%;background:var(--surface-alt);color:var(--text-3);border:1px dashed var(--border-sub)">◀ ' + e.startDate.slice(5) + '</div></div>';
     } else if (isOutAfter) {
-      trackHtml = '<div class="gantt-track"><div class="gantt-bar gantt-bar-out" style="right:0%;width:18%;background:var(--surface-alt);color:var(--text-3);border:1px dashed var(--border-sub)">' + e.startDate.slice(5) + ' ▶</div></div>';
+      trackHtml = '<div class="gantt-track" style="width:100%"><div class="gantt-bar gantt-bar-out" style="right:0%;width:18%;background:var(--surface-alt);color:var(--text-3);border:1px dashed var(--border-sub)">' + e.startDate.slice(5) + ' ▶</div></div>';
     } else {
       if (widthPct < 14) {
-        trackHtml = '<div class="gantt-track" style="position:relative"><div class="gantt-bar" style="left:' + leftPct.toFixed(1) + '%;width:' + widthPct.toFixed(1) + '%"></div><span style="position:absolute;left:' + (leftPct + widthPct + 1).toFixed(1) + '%;top:3px;font-size:.7rem;font-weight:600;color:var(--text-1);white-space:nowrap">' + barLabel + '</span></div>';
+        const isNearRight = (leftPct + widthPct) > 75;
+        const labelPosStyle = isNearRight
+          ? ('right:' + (100 - leftPct + 1).toFixed(1) + '%;')
+          : ('left:' + (leftPct + widthPct + 1).toFixed(1) + '%;');
+        trackHtml = '<div class="gantt-track" style="width:100%;position:relative"><div class="gantt-bar" style="left:' + leftPct.toFixed(1) + '%;width:' + widthPct.toFixed(1) + '%" title="' + esc(e.title) + ': ' + barLabel + '"></div><span style="position:absolute;' + labelPosStyle + 'top:3px;font-size:.7rem;font-weight:600;color:var(--text-1);white-space:nowrap">' + barLabel + '</span></div>';
       } else {
-        trackHtml = '<div class="gantt-track"><div class="gantt-bar" style="left:' + leftPct.toFixed(1) + '%;width:' + widthPct.toFixed(1) + '%">' + barLabel + '</div></div>';
+        trackHtml = '<div class="gantt-track" style="width:100%"><div class="gantt-bar" style="left:' + leftPct.toFixed(1) + '%;width:' + widthPct.toFixed(1) + '%" title="' + esc(e.title) + ': ' + barLabel + '">' + barLabel + '</div></div>';
       }
     }
-
-    r.innerHTML = '<div class="gantt-lbl" title="' + esc(e.title) + '">' + esc(e.title) + '</div>' + trackHtml;
-    c.appendChild(r);
+    rRow.innerHTML = trackHtml;
+    rightCanvas.appendChild(rRow);
   });
+
+  rightPane.appendChild(rightCanvas);
+  splitContainer.appendChild(leftCol);
+  splitContainer.appendChild(rightPane);
+  c.appendChild(splitContainer);
 }
 
 function getEvDateTag(ev) {
@@ -1055,6 +1176,7 @@ function resetEvFilters() {
   const evOrgEl = document.getElementById("evOrgFilter"); if (evOrgEl) evOrgEl.value = "ALL";
   const evStEl = document.getElementById("evStatusFilter"); if (evStEl) evStEl.value = "ALL";
   renderEvGrid();
+  updateResetBtns();
 }
 
 function resetSmFilters() {
@@ -1066,6 +1188,7 @@ function resetSmFilters() {
   document.getElementById("fSpm").value = "ALL";
   document.getElementById("fSt").value = "ALL";
   renderTable();
+  updateResetBtns();
 }
 
 function updateResetBtns() {
@@ -1179,7 +1302,7 @@ function renderDesktopTable(fd) {
       const subMetaHtml = metaParts.length ? '<div style="font-size:.73rem;color:var(--text-3);margin-top:.1rem">' + metaParts.join(' · ') + '</div>' : '';
 
       const modelHtml = '<div style="display:flex;flex-direction:column;gap:.05rem">' +
-        '<div style="display:flex;align-items:center;gap:.35rem;flex-wrap:wrap"><span class="seg">' + esc(it.segment || "Zenbook") + '</span><span style="font-weight:600;font-size:.88rem;color:var(--text-1);letter-spacing:-0.01em">' + esc(it.productModel) + '</span></div>' +
+        '<div style="font-weight:600;font-size:.92rem;color:var(--text-1);letter-spacing:-0.01em">' + esc(it.productModel) + '</div>' +
         subMetaHtml +
         '</div>';
 
@@ -1238,12 +1361,17 @@ function renderDesktopTable(fd) {
         '<tr class="hist-row' + (expanded.has(it.id) ? " on" : "") + '" id="h_' + it.id + '"><td colspan="7">' + buildHistHtml(it) + '</td></tr>';
     });
 
-    let statBadgesHtml = '<span class="evt-grp-stat"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> Total: <strong>' + totalQty + ' units</strong></span>';
-    if (stCounts.using > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--green)"><span class="sync-dot" style="background:var(--green)"></span> In Use: <strong>' + stCounts.using + '</strong></span>';
-    if (stCounts.confirmed > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--blue)"><span class="sync-dot" style="background:var(--blue)"></span> Confirmed: <strong>' + stCounts.confirmed + '</strong></span>';
-    if (stCounts.pending > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--amber)"><span class="sync-dot" style="background:var(--amber)"></span> Pending: <strong>' + stCounts.pending + '</strong></span>';
-    if (stCounts.closed > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--text-3)"><span class="sync-dot" style="background:var(--text-3)"></span> Closed: <strong>' + stCounts.closed + '</strong></span>';
-    if (stCounts.unavail > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--red)"><span class="sync-dot" style="background:var(--red)"></span> Unavail: <strong>' + stCounts.unavail + '</strong></span>';
+    let subStats = [];
+    if (stCounts.using > 0) subStats.push(stCounts.using + ' In Use');
+    if (stCounts.confirmed > 0) subStats.push(stCounts.confirmed + ' Confirmed');
+    if (stCounts.pending > 0) subStats.push(stCounts.pending + ' Pending');
+    if (stCounts.unavail > 0) subStats.push(stCounts.unavail + ' Unavail');
+    if (stCounts.closed > 0) subStats.push(stCounts.closed + ' Closed');
+    
+    let statBadgesHtml = '<span class="evt-grp-stat" style="font-weight:600;color:var(--text-1);font-size:.78rem">' + totalQty + ' units</span>';
+    if (subStats.length > 0) {
+      statBadgesHtml += '<span style="color:var(--text-3);font-size:.72rem"> · ' + subStats.join(' · ') + '</span>';
+    }
 
     grpCard.innerHTML = '<div class="evt-grp-hdr" onclick="toggleEvtGrp(\'' + grpId + '\')">' +
       '<div class="evt-grp-left">' +
@@ -1288,14 +1416,14 @@ function renderMobileCards(fd) {
     let condBadge = "";
     if (latestLog && latestLog.condition && latestLog.condition !== "Good") {
       const cc = latestLog.condition === "Needs Repair" ? "st-unavail" : "st-partial";
-      condBadge = ' <span class="st ' + cc + '" style="font-size:.65rem;padding:.08rem .35rem">⚠️ ' + esc(latestLog.condition) + '</span>';
+      condBadge = ' <span class="st ' + cc + '" style="font-size:.65rem;padding:.08rem .4rem;display:inline-flex;align-items:center;gap:.2rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' + esc(latestLog.condition) + '</span>';
     }
 
     const curEvtObj = evs.find(e => e.title === (it.currentEvent || it.event));
     const todayStr = new Date().toISOString().split("T")[0];
     let overdueBadge = "";
     if (curEvtObj && curEvtObj.endDate && curEvtObj.endDate < todayStr && it.status === "using") {
-      overdueBadge = ' <span class="st st-unavail" style="font-size:.65rem;padding:.08rem .35rem">⚠️ Overdue</span>';
+      overdueBadge = ' <span class="st st-unavail" style="font-size:.65rem;padding:.08rem .4rem;display:inline-flex;align-items:center;gap:.2rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Overdue</span>';
     }
 
     const histCount = it.custodyLogs ? it.custodyLogs.length : 0;
@@ -1310,7 +1438,7 @@ function renderMobileCards(fd) {
     if (it.serialNumber) metaParts.push('SN: ' + esc(it.serialNumber));
     const subMetaHtml = metaParts.length ? '<div style="font-size:.73rem;color:var(--text-3);margin-top:.1rem">' + metaParts.join(' · ') + '</div>' : '';
 
-    let html = '<div class="s-card-top"><div style="display:flex;flex-direction:column;gap:.05rem"><div style="display:flex;align-items:center;gap:.35rem;flex-wrap:wrap"><span class="seg">' + esc(it.segment || "Zenbook") + "</span> <span style=\"font-weight:600;font-size:.9rem;color:var(--text-1)\">" + esc(it.productModel) + "</span></div>" + subMetaHtml;
+    let html = '<div class="s-card-top"><div style="display:flex;flex-direction:column;gap:.05rem"><div style="font-weight:600;font-size:.92rem;color:var(--text-1)">' + esc(it.productModel) + "</div>" + subMetaHtml;
     html += '</div><div style="display:flex;align-items:center;gap:.25rem;flex-wrap:wrap"><span class="st ' + si.css + '">' + si.label + "</span>" + condBadge + overdueBadge + "</div></div>";
     html += '<div class="s-card-grid">';
     html += '<div><div class="s-card-label">Event</div><div style="font-weight:600;color:var(--blue)">' + esc(it.event || "-") + "</div></div>";
@@ -1463,17 +1591,35 @@ function toggleHistCard(id) {
 /* ======================================================================
    Event CRUD
    ====================================================================== */
-function openNewEvt() {
-  document.getElementById("eId").value = "";
-  document.getElementById("mEvtTitle").textContent = "New Event";
-  document.getElementById("eSubmit").textContent = "Create";
-  document.getElementById("fEvtForm").reset();
-  const today = new Date().toISOString().split("T")[0];
-  document.getElementById("eStart").value = today;
-  document.getElementById("eEnd").value = new Date(Date.now() + 7 * 864e5).toISOString().split("T")[0];
-  document.getElementById("eDL").value = today;
-  populateLinkSelect();
-  document.getElementById("mEvt").classList.add("on");
+function updateEvtRangeHint() {
+  const sEl = document.getElementById("eStart"), eEl = document.getElementById("eEnd"), dlEl = document.getElementById("eDL");
+  const infoEl = document.getElementById("eRangeInfo");
+  if (!sEl || !eEl || !infoEl) return;
+
+  const sVal = sEl.value, eVal = eEl.value;
+  if (!sVal) { infoEl.style.display = "none"; return; }
+
+  if (sVal && !dlEl.value) {
+    dlEl.value = sVal;
+  }
+
+  if (sVal && eVal) {
+    const sDate = new Date(sVal), eDate = new Date(eVal);
+    const diffMs = eDate - sDate;
+    const diffDays = Math.round(diffMs / 864e5) + 1;
+
+    infoEl.style.display = "block";
+    if (diffDays >= 1) {
+      const sFmt = sVal.slice(5).replace('-', '/'), eFmt = eVal.slice(5).replace('-', '/');
+      infoEl.innerHTML = '<div style="background:var(--blue-bg);border:1px solid rgba(59,130,246,0.25);border-radius:var(--r-pill);padding:.45rem .85rem;color:var(--blue);font-size:.78rem;font-weight:500;display:flex;align-items:center;gap:.4rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Event Schedule Range: <strong>' + diffDays + ' Days</strong> (' + sFmt + ' ~ ' + eFmt + ')</div>';
+    } else {
+      infoEl.innerHTML = '<div style="background:var(--s-unavail-bg);border:1px solid rgba(239,68,68,0.25);border-radius:var(--r-pill);padding:.45rem .85rem;color:var(--red);font-size:.78rem;font-weight:500;display:flex;align-items:center;gap:.4rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> End date must be on or after Start date.</div>';
+    }
+  } else if (sVal) {
+    infoEl.style.display = "block";
+    const sFmt = sVal.slice(5).replace('-', '/');
+    infoEl.innerHTML = '<div style="background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-pill);padding:.45rem .85rem;color:var(--text-2);font-size:.78rem;font-weight:500;display:flex;align-items:center;gap:.4rem"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Start Date: <strong>' + sFmt + '</strong> (Select End Date to complete schedule)</div>';
+  }
 }
 
 function openNewEvt() {
@@ -1488,6 +1634,7 @@ function openNewEvt() {
   populateLinkSelect();
   const btnDel = document.getElementById("btnDelEvtModal");
   if (btnDel) btnDel.style.display = "none";
+  updateEvtRangeHint();
   document.getElementById("mEvt").classList.add("on");
 }
 
@@ -1508,6 +1655,7 @@ function openEditEvt(id) {
   document.getElementById("eLink").value = ev.precedingEvent || "";
   const btnDel = document.getElementById("btnDelEvtModal");
   if (btnDel) btnDel.style.display = "inline-flex";
+  updateEvtRangeHint();
   document.getElementById("mEvt").classList.add("on");
 }
 
@@ -1533,12 +1681,36 @@ function submitEvt(e) {
   e.preventDefault();
   const id = document.getElementById("eId").value;
   const data = { title: document.getElementById("eTitle").value.trim(), type: document.getElementById("eType").value, location: document.getElementById("eLoc").value.trim(), organizer: document.getElementById("eOrg").value.trim(), startDate: document.getElementById("eStart").value, endDate: document.getElementById("eEnd").value, deadline: document.getElementById("eDL").value, precedingEvent: document.getElementById("eLink").value, notes: document.getElementById("eNotes").value.trim() };
-  if (id) { const ex = evs.find(x => x.id === id); if (ex) Object.assign(ex, data); toast("Updated: " + data.title); }
-  else { evs.push({ id: genId("EV"), ...data }); toast("Created: " + data.title); }
+  if (id) {
+    const ex = evs.find(x => x.id === id);
+    if (ex) {
+      const oldTitle = ex.title;
+      Object.assign(ex, data);
+
+      let syncCount = 0;
+      sms.forEach(s => {
+        if (s.event === oldTitle || s.currentEvent === oldTitle || s.targetEvent === oldTitle) {
+          if (oldTitle !== data.title) {
+            if (s.event === oldTitle) s.event = data.title;
+            if (s.currentEvent === oldTitle) s.currentEvent = data.title;
+            if (s.targetEvent === oldTitle) s.targetEvent = data.title;
+          }
+          s.readyDate = data.deadline || data.startDate;
+          s.location = data.location;
+          syncCount++;
+        }
+      });
+      if (syncCount > 0) saveSm();
+      toast("Updated: " + data.title + (syncCount ? " (Synced " + syncCount + " sample ready dates)" : ""));
+    }
+  } else {
+    evs.push({ id: genId("EV"), ...data });
+    toast("Created: " + data.title);
+  }
   saveEv(); render(); document.getElementById("mEvt").classList.remove("on");
 }
 
-function filterByEv(t) { switchView("vTrack"); document.getElementById("fEvt").value = t; fEvt = t; renderTable(); }
+function filterByEv(t) { switchView("vTrack"); document.getElementById("fEvt").value = t; fEvt = t; renderTable(); updateResetBtns(); }
 
 /* ======================================================================
    Sample Request
@@ -1942,6 +2114,7 @@ function openEdit(id) {
   document.getElementById("xReady").value = s.readyDate || "";
   document.getElementById("xStatus").value = s.status || "pending";
   document.getElementById("xNotes").value = s.notes || "";
+
   const btnDel = document.getElementById("btnDelSmModal");
   if (btnDel) btnDel.style.display = "inline-flex";
   document.getElementById("mEdit").classList.add("on");
@@ -1976,7 +2149,7 @@ function submitEdit(e) {
   const newReqBy = document.getElementById("xReqBy").value.trim();
   const newHolder = document.getElementById("xHolder").value.trim();
   const newLoc = document.getElementById("xLoc").value.trim();
-  const newReady = document.getElementById("xReady").value;
+  document.getElementById("xReady").value = s.readyDate || "";
   const newStatus = document.getElementById("xStatus").value;
   const newNotes = document.getElementById("xNotes").value.trim();
 
@@ -2026,8 +2199,24 @@ function delSm(id) {
 function openAdminSettings() {
   const elCount = document.getElementById("spmDictCount");
   if (elCount) elCount.textContent = Object.keys(modelSpmMaster).length;
+  const txtCm = document.getElementById("txtCmDirectory");
+  if (txtCm) txtCm.value = cmDirectory.join(", ");
   updateTeamsStatus();
   document.getElementById("mAdminSettings").classList.add("on");
+}
+
+function saveTeamDirectory() {
+  const txt = document.getElementById("txtCmDirectory").value;
+  if (!txt) return;
+  const list = txt.split(",").map(x => x.trim()).filter(Boolean);
+  if (!list.length) return;
+  cmDirectory = list;
+  try {
+    localStorage.setItem(LS_CM_DIR, JSON.stringify(cmDirectory));
+    try { if (typeof db !== "undefined" && db.ref) db.ref("cmDirectory").set(cmDirectory); } catch(e) {}
+  } catch(e) {}
+  updateCmDatalist();
+  toast("Saved Team Directory (" + cmDirectory.length + " members)");
 }
 
 function saveTeamsWebhook() {
@@ -2452,29 +2641,87 @@ function submitTrans(e) {
 }
 
 /* ======================================================================
-   Export — Multi-Sheet XLSX
+   Export — Multi-Sheet XLSX with Customized Filters
    ====================================================================== */
 function doExport() {
-  if (!sms.length && !evs.length) { toast("No data to export"); return; }
+  openExportModal();
+}
 
-  // Load SheetJS on demand
+function openExportModal() {
+  const sel = document.getElementById("expEvtSelect");
+  if (sel) {
+    sel.innerHTML = "";
+    evs.forEach(ev => {
+      const o = document.createElement("option");
+      o.value = ev.title;
+      o.textContent = ev.title;
+      sel.appendChild(o);
+    });
+  }
+  document.getElementById("expScope").value = "all";
+  toggleExportScopeOpts();
+  document.getElementById("mExport").classList.add("on");
+}
+
+function toggleExportScopeOpts() {
+  const scope = document.getElementById("expScope").value;
+  const box = document.getElementById("expEvtBox");
+  if (box) box.style.display = scope === "singleEvent" ? "block" : "none";
+}
+
+function processCustomExport() {
+  const scope = document.getElementById("expScope").value;
+  let targetSamples = [...sms];
+  let targetEvents = [...evs];
+
+  if (scope === "filtered") {
+    if (fSeg !== "ALL") targetSamples = targetSamples.filter(s => s.segment === fSeg);
+    if (fEvt !== "ALL") targetSamples = targetSamples.filter(s => s.event === fEvt || s.currentEvent === fEvt);
+    if (fReq !== "ALL") targetSamples = targetSamples.filter(s => s.requestedBy === fReq);
+    if (fSpm !== "ALL") targetSamples = targetSamples.filter(s => s.modelSPM === fSpm);
+    if (fSt !== "ALL") targetSamples = targetSamples.filter(s => s.status === fSt);
+    if (sq) targetSamples = targetSamples.filter(s => (s.productModel + " " + s.serialNumber + " " + s.event + " " + s.modelSPM + " " + s.requestedBy + " " + (s.currentHolder || "")).toLowerCase().includes(sq));
+
+    const evTitles = new Set(targetSamples.map(s => s.event || s.currentEvent));
+    if (evTitles.size) targetEvents = evs.filter(e => evTitles.has(e.title));
+  } else if (scope === "overdue") {
+    const todayStr = new Date().toISOString().split("T")[0];
+    targetSamples = sms.filter(s => {
+      const evObj = evs.find(e => e.title === (s.currentEvent || s.event));
+      return (evObj && evObj.endDate && evObj.endDate < todayStr && s.status === "using");
+    });
+    const evTitles = new Set(targetSamples.map(s => s.event || s.currentEvent));
+    targetEvents = evs.filter(e => evTitles.has(e.title));
+  } else if (scope === "singleEvent") {
+    const targetEvtTitle = document.getElementById("expEvtSelect").value;
+    targetSamples = sms.filter(s => s.event === targetEvtTitle || s.currentEvent === targetEvtTitle);
+    targetEvents = evs.filter(e => e.title === targetEvtTitle);
+  }
+
+  if (!targetSamples.length && !targetEvents.length) {
+    toast("No data matching export criteria");
+    return;
+  }
+
+  document.getElementById("mExport").classList.remove("on");
+  
   if (typeof XLSX === "undefined") {
     toast("Loading export library...");
     const sc = document.createElement("script");
     sc.src = "https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js";
-    sc.onload = () => buildXLSX();
+    sc.onload = () => buildCustomXLSX(targetEvents, targetSamples, scope);
     sc.onerror = () => { toast("Failed to load export library — falling back to CSV"); exportCSV(); };
     document.head.appendChild(sc);
   } else {
-    buildXLSX();
+    buildCustomXLSX(targetEvents, targetSamples, scope);
   }
 }
 
-function buildXLSX() {
+function buildCustomXLSX(eventsData, samplesData, scopeLabel) {
   const wb = XLSX.utils.book_new();
 
   // Sheet 1: Events
-  const evRows = evs.map(e => ({
+  const evRows = eventsData.map(e => ({
     "Event ID": e.id,
     "Title": e.title,
     "Type": e.type,
@@ -2490,7 +2737,7 @@ function buildXLSX() {
   XLSX.utils.book_append_sheet(wb, ws1, "Events");
 
   // Sheet 2: Tracking (Samples)
-  const smRows = sms.map(s => {
+  const smRows = samplesData.map(s => {
     const latestLog = (s.custodyLogs && s.custodyLogs.length) ? s.custodyLogs[0] : null;
     const histSummary = (s.custodyLogs || []).map((l, i) => `#${s.custodyLogs.length - i} ${l.action} (${l.date})`).join(" | ");
     return {
@@ -2517,8 +2764,8 @@ function buildXLSX() {
   const ws2 = XLSX.utils.json_to_sheet(smRows.length ? smRows : [{ "Sample ID": "(no samples)" }]);
   XLSX.utils.book_append_sheet(wb, ws2, "Tracking");
 
-  XLSX.writeFile(wb, "Sample_Logistics_Report_" + fmtFile(new Date()) + ".xlsx");
-  toast("Exported XLSX (Events & Tracking sheets)");
+  XLSX.writeFile(wb, "Sample_Report_" + scopeLabel + "_" + fmtFile(new Date()) + ".xlsx");
+  toast("Exported XLSX (" + samplesData.length + " sample(s) exported)");
 }
 
 function exportCSV() {

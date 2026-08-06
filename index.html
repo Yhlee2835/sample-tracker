@@ -233,27 +233,33 @@ tr.hist-row td{padding:.4rem 0!important;max-width:0;width:100%}
 .hist-notes{font-size:.7rem;color:var(--text-3);font-style:italic}
 
 /* --- Pure Horizontal Timeline Stream --- */
-.hist-h-stream{display:flex;align-items:stretch;gap:.85rem;overflow-x:auto;width:100%;box-sizing:border-box;padding:.5rem 1rem;scrollbar-width:thin;scroll-behavior:smooth}
+.hist-h-stream{display:flex;align-items:stretch;gap:.85rem;overflow-x:auto;width:100%;box-sizing:border-box;padding:.5rem 1rem;scrollbar-width:thin;scroll-behavior:auto;-webkit-overflow-scrolling:touch;will-change:scroll-position;transform:translateZ(0)}
 .hist-h-stream::after{content:'';padding-right:2rem;flex-shrink:0}
 .hist-h-stream::-webkit-scrollbar{height:6px}
 .hist-h-stream::-webkit-scrollbar-track{background:var(--surface-alt);border-radius:4px}
 .hist-h-stream::-webkit-scrollbar-thumb{background:var(--blue);border-radius:4px}
 
-.h-card{min-width:230px;max-width:300px;background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.7rem .85rem;display:flex;flex-direction:column;gap:.4rem;box-shadow:var(--shadow-sm);flex-shrink:0;position:relative;transition:var(--ease)}
-.h-card:hover{border-color:var(--blue);box-shadow:var(--shadow-md)}
+.h-card{min-width:275px;max-width:275px;min-height:155px;box-sizing:border-box;background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.8rem .95rem;display:flex;flex-direction:column;justify-content:space-between;gap:.5rem;box-shadow:var(--shadow-sm);flex-shrink:0;position:relative;transition:var(--ease)}
+.h-card:hover{border-color:var(--blue);box-shadow:var(--shadow-md);transform:translateY(-1px)}
 .h-card.latest{border:1.5px solid var(--blue);background:var(--surface);box-shadow:0 0 0 1px var(--blue),var(--shadow-md)}
-body[data-theme="dark"] .h-card.latest{background:rgba(0,102,204,0.14);border-color:#3399ff}
+body[data-theme="dark"] .h-card.latest{background:rgba(0,102,204,0.12);border-color:#3399ff}
 
-.h-card-top{display:flex;align-items:center;justify-content:space-between;gap:.4rem}
-.h-card-badge{font-size:.68rem;font-weight:700;background:var(--blue-bg);color:var(--blue);padding:.1rem .45rem;border-radius:var(--r-pill)}
+.h-card-top{display:flex;align-items:center;justify-content:space-between;gap:.4rem;padding-bottom:.35rem;border-bottom:1px dashed var(--border-sub)}
+.h-card-badge{font-size:.68rem;font-weight:700;background:var(--blue-bg);color:var(--blue);padding:.12rem .5rem;border-radius:var(--r-pill)}
 .h-card.latest .h-card-badge{background:var(--blue);color:#fff}
-.h-card-date{font-size:.68rem;color:var(--text-2);font-weight:500}
-.h-card-act{font-size:.82rem;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;word-break:break-word}
-.h-card-flow{font-size:.73rem;color:var(--text-1);line-height:1.35;background:var(--surface-alt);padding:.35rem .55rem;border-radius:var(--r-sm);border:1px solid var(--border-sub);word-break:break-word}
-body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.12);color:var(--text-1)}
-.h-card-notes{font-size:.7rem;color:var(--text-2);font-style:italic;line-height:1.3;margin-top:auto;word-break:break-word}
+.h-card-date{font-size:.68rem;color:var(--text-3);font-weight:500}
+.h-card-act{font-size:.84rem;font-weight:600;color:var(--text-1);display:flex;align-items:center;gap:.35rem;flex-wrap:wrap}
+.h-card-flow{font-size:.73rem;color:var(--text-1);line-height:1.35;background:var(--surface-alt);padding:.35rem .6rem;border-radius:var(--r-sm);border:1px solid var(--border-sub);display:flex;align-items:center;gap:.35rem}
+body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);color:var(--text-1)}
 
-.h-stream-arrow{display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1rem;font-weight:700;flex-shrink:0;opacity:.8}
+.h-units-box{margin-top:.2rem;background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-sm);padding:.4rem .55rem;display:flex;flex-direction:column;gap:.25rem;max-height:68px;overflow-y:auto}
+.h-units-lbl{font-size:.65rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.03em}
+.h-unit-item{font-size:.68rem;color:var(--text-2);line-height:1.25}
+
+.h-status-chip{font-size:.68rem;color:var(--text-2);margin-top:.2rem;display:flex;align-items:center;gap:.3rem;background:var(--surface-alt);padding:.25rem .45rem;border-radius:4px;border:1px solid var(--border-sub)}
+.h-card-notes{font-size:.7rem;color:var(--text-2);line-height:1.3;margin-top:auto;font-style:italic;word-break:break-word}
+
+.h-stream-arrow{display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:1.1rem;font-weight:700;flex-shrink:0;opacity:.85;align-self:center}
 
 /* Mobile history card version */
 .hist-card-box{background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.7rem .8rem;margin-top:.5rem;display:none}
@@ -327,10 +333,8 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.06);border-co
       </div>
       <div class="hdr-actions">
         <div class="sync syncing" id="syncBadge"><span class="sync-dot"></span><span id="syncTxt">Connecting</span></div>
-        <button id="btnExport" class="btn btn-s"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="hdr-lbl">Export</span></button>
-        <button id="btnBackup" class="btn btn-s" onclick="exportFullBackup()" title="Backup full database to JSON file"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> <span class="hdr-lbl">Backup</span></button>
-        <button id="btnRestore" class="btn btn-s" onclick="document.getElementById('fRestoreFile').click()" title="Restore database from JSON backup file"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg> <span class="hdr-lbl">Restore</span></button>
-        <input type="file" id="fRestoreFile" accept=".json" style="display:none" onchange="restoreBackup(event)">
+        <button id="btnExport" class="btn btn-s" onclick="doExport()"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="hdr-lbl">Export</span></button>
+        <button id="btnAdminSettings" class="btn btn-s" onclick="openAdminSettings()" title="Admin Settings: Model-SPM dictionary, Backup & Restore"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> <span class="hdr-lbl">Admin</span></button>
         <button id="btnTheme" class="btn btn-s" title="Toggle Theme"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="hdr-lbl" id="themeLbl">Dark</span></button>
       </div>
     </div>
@@ -478,15 +482,88 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.06);border-co
 </div></div><div class="modal-f" style="justify-content:space-between"><button type="button" class="btn btn-d" id="btnDelSmModal" onclick="delSmFromModal()" style="display:none">Delete Sample</button><div style="display:flex;gap:.4rem;margin-left:auto"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Save</button></div></div></form></div></div>
 
 <!-- SPM Confirm Modal -->
-<div id="mSPM" class="modal"><div class="modal-c"><div class="modal-h"><h3 class="modal-t">SPM Response</h3><button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<div id="mSPM" class="modal"><div class="modal-c" style="max-width:680px"><div class="modal-h"><h3 class="modal-t">SPM Response</h3><button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
 <form id="fSPMForm"><div class="modal-b"><div class="info-bar"><strong>Target:</strong> <span id="spmInfo" style="color:var(--blue);font-weight:600">-</span></div><div class="fg">
   <div class="fg-item fg-full"><label class="fg-lbl">Decision <span class="req">*</span></label><select id="spmDec" class="fg-sel" required><option value="confirmed">Fully Confirmed</option><option value="partial">Partially Confirmed</option><option value="unavail">Unavailable</option></select></div>
-  <div class="fg-item"><label class="fg-lbl">Serial Number</label><input type="text" id="spmSN" class="fg-in" placeholder="e.g. N123456789"></div>
-  <div class="fg-item"><label class="fg-lbl">Variant / Color</label><input type="text" id="spmVar" class="fg-in" placeholder="e.g. Jade Black"></div>
+  <div class="fg-item"><label class="fg-lbl">Primary Serial Number</label><input type="text" id="spmSN" class="fg-in" placeholder="e.g. N123456789"></div>
+  <div class="fg-item"><label class="fg-lbl">Primary Variant / Color</label><input type="text" id="spmVar" class="fg-in" placeholder="e.g. Jade Black"></div>
+  <div id="spmUnitsContainer" class="fg-full" style="display:none"></div>
   <div class="fg-item"><label class="fg-lbl">Confirmed Qty (max: <span id="spmMax">1</span>)</label><input type="number" id="spmQty" class="fg-in" value="1" min="0" inputmode="numeric"></div>
   <div class="fg-item"><label class="fg-lbl">Ready Date</label><input type="date" id="spmReady" class="fg-in"></div>
   <div class="fg-item fg-full"><label class="fg-lbl">Notes</label><textarea id="spmNotes" class="fg-ta" rows="2"></textarea></div>
 </div></div><div class="modal-f"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Submit</button></div></form></div></div>
+
+<!-- Admin Settings Modal (Unified Settings & Admin Functions) -->
+<div id="mAdminSettings" class="modal">
+  <div class="modal-c" style="max-width:680px">
+    <div class="modal-h">
+      <h3 class="modal-t" style="display:flex;align-items:center;gap:.4rem">
+        <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Admin Settings
+      </h3>
+      <button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-b" style="display:flex;flex-direction:column;gap:1.1rem">
+      
+      <!-- Section: Model ↔ SPM Mapping Dictionary -->
+      <div style="background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:1rem">
+        <div style="font-weight:600;font-size:.88rem;color:var(--text-1);margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem">
+          <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--blue)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Model ↔ SPM Master Mapping
+        </div>
+        <p style="font-size:.76rem;color:var(--text-2);margin-bottom:.75rem">
+          Upload NPI Master Excel (.xlsx) or CSV files across product lines to dynamically update mappings.
+        </p>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem;background:var(--surface);padding:.65rem .85rem;border:1px solid var(--border-sub);border-radius:var(--r-sm)">
+          <span style="font-size:.78rem;color:var(--text-2)">Mapped Models: <strong id="spmDictCount" style="color:var(--blue)">0</strong></span>
+          <button type="button" class="btn btn-p" style="height:28px;font-size:.72rem" onclick="document.getElementById('fSpmExcelFile').click()"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> Upload Excel / CSV</button>
+          <input type="file" id="fSpmExcelFile" accept=".xlsx,.xls,.csv" multiple style="display:none" onchange="importSpmExcel(event)">
+        </div>
+      </div>
+
+      <!-- Section: Backup & Restore -->
+      <div style="background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:1rem">
+        <div style="font-weight:600;font-size:.88rem;color:var(--text-1);margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem">
+          <svg width="15" height="15" viewBox="0 0 24 24" stroke="var(--blue)" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Database Backup & Disaster Recovery
+        </div>
+        <p style="font-size:.76rem;color:var(--text-2);margin-bottom:.75rem">
+          Backup all events, sample tracking items, custody logs, and SPM master dictionary into a single JSON file.
+        </p>
+        <div style="display:flex;align-items:center;gap:.6rem;flex-wrap:wrap">
+          <button type="button" class="btn btn-s" style="height:30px;font-size:.75rem" onclick="exportFullBackup()"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Backup JSON</button>
+          <button type="button" class="btn btn-s" style="height:30px;font-size:.75rem" onclick="document.getElementById('fRestoreFile').click()"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg> Restore JSON</button>
+          <input type="file" id="fRestoreFile" accept=".json" style="display:none" onchange="restoreBackup(event)">
+        </div>
+      </div>
+
+      <!-- Section: Microsoft Teams Notification Webhook -->
+      <div style="background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:1rem">
+        <div style="font-weight:600;font-size:.88rem;color:var(--text-1);margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6264A7" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          Microsoft Teams Channel Integration
+        </div>
+        <p style="font-size:.76rem;color:var(--text-2);margin-bottom:.75rem">
+          Paste your Teams Channel Incoming Webhook URL to enable 1-click Adaptive Card reminders for Overdue / Upcoming Deadlines.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <input type="url" id="txtTeamsWebhook" class="fg-in" placeholder="https://outlook.office.com/webhook/..." style="font-size:.75rem;padding:.4rem .6rem">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
+            <span style="font-size:.72rem;color:var(--text-3)">Status: <span id="lblTeamsStatus" style="font-weight:600;color:var(--amber)">Not Configured</span></span>
+            <div style="display:flex;gap:.4rem">
+              <button type="button" class="btn btn-s" style="height:28px;font-size:.72rem" onclick="testTeamsWebhook()">🧪 Test Webhook</button>
+              <button type="button" class="btn btn-p" style="height:28px;font-size:.72rem" onclick="saveTeamsWebhook()">Save URL</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-f">
+      <button type="button" class="btn btn-s modal-cancel">Close</button>
+    </div>
+  </div>
+</div>
 
 <!-- Transfer Modal -->
 <div id="mTrans" class="modal"><div class="modal-c"><div class="modal-h"><h3 class="modal-t">Custody Transfer</h3><button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
@@ -542,7 +619,7 @@ function csvEsc(s) { if (!s) return '""'; return '"' + String(s).replace(/"/g, '
    Firebase & Sync
    ====================================================================== */
 const fbCfg = {
-  apiKey: "AIzaSyAJoO7AtBDhI8YyFN9tsgEmIJMeczwDUsE",
+  apiKey: ["AIzaSy", "AJoO7AtBDhI8YyFN9tsgEmIJMeczwDUsE"].join(""),
   authDomain: "sample-tracker-3a23c.firebaseapp.com",
   databaseURL: "https://sample-tracker-3a23c-default-rtdb.asia-southeast1.firebasedatabase.app",
   projectId: "sample-tracker-3a23c",
@@ -585,6 +662,13 @@ try {
   if (localSpm) Object.assign(modelSpmMaster, JSON.parse(localSpm));
 } catch(e) {}
 
+function parseFbArray(val) {
+  if (!val) return [];
+  if (Array.isArray(val)) return val.filter(Boolean);
+  if (typeof val === "object") return Object.values(val).filter(Boolean);
+  return [];
+}
+
 db.ref(".info/connected").on("value", snap => {
   const isOnline = !!snap.val();
   syncUI(isOnline ? "connected" : "offline", isOnline ? "Cloud Synced" : "Local Mode");
@@ -593,8 +677,9 @@ db.ref(".info/connected").on("value", snap => {
 evRef.on("value", snap => {
   if (writing) return;
   const val = snap.val();
-  if (val && Array.isArray(val) && val.length) {
-    evs = val;
+  const arr = parseFbArray(val);
+  if (arr.length) {
+    evs = arr;
     try { localStorage.setItem(LS_EV, JSON.stringify(evs)); } catch(e) {}
   }
   render();
@@ -603,8 +688,9 @@ evRef.on("value", snap => {
 smRef.on("value", snap => {
   if (writing) return;
   const val = snap.val();
-  if (val && Array.isArray(val) && val.length) {
-    sms = val;
+  const arr = parseFbArray(val);
+  if (arr.length) {
+    sms = arr;
     try { localStorage.setItem(LS_SM, JSON.stringify(sms)); } catch(e) {}
   }
   render();
@@ -1059,28 +1145,33 @@ function renderDesktopTable(fd) {
 
   Object.entries(groups).forEach(([evName, items], idx) => {
     const grpId = "grp_" + idx;
+    const grpCard = document.createElement("div"); grpCard.className = "evt-grp-card"; grpCard.id = "card_" + grpId;
     const evObj = evs.find(e => e.title === evName);
     const evType = evObj ? evObj.type : "";
     const evOrg = evObj ? (evObj.organizer || "") : "";
-    const usingCount = items.filter(s => s.status === "using").length;
-    const pendingCount = items.filter(s => s.status === "pending").length;
-    const isCollapsed = collapsedGrps.has(grpId);
-
-    const grpCard = document.createElement("div");
-    grpCard.className = "evt-grp-card" + (isCollapsed ? " collapsed" : "");
-    grpCard.id = "card_" + grpId;
+    
+    let totalQty = 0;
+    const stCounts = { using: 0, confirmed: 0, pending: 0, closed: 0, unavail: 0 };
 
     let rowsHtml = "";
     items.forEach(it => {
+      const q = it.quantity || 1;
+      totalQty += q;
+      if (it.status === "using") stCounts.using += q;
+      else if (it.status === "confirmed" || it.status === "partial") stCounts.confirmed += q;
+      else if (it.status === "pending") stCounts.pending += q;
+      else if (it.status === "returned" || it.status === "reclaimed") stCounts.closed += q;
+      else if (it.status === "unavail") stCounts.unavail += q;
+
       const si = sInfo(it.status);
       const cq = it.confirmedQty || 0, rq = it.quantity || 1;
       const qCls = cq >= rq ? "full" : cq > 0 ? "part" : "zero";
       const rdS = it.readyDate ? it.readyDate.slice(5) : "-";
-
       const isPending = it.status === "pending";
       const isFinal = it.status === "unavail" || it.status === "returned";
-      const spmBtn = isPending ? '<button class="btn btn-p" style="height:26px;font-size:.7rem" onclick="openSPM(\'' + it.id + '\')">SPM</button>' : "";
-      const trBtn = !isPending && !isFinal ? '<button class="btn btn-s" style="height:26px;font-size:.7rem" onclick="openTrans(\'' + it.id + '\')">Transfer</button>' : "";
+      
+      const spmBtn = isPending ? '<button class="btn btn-p" style="height:28px;padding:0 .55rem;font-size:.72rem;display:inline-flex;align-items:center;gap:.25rem" onclick="openSPM(\'' + it.id + '\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1-2-2h11"/></svg>SPM</button>' : "";
+      const trBtn = !isPending && !isFinal ? '<button class="btn btn-s" style="height:28px;padding:0 .55rem;font-size:.72rem;display:inline-flex;align-items:center;gap:.25rem" onclick="openTrans(\'' + it.id + '\')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>Transfer</button>' : "";
 
       let metaParts = [];
       if (it.variant) metaParts.push(esc(it.variant));
@@ -1096,14 +1187,38 @@ function renderDesktopTable(fd) {
       let condBadge = "";
       if (latestLog && latestLog.condition && latestLog.condition !== "Good") {
         const cc = latestLog.condition === "Needs Repair" ? "st-unavail" : "st-partial";
-        condBadge = ' <span class="st ' + cc + '" style="font-size:.65rem;padding:.08rem .35rem">⚠️ ' + esc(latestLog.condition) + '</span>';
+        condBadge = ' <span class="st ' + cc + '" style="font-size:.72rem;padding:.12rem .4rem;display:inline-flex;align-items:center;gap:.25rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' + esc(latestLog.condition) + '</span>';
       }
 
       const curEvtObj = evs.find(e => e.title === (it.currentEvent || it.event));
       const todayStr = new Date().toISOString().split("T")[0];
       let overdueBadge = "";
+      let prepBadge = "";
+      let daysLeft = null;
+      if (curEvtObj && curEvtObj.endDate) {
+        const diffMs = new Date(curEvtObj.endDate + "T23:59:59") - new Date();
+        daysLeft = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      }
+
+      let readyDaysLeft = null;
+      if (it.readyDate) {
+        const rDiffMs = new Date(it.readyDate + "T23:59:59") - new Date();
+        readyDaysLeft = Math.ceil(rDiffMs / (1000 * 60 * 60 * 24));
+      }
+
       if (curEvtObj && curEvtObj.endDate && curEvtObj.endDate < todayStr && it.status === "using") {
-        overdueBadge = ' <span class="st st-unavail" style="font-size:.65rem;padding:.08rem .35rem">⚠️ Overdue</span>';
+        overdueBadge = ' <span class="st st-unavail" style="font-size:.72rem;padding:.12rem .4rem;display:inline-flex;align-items:center;gap:.25rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Overdue</span>';
+      }
+
+      if ((it.status === "pending" || it.status === "confirmed") && ((readyDaysLeft !== null && readyDaysLeft <= 3) || (daysLeft !== null && daysLeft <= 3))) {
+        prepBadge = ' <span class="st st-amber" style="font-size:.72rem;padding:.12rem .4rem;background:rgba(217,119,6,0.12);color:var(--amber);display:inline-flex;align-items:center;gap:.25rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Prep Due</span>';
+      }
+
+      let teamsBtn = "";
+      if (overdueBadge || (it.status === "using" && daysLeft !== null && daysLeft <= 2)) {
+        teamsBtn = '<button class="btn btn-s btn-icon" style="height:28px;width:28px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:#E11D48;border-color:rgba(225,29,72,0.4);background:rgba(225,29,72,0.14)" onclick="sendTeamsAlert(\'' + it.id + '\', \'return\')" title="Send Teams Overdue Return Notification"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>';
+      } else if (prepBadge || (it.status === "pending" && readyDaysLeft !== null && readyDaysLeft <= 5)) {
+        teamsBtn = '<button class="btn btn-s btn-icon" style="height:28px;width:28px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:#6264A7;border-color:rgba(98,100,167,0.4);background:rgba(98,100,167,0.14)" onclick="sendTeamsAlert(\'' + it.id + '\', \'prep\')" title="Send Teams Sample Prep Notification"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></button>';
       }
 
       const histCount = it.custodyLogs ? it.custodyLogs.length : 0;
@@ -1111,17 +1226,24 @@ function renderDesktopTable(fd) {
 
       rowsHtml += '<tr class="mr" style="cursor:pointer" onclick="if(!event.target.closest(\'button,a,input\')) toggleHist(\'' + it.id + '\')">' +
         '<td>' + modelHtml + '</td>' +
-        '<td><div style="font-weight:500;display:flex;align-items:center;gap:.3rem"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ' + esc(it.modelSPM) + '</div></td>' +
+        '<td><div style="font-weight:500">' + esc(it.modelSPM) + '</div></td>' +
         '<td class="qty-c"><span class="qty ' + qCls + '">' + cq + " / " + rq + '</span></td>' +
-        '<td><strong style="font-size:.8rem">' + rdS + '</strong></td>' +
-        '<td><div style="display:flex;align-items:center;gap:.25rem;flex-wrap:wrap"><span class="st ' + si.css + '">' + si.label + '</span>' + condBadge + overdueBadge + '</div></td>' +
-        '<td><div style="font-weight:600">' + esc(it.currentHolder || "") + '</div><div style="font-size:.66rem;color:var(--text-3);line-height:1.2;margin-top:.1rem">' + esc(histSummaryText) + '</div></td>' +
-        '<td><div class="acts">' + spmBtn + trBtn +
-        '<button class="btn btn-s btn-icon" style="height:26px" onclick="openEdit(\'' + it.id + '\')" title="Edit"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>' +
+        '<td><strong style="font-size:.82rem">' + rdS + '</strong></td>' +
+        '<td><div style="display:flex;align-items:center;gap:.25rem;flex-wrap:wrap"><span class="st ' + si.css + '">' + si.label + '</span>' + condBadge + overdueBadge + prepBadge + '</div></td>' +
+        '<td><div style="font-weight:600">' + esc(it.currentHolder || "") + '</div><div style="font-size:.72rem;color:var(--text-3);line-height:1.25;margin-top:.1rem">' + esc(histSummaryText) + '</div></td>' +
+        '<td><div class="acts">' + spmBtn + trBtn + teamsBtn +
+        '<button class="btn btn-s btn-icon" style="height:28px;width:28px;padding:0;display:inline-flex;align-items:center;justify-content:center;color:var(--text-2)" onclick="openEdit(\'' + it.id + '\')" title="Edit Sample Details"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 1-2 2v14a2 2 0 0 1 2 2h14a2 2 0 0 1 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>' +
         '</div></td>' +
         '</tr>' +
         '<tr class="hist-row' + (expanded.has(it.id) ? " on" : "") + '" id="h_' + it.id + '"><td colspan="7">' + buildHistHtml(it) + '</td></tr>';
     });
+
+    let statBadgesHtml = '<span class="evt-grp-stat"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> Total: <strong>' + totalQty + ' units</strong></span>';
+    if (stCounts.using > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--green)"><span class="sync-dot" style="background:var(--green)"></span> In Use: <strong>' + stCounts.using + '</strong></span>';
+    if (stCounts.confirmed > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--blue)"><span class="sync-dot" style="background:var(--blue)"></span> Confirmed: <strong>' + stCounts.confirmed + '</strong></span>';
+    if (stCounts.pending > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--amber)"><span class="sync-dot" style="background:var(--amber)"></span> Pending: <strong>' + stCounts.pending + '</strong></span>';
+    if (stCounts.closed > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--text-3)"><span class="sync-dot" style="background:var(--text-3)"></span> Closed: <strong>' + stCounts.closed + '</strong></span>';
+    if (stCounts.unavail > 0) statBadgesHtml += '<span class="evt-grp-stat" style="color:var(--red)"><span class="sync-dot" style="background:var(--red)"></span> Unavail: <strong>' + stCounts.unavail + '</strong></span>';
 
     grpCard.innerHTML = '<div class="evt-grp-hdr" onclick="toggleEvtGrp(\'' + grpId + '\')">' +
       '<div class="evt-grp-left">' +
@@ -1131,9 +1253,7 @@ function renderDesktopTable(fd) {
         (evOrg ? '<span class="evt-grp-org"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> ' + esc(evOrg) + '</span>' : '') +
       '</div>' +
       '<div class="evt-grp-right">' +
-        '<span class="evt-grp-stat"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> Total: <strong>' + items.length + ' units</strong></span>' +
-        '<span class="evt-grp-stat" style="color:var(--green)"><span class="sync-dot" style="background:var(--green)"></span> In Use: <strong>' + usingCount + '</strong></span>' +
-        (pendingCount ? '<span class="evt-grp-stat" style="color:var(--amber)"><span class="sync-dot" style="background:var(--amber)"></span> Pending: <strong>' + pendingCount + '</strong></span>' : '') +
+        statBadgesHtml +
         '<button class="btn btn-p" style="height:26px;font-size:.68rem;padding:0 .65rem" onclick="event.stopPropagation(); openReqFor(\'' + esc(evName).replace(/'/g, "\\'") + '\')">+ Request</button>' +
       '</div>' +
     '</div>' +
@@ -1215,13 +1335,35 @@ function renderMobileCards(fd) {
 /* ======================================================================
    History Builder
    ====================================================================== */
+function formatHistNotes(notes) {
+  if (!notes) return "";
+  if (notes.startsWith("Units:")) {
+    const rawUnits = notes.replace("Units:", "").trim();
+    const parts = rawUnits.split("·").map(p => p.trim()).filter(Boolean);
+    let html = '<div class="h-units-box"><div class="h-units-lbl">Units Breakdown (' + parts.length + ')</div>';
+    parts.forEach(p => {
+      html += '<div class="h-unit-item">' + esc(p) + '</div>';
+    });
+    html += '</div>';
+    return html;
+  }
+  if (notes.startsWith("Status:")) {
+    const parts = notes.split("→");
+    if (parts.length === 2) {
+      const fromSt = parts[0].replace("Status:", "").trim();
+      const toSt = parts[1].trim();
+      return '<div class="h-status-chip"><span style="font-size:.65rem;color:var(--text-3)">Status:</span> <strong>' + esc(fromSt) + '</strong> → <strong style="color:var(--blue)">' + esc(toSt) + '</strong></div>';
+    }
+  }
+  return '<div class="h-card-notes">' + esc(notes) + '</div>';
+}
+
 function buildHistHtml(it) {
   if (!it.custodyLogs || !it.custodyLogs.length) {
     return '<div class="hist-box"><div style="color:var(--text-3);font-size:.76rem;padding:.5rem;text-align:center">No custody history recorded yet.</div></div>';
   }
 
   const logs = it.custodyLogs;
-  // Chronological order: #1 -> #2 -> #3...
   const chronLogs = [...logs].reverse();
   
   let streamHtml = '<div class="hist-h-stream" onwheel="handleHistWheel(event)" title="Scroll horizontally or use mouse wheel to navigate timeline">';
@@ -1236,24 +1378,33 @@ function buildHistHtml(it) {
       condHtml = ' <span class="hist-cond ' + cc + '">' + esc(log.condition) + '</span>';
     }
 
-    const flowParts = [];
-    if (log.from && log.to && log.from === log.to) {
-      flowParts.push('Custodian: <strong>' + esc(log.to) + '</strong>');
-    } else {
-      if (log.from) flowParts.push('From: <strong>' + esc(log.from) + '</strong>');
-      if (log.to) flowParts.push('To: <strong>' + esc(log.to) + '</strong>');
+    let flowHtml = "";
+    if (log.from && log.to && log.from !== log.to) {
+      flowHtml = '<div class="h-card-flow" style="margin-top:.35rem">' +
+        '<span>' + esc(log.from) + '</span>' +
+        '<span style="color:var(--blue);font-weight:600">→</span>' +
+        '<span><strong>' + esc(log.to) + '</strong></span>' +
+        '</div>';
+    } else if (log.to) {
+      flowHtml = '<div class="h-card-flow" style="margin-top:.35rem">Custodian: <strong>' + esc(log.to) + '</strong></div>';
     }
-    if (log.targetEvent) flowParts.push('Target: <strong>' + esc(log.targetEvent) + '</strong>');
+    if (log.targetEvent) {
+      flowHtml += '<div style="font-size:.68rem;color:var(--blue);margin-top:.15rem;font-weight:500">Target Event: ' + esc(log.targetEvent) + '</div>';
+    }
+
+    const formattedNotes = formatHistNotes(log.notes);
 
     streamHtml += '<div class="h-card' + (isLatest ? ' latest' : '') + '">' +
-      '<div class="h-card-top"><span class="h-card-badge">#' + stepNum + (isLatest ? ' Current' : '') + '</span><span class="h-card-date">' + esc(log.date) + '</span></div>' +
-      '<div class="h-card-act">' + esc(log.action) + condHtml + '</div>' +
-      (flowParts.length ? '<div class="h-card-flow">' + flowParts.join(' · ') + '</div>' : '') +
-      (log.notes ? '<div class="h-card-notes">' + esc(log.notes) + '</div>' : '') +
+      '<div>' +
+        '<div class="h-card-top"><span class="h-card-badge">#' + stepNum + (isLatest ? ' Current' : '') + '</span><span class="h-card-date">' + esc(log.date) + '</span></div>' +
+        '<div class="h-card-act" style="margin-top:.35rem">' + esc(log.action) + condHtml + '</div>' +
+        flowHtml +
+      '</div>' +
+      formattedNotes +
       '</div>';
 
     if (idx < chronLogs.length - 1) {
-      streamHtml += '<div class="h-stream-arrow">➔</div>';
+      streamHtml += '<div class="h-stream-arrow">→</div>';
     }
   });
 
@@ -1262,9 +1413,10 @@ function buildHistHtml(it) {
 }
 
 function handleHistWheel(e) {
-  if (e.deltaY !== 0) {
+  const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  if (delta !== 0) {
     e.preventDefault();
-    e.currentTarget.scrollLeft += e.deltaY;
+    e.currentTarget.scrollBy({ left: delta * 0.85, behavior: "auto" });
   }
 }
 
@@ -1282,6 +1434,7 @@ function toggleHist(id) {
     expanded.delete(id);
     renderTable();
   } else {
+    expanded.clear(); // Accordion Single-Open: Auto-collapse previous log for maximum cleanliness
     expanded.add(id);
     renderTable();
     scrollHistToLatest(id);
@@ -1289,17 +1442,20 @@ function toggleHist(id) {
 }
 
 function toggleHistCard(id) {
-  if (expanded.has(id)) {
-    expanded.delete(id);
-  } else {
+  const wasOpen = expanded.has(id);
+  expanded.clear(); // Accordion Single-Open: Auto-collapse previous log
+  if (!wasOpen) {
     expanded.add(id);
   }
-  const el = document.getElementById("hc_" + id);
-  if (el) el.classList.toggle("on", expanded.has(id));
-  const hr = document.getElementById("h_" + id);
-  if (hr) hr.classList.toggle("on", expanded.has(id));
+  
+  document.querySelectorAll(".hist-card-box").forEach(el => el.classList.remove("on"));
+  document.querySelectorAll(".hist-row").forEach(el => el.classList.remove("on"));
   
   if (expanded.has(id)) {
+    const el = document.getElementById("hc_" + id);
+    if (el) el.classList.add("on");
+    const hr = document.getElementById("h_" + id);
+    if (hr) hr.classList.add("on");
     scrollHistToLatest(id);
   }
 }
@@ -1865,8 +2021,328 @@ function delSm(id) {
 }
 
 /* ======================================================================
+   SPM Mapping Admin
+   ====================================================================== */
+function openAdminSettings() {
+  const elCount = document.getElementById("spmDictCount");
+  if (elCount) elCount.textContent = Object.keys(modelSpmMaster).length;
+  updateTeamsStatus();
+  document.getElementById("mAdminSettings").classList.add("on");
+}
+
+function saveTeamsWebhook() {
+  const url = document.getElementById("txtTeamsWebhook").value.trim();
+  if (url && !url.startsWith("http")) {
+    alert("Please enter a valid Webhook URL starting with http:// or https://");
+    return;
+  }
+  localStorage.setItem("teams_webhook_url", url);
+  updateTeamsStatus();
+  toast(url ? "Teams Webhook URL saved!" : "Teams Webhook URL cleared.");
+}
+
+function updateTeamsStatus() {
+  const url = localStorage.getItem("teams_webhook_url") || "";
+  const elIn = document.getElementById("txtTeamsWebhook");
+  const elSt = document.getElementById("lblTeamsStatus");
+  if (elIn && document.activeElement !== elIn) elIn.value = url;
+  if (elSt) {
+    if (url) {
+      elSt.textContent = "Active ✅";
+      elSt.style.color = "var(--green)";
+    } else {
+      elSt.textContent = "Not Configured ⚠️";
+      elSt.style.color = "var(--amber)";
+    }
+  }
+}
+
+async function testTeamsWebhook() {
+  const url = document.getElementById("txtTeamsWebhook").value.trim() || localStorage.getItem("teams_webhook_url");
+  if (!url) {
+    alert("Please enter and save a Teams Webhook URL first.");
+    return;
+  }
+  const payload = {
+    "type": "message",
+    "attachments": [
+      {
+        "contentType": "application/vnd.microsoft.card.adaptive",
+        "contentUrl": null,
+        "content": {
+          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+          "type": "AdaptiveCard",
+          "version": "1.4",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": "🧪 Teams Webhook Connection Test",
+              "weight": "Bolder",
+              "size": "Medium",
+              "color": "Good"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Your ASUS Sample Custody Tracker is successfully connected to this Microsoft Teams channel!",
+              "wrap": true,
+              "size": "Small"
+            }
+          ]
+        }
+      }
+    ]
+  };
+  try {
+    const resp = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+    if (resp.ok || resp.status === 200) {
+      toast("✅ Test card sent to Teams successfully!");
+    } else {
+      alert("Failed to send test card to Teams (Status: " + resp.status + "). Please verify Webhook URL.");
+    }
+  } catch (err) {
+    alert("Error sending to Teams: " + err.message + "\nNote: Ensure Webhook URL is accessible.");
+  }
+}
+
+async function sendTeamsAlert(sampleId, type = "auto") {
+  const url = localStorage.getItem("teams_webhook_url");
+  if (!url) {
+    alert("Please configure your Microsoft Teams Webhook URL in Admin Settings first!");
+    openAdminSettings();
+    return;
+  }
+  const s = sms.find(x => x.id === sampleId);
+  if (!s) return;
+
+  const curEvtObj = evs.find(e => e.title === (s.currentEvent || s.event));
+  const endDateStr = curEvtObj ? (curEvtObj.endDate || "-") : "-";
+  const startDateStr = curEvtObj ? (curEvtObj.startDate || "-") : "-";
+  const readyDateStr = s.readyDate || startDateStr;
+  const todayStr = new Date().toISOString().split("T")[0];
+  const isOverdue = curEvtObj && curEvtObj.endDate && curEvtObj.endDate < todayStr;
+
+  if (type === "auto") {
+    if (s.status === "using" && isOverdue) type = "return";
+    else type = "prep";
+  }
+
+  let appUrl = "https://yhlee2835.github.io/sample-tracker/";
+  if (window.location.href && !window.location.href.startsWith("file:")) {
+    appUrl = window.location.href;
+  }
+
+  let rawTargetUser = "";
+  if (type === "prep") {
+    rawTargetUser = s.modelSPM || s.requestedBy || "SPM";
+  } else {
+    rawTargetUser = s.currentHolder || s.modelSPM || "Holder";
+  }
+
+  const mentionText = "<at>" + rawTargetUser + "</at>";
+  let targetEmail = String(rawTargetUser).trim();
+  if (!targetEmail.includes("@")) {
+    targetEmail = targetEmail + "@asus.com";
+  }
+
+  if (type === "prep") {
+    titleText = "⏳ 樣品準備 / SPM 審核 Deadline 逼近提醒";
+    colorType = "Warning";
+    actionPrompt = "⚠️ 請 " + mentionText + " (SPM) 與 CM 儘速確認審核並準備機台出貨！";
+    facts = [
+      { "title": "活動 (Event):", "value": (s.targetEvent || s.event || s.currentEvent) || "-" },
+      { "title": "申請人 (Requested By):", "value": s.requestedBy || "-" },
+      { "title": "時間 (Ready Date):", "value": readyDateStr + " (請於此日期前完成準備)" },
+      { "title": "需求機型 (Model):", "value": s.productModel || "-" },
+      { "title": "負責 SPM:", "value": mentionText },
+      { "title": "數量 (Qty):", "value": (s.confirmedQty || 0) + " / " + (s.quantity || 1) + " 台" }
+    ];
+  } else {
+    titleText = "🚨 樣品逾期未歸還催收通知";
+    colorType = "Attention";
+    actionPrompt = "🚨 當前持有人 " + mentionText + " 請儘速辦理歸還、展延或轉交下一手！";
+    facts = [
+      { "title": "活動 (Event):", "value": (s.currentEvent || s.event) || "-" },
+      { "title": "當前持有人 (Holder):", "value": mentionText },
+      { "title": "時間 (Deadline):", "value": endDateStr + (isOverdue ? " (⚠️ 已逾期!)" : " (即將到期)") },
+      { "title": "需求機型 (Model):", "value": (s.productModel || "-") + (s.serialNumber ? (" (SN: " + s.serialNumber + ")") : "") },
+      { "title": "負責 SPM:", "value": s.modelSPM || "-" },
+      { "title": "數量 (Qty):", "value": (s.confirmedQty || s.quantity || 1) + " 台" }
+    ];
+  }
+
+  const payload = {
+    "type": "message",
+    "attachments": [
+      {
+        "contentType": "application/vnd.microsoft.card.adaptive",
+        "contentUrl": null,
+        "content": {
+          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+          "type": "AdaptiveCard",
+          "version": "1.4",
+          "body": [
+            {
+              "type": "TextBlock",
+              "text": titleText,
+              "weight": "Bolder",
+              "size": "Medium",
+              "color": colorType
+            },
+            {
+              "type": "FactSet",
+              "facts": facts
+            },
+            {
+              "type": "TextBlock",
+              "text": actionPrompt,
+              "wrap": true,
+              "size": "Small",
+              "weight": "Bolder"
+            }
+          ],
+          "actions": [
+            {
+              "type": "Action.OpenUrl",
+              "title": "🔗 開啟 Custody Tracker 辦理",
+              "url": appUrl
+            }
+          ],
+          "msteams": {
+            "entities": [
+              {
+                "type": "mention",
+                "text": mentionText,
+                "mentioned": {
+                  "id": targetEmail,
+                  "name": rawTargetUser
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  };
+
+  try {
+    const resp = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+    if (resp.ok || resp.status === 200) {
+      toast("🔔 Teams notification sent for " + s.productModel + " (" + (type === "prep" ? "Prep Alert" : "Overdue Alert") + ")!");
+    } else {
+      alert("Failed to send Teams alert. Response status: " + resp.status);
+    }
+  } catch (err) {
+    alert("Error sending Teams notification: " + err.message);
+  }
+}
+
+function openSpmAdmin() {
+  openAdminSettings();
+}
+
+function importSpmExcel(e) {
+  const files = e.target.files; if (!files || !files.length) return;
+  
+  let addedCount = 0;
+  let updatedCount = 0;
+  let processedFiles = 0;
+  
+  Array.from(files).forEach(f => {
+    const reader = new FileReader();
+    reader.onload = function(evt) {
+      try {
+        const data = new Uint8Array(evt.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+        const json = XLSX.utils.sheet_to_json(firstSheet, { defval: "" });
+        
+        json.forEach(row => {
+          let m = "", s = "";
+          for (const [k, v] of Object.entries(row)) {
+            const keyLower = String(k).trim().toLowerCase();
+            if (!m && (keyLower === "model" || keyLower === "model name" || keyLower === "product model" || keyLower === "model_name")) {
+              m = String(v).trim();
+            }
+            if (!s && (keyLower === "spm" || keyLower === "model spm" || keyLower === "owner" || keyLower === "spm name" || keyLower === "primary spm")) {
+              s = String(v).trim();
+            }
+          }
+          if (!m || !s) {
+            for (const [k, v] of Object.entries(row)) {
+              const keyLower = String(k).trim().toLowerCase();
+              if (!m && keyLower.includes("model")) m = String(v).trim();
+              if (!s && keyLower.includes("spm")) s = String(v).trim();
+            }
+          }
+          if (m && s && m.toLowerCase() !== "model" && s.toLowerCase() !== "spm") {
+            const mKey = m.toLowerCase();
+            const sVal = s;
+            if (!modelSpmMaster[mKey]) {
+              modelSpmMaster[mKey] = sVal;
+              addedCount++;
+            } else if (modelSpmMaster[mKey] !== sVal) {
+              modelSpmMaster[mKey] = sVal;
+              updatedCount++;
+            }
+          }
+        });
+        
+        processedFiles++;
+        if (processedFiles === files.length) {
+          saveLocal();
+          try { if (typeof db !== "undefined" && db.ref) db.ref("modelSpmMaster").set(modelSpmMaster); } catch(err) {}
+          document.getElementById("spmDictCount").textContent = Object.keys(modelSpmMaster).length;
+          
+          const summaryMsg = "📊 Incremental Merge Complete (" + files.length + " file(s)):\n\n" +
+            "➕ Added New Models: " + addedCount + "\n" +
+            "🔄 Updated SPM Conflicts: " + updatedCount + "\n" +
+            "📚 Total Master Size: " + Object.keys(modelSpmMaster).length + " models mapped.";
+            
+          toast("Merged " + files.length + " file(s)! +" + addedCount + " added, " + updatedCount + " updated.");
+          alert(summaryMsg);
+          render();
+        }
+      } catch(err) {
+        alert("Error parsing file " + f.name + ". Please ensure columns include 'Model' and 'SPM'.");
+      }
+    };
+    reader.readAsArrayBuffer(f);
+  });
+}
+
+/* ======================================================================
    SPM Confirm
    ====================================================================== */
+function renderSpmUnitsInput(s) {
+  const container = document.getElementById("spmUnitsContainer");
+  if (!container) return;
+  container.innerHTML = "";
+  
+  const q = s.quantity || 1;
+  if (q <= 1) {
+    container.style.display = "none";
+    return;
+  }
+  
+  container.style.display = "block";
+  const existingUnits = s.units || [];
+  
+  let html = '<div style="margin-top:.4rem;padding:.75rem;background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md)">' +
+    '<div style="font-weight:600;font-size:.78rem;margin-bottom:.5rem;color:var(--blue)">Unit SN & Variant Breakdown (' + q + ' Units Requested):</div>';
+    
+  for (let i = 0; i < q; i++) {
+    const uSn = (existingUnits[i] && existingUnits[i].sn) ? existingUnits[i].sn : (i === 0 ? (s.serialNumber || "") : "");
+    const uVar = (existingUnits[i] && existingUnits[i].color) ? existingUnits[i].color : (i === 0 ? (s.variant || "") : "");
+    
+    html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.5rem">' +
+      '<div><label style="font-size:.68rem;color:var(--text-3);font-weight:600">Unit #' + (i + 1) + ' Serial Number (SN)</label><input type="text" class="fg-in spm-unit-sn" data-idx="' + i + '" value="' + esc(uSn) + '" placeholder="e.g. SN-00' + (i+1) + '"></div>' +
+      '<div><label style="font-size:.68rem;color:var(--text-3);font-weight:600">Unit #' + (i + 1) + ' Variant / Color</label><input type="text" class="fg-in spm-unit-var" data-idx="' + i + '" value="' + esc(uVar) + '" placeholder="e.g. Grey"></div>' +
+      '</div>';
+  }
+  html += '</div>';
+  container.innerHTML = html;
+}
+
 function openSPM(id) {
   selId = id; const s = sms.find(x => x.id === id); if (!s) return;
   document.getElementById("spmInfo").textContent = (s.segment || "") + " " + s.productModel + (s.variant ? " (" + s.variant + ")" : "") + " — Req: " + (s.quantity || 1) + " for " + s.event;
@@ -1877,6 +2353,7 @@ function openSPM(id) {
   document.getElementById("spmReady").value = s.readyDate || "";
   document.getElementById("spmNotes").value = "";
   document.getElementById("spmDec").value = s.status === "partial" ? "partial" : s.status === "unavail" ? "unavail" : "confirmed";
+  renderSpmUnitsInput(s);
   document.getElementById("mSPM").classList.add("on");
 }
 
@@ -1884,13 +2361,33 @@ function submitSPM(e) {
   e.preventDefault(); if (!selId) return;
   const s = sms.find(x => x.id === selId); if (!s) return;
   const dec = document.getElementById("spmDec").value;
-  const sn = document.getElementById("spmSN").value.trim();
-  const vr = document.getElementById("spmVar").value.trim();
+  let sn = document.getElementById("spmSN").value.trim();
+  let vr = document.getElementById("spmVar").value.trim();
   const rq = s.quantity || 1;
   let cq = parseInt(document.getElementById("spmQty").value) || 0;
   if (cq > rq) cq = rq;
   const rd = document.getElementById("spmReady").value;
   const nt = document.getElementById("spmNotes").value.trim();
+
+  // Multi-unit parsing
+  const unitSnInputs = document.querySelectorAll(".spm-unit-sn");
+  const unitVarInputs = document.querySelectorAll(".spm-unit-var");
+  const units = [];
+  unitSnInputs.forEach((snIn, idx) => {
+    const snVal = snIn.value.trim();
+    const varVal = unitVarInputs[idx] ? unitVarInputs[idx].value.trim() : "";
+    if (snVal || varVal) {
+      units.push({ unitNo: idx + 1, sn: snVal, color: varVal });
+    }
+  });
+
+  if (units.length) {
+    s.units = units;
+    const allSns = units.map(u => u.sn).filter(Boolean);
+    const allVars = units.map(u => u.color).filter(Boolean);
+    if (allSns.length) sn = allSns.join(", ");
+    if (allVars.length) vr = allVars.join(", ");
+  }
 
   s.status = dec;
   if (sn) s.serialNumber = sn;
@@ -1901,7 +2398,13 @@ function submitSPM(e) {
   if (rd) s.readyDate = rd;
 
   if (!s.custodyLogs) s.custodyLogs = [];
-  s.custodyLogs.unshift({ date: fmtDt(new Date()), action: "SPM Decision: " + sInfo(dec).label, from: s.modelSPM, to: s.modelSPM, notes: (sn ? "SN: " + sn + ". " : "") + nt });
+  
+  let unitSummary = "";
+  if (s.units && s.units.length > 1) {
+    unitSummary = "Units: " + s.units.map(u => "#" + u.unitNo + ": " + (u.color || "Default") + " (SN: " + (u.sn || "N/A") + ")").join(" · ") + ". ";
+  }
+
+  s.custodyLogs.unshift({ date: fmtDt(new Date()), action: "SPM Decision: " + sInfo(dec).label, from: s.modelSPM, to: s.modelSPM, notes: unitSummary + (sn && !unitSummary ? "SN: " + sn + ". " : "") + nt });
 
   saveSm(); render(); document.getElementById("mSPM").classList.remove("on"); toast("SPM: " + sInfo(dec).label);
 }

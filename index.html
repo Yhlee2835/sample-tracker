@@ -66,22 +66,22 @@ svg{display:inline-block;vertical-align:middle;fill:none}
 .app{display:flex;flex-direction:column;min-height:100vh;width:100%}
 
 /* --- Header --- */
-.hdr{position:sticky;top:0;z-index:1000;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border-sub);padding:.75rem 2rem}
-.hdr-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
-.brand{display:flex;align-items:center;gap:.6rem}
+.hdr{position:sticky;top:0;z-index:1000;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border-sub);height:54px;padding:0 2rem;display:flex;align-items:center;box-sizing:border-box;flex-shrink:0}
+.hdr-inner{width:100%;max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:.75rem}
+.brand{display:flex;align-items:center;gap:.6rem;flex-shrink:0}
 .brand-ico{width:30px;height:30px;background:var(--blue-bg);color:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.brand h1{font-size:1.05rem;font-weight:600;color:var(--text-1);letter-spacing:-0.02em}
-.hdr-actions{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
-.sync{display:inline-flex;align-items:center;gap:.4rem;padding:.25rem .7rem;border-radius:var(--r-pill);font-size:.72rem;font-weight:500;background:var(--surface-alt);border:1px solid var(--border-sub);color:var(--text-2)}
+.brand h1{font-size:1.05rem;font-weight:600;color:var(--text-1);letter-spacing:-0.02em;white-space:nowrap}
+.hdr-actions{display:flex;align-items:center;gap:.45rem;flex-wrap:nowrap;flex-shrink:0}
+.sync{display:inline-flex;align-items:center;gap:.4rem;height:32px;padding:0 .85rem;border-radius:var(--r-pill);font-size:.78rem;font-weight:500;background:var(--surface-alt);border:1px solid var(--border-sub);color:var(--text-2);box-sizing:border-box}
 .sync-dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
 .sync.syncing .sync-dot{background:var(--amber);animation:pulse .8s infinite alternate}
 .sync.offline .sync-dot{background:var(--red)}
 @keyframes pulse{from{opacity:.3}to{opacity:1}}
 
 /* --- Nav --- */
-.nav{position:sticky;top:51px;z-index:999;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border-sub);padding:.4rem 2rem;display:flex;justify-content:center}
-.nav-inner{max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.35rem}
-.tab{display:inline-flex;align-items:center;gap:.4rem;padding:.4rem 1.1rem;color:var(--text-2);font-weight:500;font-size:.83rem;border-radius:var(--r-pill);cursor:pointer;transition:var(--ease);border:1px solid transparent}
+.nav{position:sticky;top:54px;z-index:999;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border-sub);height:48px;padding:0 2rem;display:flex;align-items:center;justify-content:center;box-sizing:border-box;flex-shrink:0}
+.nav-inner{height:100%;max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:.35rem}
+.tab{display:inline-flex;align-items:center;gap:.4rem;height:32px;padding:0 1.1rem;color:var(--text-2);font-weight:500;font-size:.83rem;border-radius:var(--r-pill);cursor:pointer;transition:var(--ease);border:1px solid transparent;box-sizing:border-box}
 .tab:hover{color:var(--text-1);background:var(--surface-alt)}
 .tab.on{color:var(--blue);background:var(--blue-bg);font-weight:600}
 .tab-n{background:var(--border-sub);color:var(--text-2);padding:.1rem .4rem;border-radius:var(--r-pill);font-size:.68rem;font-weight:600;min-width:18px;text-align:center}
@@ -116,7 +116,7 @@ svg{display:inline-block;vertical-align:middle;fill:none}
 .sec-hdr p{font-size:.83rem;color:var(--text-2);margin-top:.15rem}
 
 /* --- Control Bar (Sticky) --- */
-.ctrl{position:sticky;top:92px;z-index:998;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:.7rem 1rem;margin-bottom:1.2rem;display:flex;align-items:center;flex-wrap:wrap;gap:.75rem;justify-content:space-between;box-shadow:var(--shadow-md)}
+.ctrl{position:sticky;top:102px;z-index:998;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border:1px solid var(--border-sub);border-radius:var(--r-lg);padding:.7rem 1rem;margin-bottom:1.2rem;display:flex;align-items:center;flex-wrap:wrap;gap:.75rem;justify-content:space-between;box-shadow:var(--shadow-md)}
 .search{position:relative;flex:1;min-width:220px;display:flex;align-items:center}
 .search svg{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none}
 .search input{width:100%;background:var(--input-bg);border:1px solid var(--border);border-radius:var(--r-md);padding:.5rem 1rem .5rem 2.3rem;color:var(--text-1);font-size:.82rem;font-family:var(--font);transition:var(--ease)}
@@ -291,32 +291,50 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
 .toast-c{position:fixed;bottom:1.5rem;right:1.5rem;z-index:200000;display:flex;flex-direction:column;gap:.4rem}
 .toast{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--blue);border-radius:var(--r-md);padding:.55rem .9rem;color:var(--text-1);font-size:.8rem;font-weight:500;box-shadow:var(--shadow-lg);animation:fadeIn .18s ease}
 
-/* --- Responsive --- */
+/* --- Responsive Enhancements for Mobile (< 768px, < 640px, < 480px) --- */
 @media(max-width:1024px){.metrics{grid-template-columns:repeat(auto-fit,minmax(145px,1fr))}}
 @media(max-width:768px){
-  .hdr{padding:.6rem 1rem}
-  .brand h1{font-size:.9rem}
-  .nav{padding:.35rem 1rem}
-  .main{padding:1rem}
+  .hdr{position:relative!important;top:auto!important;padding:.5rem .85rem}
+  .hdr-inner{gap:.5rem}
+  .brand h1{font-size:.86rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .hdr-actions{gap:.3rem}
+  .nav{position:sticky!important;top:0!important;z-index:1000!important;padding:.35rem .85rem;background:var(--surface-glass);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--border-sub)}
+  .ctrl{position:relative!important;top:auto!important;z-index:1!important;box-shadow:none!important;margin-bottom:1rem;flex-direction:column;align-items:stretch;gap:.5rem}
+  .main{padding:.85rem .75rem}
   .fg{grid-template-columns:1fr}
   .fg-full{grid-column:span 1}
-  .metrics{grid-template-columns:1fr 1fr;gap:.5rem}
-  .met{padding:.65rem .8rem}
-  .met-val{font-size:1.15rem}
+  .metrics{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:.45rem}
+  .met{padding:.55rem .7rem}
+  .met-val{font-size:1.1rem}
   .gantt{display:none}
-  .tbl-wrap{display:none}
-  .cards{display:block}
+  #tblContainer{display:none!important}
+  .cards{display:block!important}
   .ev-grid{grid-template-columns:1fr}
-  .ev-acts{grid-template-columns:1fr 1fr}
-  .ctrl{flex-direction:column;align-items:stretch}
-  .search{min-width:0}
-  .filters{justify-content:flex-start}
+  .ev-acts{display:flex;flex-wrap:wrap;gap:.35rem}
+  .ev-acts .btn{flex:1;min-width:75px;justify-content:center}
+  .search{min-width:0;width:100%}
+  .filters{display:grid;grid-template-columns:1fr 1fr;width:100%;gap:.4rem}
+  .filters .fg-sel,.filters select{width:100%}
+  .s-card{padding:.85rem .9rem;word-break:break-word}
+  .s-card-grid{gap:.35rem .6rem}
+  .s-card-grid div{word-break:break-word;overflow-wrap:anywhere}
 }
-@media(max-width:400px){
-  .metrics{grid-template-columns:1fr}
-  .ev-acts{grid-template-columns:1fr}
-  .s-card-grid{grid-template-columns:1fr}
+@media(max-width:640px){
   .hdr-actions .btn span.hdr-lbl{display:none}
+  .hdr-actions #syncTxt{display:none}
+  .sync{padding:0 .55rem;height:32px;min-width:32px;justify-content:center}
+  .toast-c{bottom:1rem;left:1rem;right:1rem}
+  .toast{width:100%;box-sizing:border-box}
+}
+@media(max-width:480px){
+  .metrics{grid-template-columns:1fr 1fr}
+  .s-card-grid{grid-template-columns:1fr 1fr}
+  .modal-c{max-height:92vh;border-radius:var(--r-md)}
+  .modal-h{padding:.75rem .9rem}
+  .modal-b{padding:.85rem}
+  .modal-f{padding:.65rem .85rem;flex-direction:column-reverse;align-items:stretch;gap:.4rem}
+  .modal-f .btn{width:100%;height:36px;justify-content:center}
+  .modal-f > div{width:100%;display:flex;flex-direction:column-reverse;gap:.4rem;margin-left:0!important}
 }
 </style>
 </head>
@@ -332,6 +350,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
       </div>
       <div class="hdr-actions">
         <div class="sync syncing" id="syncBadge"><span class="sync-dot"></span><span id="syncTxt">Connecting</span></div>
+        <button id="btnManual" class="btn btn-s" onclick="openUserManualModal()" title="Operational User Manual & SOP"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> <span class="hdr-lbl">Manual</span></button>
         <button id="btnExport" class="btn btn-s" onclick="openExportModal()"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> <span class="hdr-lbl">Export</span></button>
         <button id="btnAdminSettings" class="btn btn-s" onclick="openAdminSettings()" title="Admin Settings: Model-SPM dictionary, Backup & Restore"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg> <span class="hdr-lbl">Admin</span></button>
         <button id="btnTheme" class="btn btn-s" title="Toggle Theme"><svg width="12" height="12" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> <span class="hdr-lbl" id="themeLbl">Dark</span></button>
@@ -482,7 +501,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
 </div></div><div class="modal-f" style="justify-content:space-between"><button type="button" class="btn btn-d" id="btnDelSmModal" onclick="delSmFromModal()" style="display:none">Delete Sample</button><div style="display:flex;gap:.4rem;margin-left:auto"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Save</button></div></div></form></div></div>
 
 <!-- SPM Confirm Modal -->
-<div id="mSPM" class="modal"><div class="modal-c" style="max-width:680px"><div class="modal-h"><h3 class="modal-t">SPM Response</h3><button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+<div id="mSPM" class="modal" role="dialog" aria-modal="true" aria-labelledby="spmModalTitle"><div class="modal-c" style="max-width:680px"><div class="modal-h"><h3 class="modal-t" id="spmModalTitle">SPM Response</h3><button class="modal-x" aria-label="Close modal"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
 <form id="fSPMForm"><div class="modal-b"><div class="info-bar"><strong>Target:</strong> <span id="spmInfo" style="color:var(--blue);font-weight:600">-</span></div><div class="fg">
   <div class="fg-item fg-full"><label class="fg-lbl">Decision <span class="req">*</span></label><select id="spmDec" class="fg-sel" required><option value="confirmed">Fully Confirmed</option><option value="partial">Partially Confirmed</option><option value="unavail">Unavailable</option></select></div>
   <div class="fg-item"><label class="fg-lbl">Primary Serial Number</label><input type="text" id="spmSN" class="fg-in" placeholder="e.g. N123456789"></div>
@@ -494,14 +513,14 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
 </div></div><div class="modal-f"><button type="button" class="btn btn-s modal-cancel">Cancel</button><button type="submit" class="btn btn-p">Submit</button></div></form></div></div>
 
 <!-- Admin Settings Modal (Unified Settings & Admin Functions) -->
-<div id="mAdminSettings" class="modal">
+<div id="mAdminSettings" class="modal" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
   <div class="modal-c" style="max-width:680px">
     <div class="modal-h">
-      <h3 class="modal-t" style="display:flex;align-items:center;gap:.4rem">
+      <h3 class="modal-t" id="adminModalTitle" style="display:flex;align-items:center;gap:.4rem">
         <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         Admin Settings
       </h3>
-      <button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <button class="modal-x" aria-label="Close modal"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-b" style="display:flex;flex-direction:column;gap:1.1rem">
       
@@ -565,6 +584,112 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
   </div>
 </div>
 
+<!-- System User Manual Modal -->
+<div id="mUserManual" class="modal">
+  <div class="modal-c" style="max-width:860px;max-height:88vh">
+    <div class="modal-h" style="background:var(--surface-alt)">
+      <h3 class="modal-t" style="font-size:1.02rem;color:var(--text-1);font-weight:600">
+        ASUS Sample Custody Tracker — 使用說明與 SOP 指南
+      </h3>
+      <button class="modal-x"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-b" style="padding:1.4rem 1.6rem;display:flex;flex-direction:column;gap:1.5rem">
+      <div>
+        <h4 style="font-size:.92rem;font-weight:700;color:var(--blue);margin-bottom:.45rem">1. 系統簡介 (System Overview)</h4>
+        <p style="font-size:.82rem;color:var(--text-2);line-height:1.6;margin-bottom:.65rem">專為展覽 (Computex, CES, IFA)、巡迴展與客戶拜訪設計，透過 Firebase RTDB 雲端即時庫存同步，提供全生命週期樣品履歷追蹤與保管權轉移 (Chain of Custody)。</p>
+        <div style="background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.8rem 1rem;font-size:.8rem;color:var(--text-2);line-height:1.6">
+          <strong style="color:var(--text-1);font-weight:600">核心功能：</strong>
+          <ul style="margin-left:1.2rem;margin-top:.25rem">
+            <li><strong>完整歷史履歷</strong>：每一次人員交接與跨活動調撥均自動記錄時間戳記與經手人。</li>
+            <li><strong>智慧配機 (SPM Mapping)</strong>：輸入需求機型即時對照帶入負責 SPM。</li>
+            <li><strong>Teams 1-Click 催收</strong>：一鍵推播 Adaptive Card 提醒逾期或即將到期機台。</li>
+            <li><strong>客製化 Excel 匯出</strong>：支援全庫、當前篩選、逾期樣品或特定活動 2-Sheet 報表匯出。</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:.92rem;font-weight:700;color:var(--blue);margin-bottom:.45rem">2. 團隊角色與分工 (Role Matrix)</h4>
+        <div style="overflow-x:auto;border:1px solid var(--border-sub);border-radius:var(--r-md)">
+          <table style="width:100%;border-collapse:collapse;font-size:.8rem;text-align:left">
+            <thead><tr style="background:var(--surface-alt);border-bottom:1px solid var(--border-sub);color:var(--text-3);font-size:.74rem"><th style="padding:.6rem .85rem">角色 (Role)</th><th style="padding:.6rem .85rem">主要職責 (Key Responsibilities)</th><th style="padding:.6rem .85rem">核心操作區塊</th></tr></thead>
+            <tbody style="color:var(--text-1)">
+              <tr style="border-bottom:1px solid var(--border-sub)"><td style="padding:.6rem .85rem;font-weight:600">申請人 (CM)</td><td style="padding:.6rem .85rem;color:var(--text-2)">建立展覽活動、提交樣品借用需求、執行人員交接 (Handover)</td><td style="padding:.6rem .85rem"><span class="seg">Events 頁面</span> <span class="seg">+ New Request</span></td></tr>
+              <tr style="border-bottom:1px solid var(--border-sub)"><td style="padding:.6rem .85rem;font-weight:600">產品經理 (SPM)</td><td style="padding:.6rem .85rem;color:var(--text-2)">審核借機需求、登錄序號 (SN) 與顏色、確認派機數量、回收庫存</td><td style="padding:.6rem .85rem"><span class="seg">Tracking 頁面</span> <span class="seg">SPM Response</span></td></tr>
+              <tr><td style="padding:.6rem .85rem;font-weight:600">現場保管人 (Custodian)</td><td style="padding:.6rem .85rem;color:var(--text-2)">參展保管機台、維護樣品狀況、執行跨活動調撥 (Cross-Event Transfer)</td><td style="padding:.6rem .85rem"><span class="seg">Tracking 頁面</span> <span class="seg">Transfer</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:.92rem;font-weight:700;color:var(--blue);margin-bottom:.5rem">3. 樣品物流全生命週期流程圖 (Logistics Lifecycle Flowchart)</h4>
+        <div style="background:var(--surface-alt);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:1.4rem 1rem;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow-x:auto">
+          <svg width="660" height="730" viewBox="-45 0 660 730" style="max-width:100%;height:auto;font-family:var(--font)">
+            <defs>
+              <marker id="fc-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--text-3)" /></marker>
+              <marker id="fc-arrow-blue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="var(--blue)" /></marker>
+            </defs>
+            <rect x="210" y="15" width="200" height="48" rx="6" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1.5"/><text x="310" y="44" text-anchor="middle" fill="var(--text-1)" font-size="12.5" font-weight="600">1. 發起活動 (Create Event)</text>
+            <line x1="310" y1="63" x2="310" y2="98" stroke="var(--text-3)" stroke-width="1.5" marker-end="url(#fc-arrow)"/>
+            <rect x="210" y="100" width="200" height="48" rx="6" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1.5"/><text x="310" y="129" text-anchor="middle" fill="var(--text-1)" font-size="12.5" font-weight="600">2. 批次申請樣品 (Batch Request)</text>
+            <line x1="310" y1="148" x2="310" y2="183" stroke="var(--text-3)" stroke-width="1.5" marker-end="url(#fc-arrow)"/>
+            <polygon points="310,185 420,245 310,305 200,245" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1.5"/><text x="310" y="241" text-anchor="middle" fill="var(--text-1)" font-size="11.5" font-weight="600">3. SPM 審核派機</text><text x="310" y="257" text-anchor="middle" fill="var(--text-1)" font-size="11.5" font-weight="600">(SPM Decision)</text>
+            <path d="M 235 265 L 150 335 L 150 365" fill="none" stroke="var(--text-3)" stroke-width="1.5" marker-end="url(#fc-arrow)"/><rect x="65" y="302" width="160" height="22" rx="4" fill="var(--surface)" stroke="none"/><text x="145" y="317" text-anchor="middle" fill="var(--text-2)" font-size="10.5" font-weight="600">Fully / Partially Confirmed</text>
+            <path d="M 385 265 L 470 335 L 470 365" fill="none" stroke="var(--text-3)" stroke-width="1.5" marker-end="url(#fc-arrow)"/><rect x="410" y="302" width="120" height="22" rx="4" fill="var(--surface)" stroke="none"/><text x="470" y="317" text-anchor="middle" fill="var(--text-2)" font-size="10.5" font-weight="600">Unavailable</text>
+            <rect x="55" y="370" width="190" height="48" rx="8" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1.5"/><text x="150" y="399" text-anchor="middle" fill="var(--text-1)" font-size="12" font-weight="600">4. 樣品出庫 / 展覽使用 (In Use)</text>
+            <rect x="375" y="370" width="190" height="48" rx="8" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1.5"/><text x="470" y="399" text-anchor="middle" fill="var(--red)" font-size="12" font-weight="600">❌ 借用終止 (Unavailable)</text>
+            <line x1="150" y1="418" x2="150" y2="458" stroke="var(--text-3)" stroke-width="1.5" marker-end="url(#fc-arrow)"/>
+            <polygon points="150,465 235,515 150,565 65,515" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1.5"/><text x="150" y="510" text-anchor="middle" fill="var(--text-1)" font-size="11.5" font-weight="600">5. 展期調撥與保管</text><text x="150" y="527" text-anchor="middle" fill="var(--text-3)" font-size="11" font-weight="500">(Loan Lifecycle)</text>
+            <path d="M 65 515 L -10 515 L -10 394 L 49 394" fill="none" stroke="var(--blue)" stroke-width="1.5" marker-end="url(#fc-arrow-blue)"/><rect x="-25" y="443" width="130" height="22" rx="4" fill="var(--surface)" stroke="var(--blue)" stroke-width="1"/><text x="40" y="458" text-anchor="middle" fill="var(--blue)" font-size="10.5" font-weight="600">人員交接 (Handover)</text>
+            <line x1="150" y1="565" x2="150" y2="633" stroke="var(--text-3)" stroke-width="1.5" marker-end="url(#fc-arrow)"/><rect x="60" y="585" width="180" height="22" rx="4" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1"/><text x="150" y="600" text-anchor="middle" fill="var(--text-2)" font-size="10.5" font-weight="600">跨活動轉移 (Cross-Event Transfer)</text>
+            <rect x="45" y="638" width="210" height="46" rx="8" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1.5"/><text x="150" y="666" text-anchor="middle" fill="var(--text-1)" font-size="11.5" font-weight="600">自動更新至 Target Event 名下</text>
+            <path d="M 255 661 L 295 661 L 295 394 L 249 394" fill="none" stroke="var(--blue)" stroke-width="1.5" marker-end="url(#fc-arrow-blue)"/>
+            <path d="M 190 418 L 190 435 L 470 435 L 470 512" fill="none" stroke="var(--text-3)" stroke-width="1.5" marker-end="url(#fc-arrow)"/>
+            <rect x="380" y="518" width="180" height="48" rx="6" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1.5"/><text x="470" y="540" text-anchor="middle" fill="var(--text-1)" font-size="11" font-weight="600">6. 庫存回收 / 歸還入庫</text><text x="470" y="555" text-anchor="middle" fill="var(--text-1)" font-size="11" font-weight="600">(Reclaim / Return)</text>
+            <line x1="470" y1="566" x2="470" y2="633" stroke="var(--text-3)" stroke-width="1.5" marker-end="url(#fc-arrow)"/>
+            <rect x="380" y="638" width="180" height="44" rx="6" fill="var(--surface)" stroke="var(--border-sub)" stroke-width="1.5"/><text x="470" y="665" text-anchor="middle" fill="var(--green)" font-size="11.5" font-weight="600">✅ 結案入庫 (Closed / Returned)</text>
+          </svg>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:.92rem;font-weight:700;color:var(--blue);margin-bottom:.55rem">4. 標準作業流程 (Standard Operating Procedures)</h4>
+        <div style="display:flex;flex-direction:column;gap:.75rem">
+          <div style="background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.85rem 1rem">
+            <div style="font-size:.82rem;font-weight:700;color:var(--text-1);margin-bottom:.25rem">SOP 1: 發起展覽活動與需求申請</div>
+            <div style="font-size:.78rem;color:var(--text-2);line-height:1.5">1. 點擊 <code>+ New Event</code> 填寫活動名稱、起訖日期與地點。<br>2. 於活動卡片點擊 <code>+ Request</code> 選擇 Product Segment、Model、顏色與數量 (系統自動帶入主負責 SPM)。</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.85rem 1rem">
+            <div style="font-size:.82rem;font-weight:700;color:var(--text-1);margin-bottom:.25rem">SOP 2: SPM 審核、配機與派機出庫</div>
+            <div style="font-size:.78rem;color:var(--text-2);line-height:1.5">1. SPM 於 Tracking 頁面點擊 <code>SPM Response</code>。<br>2. 選擇審核決策 (Fully / Partially Confirmed / Unavailable)，填寫 SN 序號與隨機配件後送出。</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.85rem 1rem">
+            <div style="font-size:.82rem;font-weight:700;color:var(--text-1);margin-bottom:.25rem">SOP 3: 現場人員交接與跨活動調撥</div>
+            <div style="font-size:.78rem;color:var(--text-2);line-height:1.5">1. 於 Tracking 頁面點擊 <code>Transfer</code>。<br>2. 選擇 <strong>Handover</strong> (變更現場保管人) 或 <strong>Cross-Event Transfer</strong> (轉移至目標活動名下)，並點檢機況與配件。</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.85rem 1rem">
+            <div style="font-size:.82rem;font-weight:700;color:var(--text-1);margin-bottom:.25rem">SOP 4: 樣品歸還入庫與結案</div>
+            <div style="font-size:.78rem;color:var(--text-2);line-height:1.5">1. 展期結束後點擊 <code>Transfer</code>。<br>2. 選擇 <strong>Reclaim</strong> (回收至 SPM 池) 或 <strong>Return</strong> (歸還倉庫)，狀態切換為 Returned 完成結案。</div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--border-sub);border-radius:var(--r-md);padding:.85rem 1rem">
+            <div style="font-size:.82rem;font-weight:700;color:var(--text-1);margin-bottom:.25rem">SOP 5: Teams 1-Click 催收與 Excel 報表匯出</div>
+            <div style="font-size:.78rem;color:var(--text-2);line-height:1.5">1. 點擊 <code>🔔 Ping</code> 可直接發送 Teams Adaptive Card 催收逾期機台。<br>2. 點擊 <code>Export</code> 可依全庫、搜尋結果或指定活動匯出 2-Sheet Excel 報表。</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size:.92rem;font-weight:700;color:var(--blue);margin-bottom:.45rem">5. 防呆機制與常見問題 (FAQ)</h4>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <div style="background:var(--surface-alt);border-left:3px solid var(--amber);padding:.6rem .85rem;border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.78rem"><strong style="color:var(--text-1);font-weight:600">Overdue 警示</strong>：活動結束但機台尚未辦理歸還，請保管人儘速處理或點擊 <code>🔔 Ping</code> 發送 Teams 提醒。</div>
+          <div style="background:var(--surface-alt);border-left:3px solid var(--blue);padding:.6rem .85rem;border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.78rem"><strong style="color:var(--text-1);font-weight:600">一鍵重置</strong>：選取篩選條件時，點擊頂部 <code>✕ Reset</code> 按鈕可即時還原預設清單。</div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-f" style="justify-content:space-between">
+      <span style="font-size:.72rem;color:var(--text-3)">ASUS Logistics SOP v2.0</span>
+      <button type="button" class="btn btn-s modal-cancel">Close</button>
+    </div>
+  </div>
+</div>
+
 <!-- Customized Export Modal -->
 <div id="mExport" class="modal">
   <div class="modal-c" style="max-width:480px">
@@ -618,6 +743,7 @@ body[data-theme="dark"] .h-card-flow{background:rgba(255,255,255,0.05);border-co
 <!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 
 <script>
 /* ======================================================================
@@ -648,8 +774,13 @@ function fmtDt(d) { return d.getFullYear() + "-" + String(d.getMonth() + 1).padS
 function fmtShort(d) { return String(d.getMonth() + 1).padStart(2, "0") + "/" + String(d.getDate()).padStart(2, "0"); }
 function fmtFile(d) { return d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0"); }
 
-/** CSV escape */
-function csvEsc(s) { if (!s) return '""'; return '"' + String(s).replace(/"/g, '""') + '"'; }
+/** CSV escape & Formula Injection Sanitization */
+function csvEsc(s) {
+  if (!s) return '""';
+  let str = String(s);
+  if (/^[=\+\-@\t\r]/.test(str)) str = "'" + str;
+  return '"' + str.replace(/"/g, '""') + '"';
+}
 
 /* ======================================================================
    Firebase & Sync
@@ -769,18 +900,30 @@ function saveLocal() {
   } catch(e) {}
 }
 
-function saveEv() {
+function saveEv(singleEvt) {
   writing = true; syncUI("syncing", "Saving...");
   saveLocal();
-  evRef.set(evs).then(() => { writing = false; syncUI("connected", "Cloud Synced"); })
-    .catch(err => { writing = false; syncUI("offline", "Local Mode"); toast("Saved locally (Cloud offline)"); });
+  if (singleEvt && singleEvt.id) {
+    evRef.child(singleEvt.id).set(singleEvt).then(() => { writing = false; syncUI("connected", "Cloud Synced"); })
+      .catch(err => { writing = false; syncUI("offline", "Local Mode"); toast("Saved locally (Cloud offline)"); });
+  } else {
+    const evMap = {}; evs.forEach(e => { if (e && e.id) evMap[e.id] = e; });
+    evRef.set(evMap).then(() => { writing = false; syncUI("connected", "Cloud Synced"); })
+      .catch(err => { writing = false; syncUI("offline", "Local Mode"); toast("Saved locally (Cloud offline)"); });
+  }
 }
 
-function saveSm() {
+function saveSm(singleSample) {
   writing = true; syncUI("syncing", "Saving...");
   saveLocal();
-  smRef.set(sms).then(() => { writing = false; syncUI("connected", "Cloud Synced"); })
-    .catch(err => { writing = false; syncUI("offline", "Local Mode"); toast("Saved locally (Cloud offline)"); });
+  if (singleSample && singleSample.id) {
+    smRef.child(singleSample.id).set(singleSample).then(() => { writing = false; syncUI("connected", "Cloud Synced"); })
+      .catch(err => { writing = false; syncUI("offline", "Local Mode"); toast("Saved locally (Cloud offline)"); });
+  } else {
+    const smMap = {}; sms.forEach(s => { if (s && s.id) smMap[s.id] = s; });
+    smRef.set(smMap).then(() => { writing = false; syncUI("connected", "Cloud Synced"); })
+      .catch(err => { writing = false; syncUI("offline", "Local Mode"); toast("Saved locally (Cloud offline)"); });
+  }
 }
 
 function exportFullBackup() {
@@ -857,6 +1000,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Buttons
   document.getElementById("btnNewEvt").addEventListener("click", openNewEvt);
+  const btnManEl = document.getElementById("btnManual");
+  if (btnManEl) btnManEl.addEventListener("click", openUserManualModal);
   document.getElementById("btnExport").addEventListener("click", openExportModal);
   document.getElementById("btnTheme").addEventListener("click", toggleTheme);
   document.getElementById("bAdd").addEventListener("click", addBRow);
@@ -1402,61 +1547,94 @@ function renderDesktopTable(fd) {
 }
 
 function renderMobileCards(fd) {
-  const c = document.getElementById("mCards"); c.innerHTML = "";
+  const c = document.getElementById("mCards"); if (!c) return; c.innerHTML = "";
   if (!fd.length) { c.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--text-3);font-size:.82rem">No items found.</div>'; return; }
 
+  // Group items by current Event
+  const groups = {};
   fd.forEach(it => {
-    const si = sInfo(it.status);
-    const cq = it.confirmedQty || 0, rq = it.quantity || 1;
-    const qCls = cq >= rq ? "full" : cq > 0 ? "part" : "zero";
-    const isPending = it.status === "pending";
-    const isFinal = it.status === "unavail" || it.status === "returned";
+    const evKey = it.currentEvent || it.event || "Unassigned";
+    if (!groups[evKey]) groups[evKey] = [];
+    groups[evKey].push(it);
+  });
 
-    const latestLog = (it.custodyLogs && it.custodyLogs.length) ? it.custodyLogs[0] : null;
-    let condBadge = "";
-    if (latestLog && latestLog.condition && latestLog.condition !== "Good") {
-      const cc = latestLog.condition === "Needs Repair" ? "st-unavail" : "st-partial";
-      condBadge = ' <span class="st ' + cc + '" style="font-size:.65rem;padding:.08rem .4rem;display:inline-flex;align-items:center;gap:.2rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' + esc(latestLog.condition) + '</span>';
-    }
+  Object.entries(groups).forEach(([evName, items], idx) => {
+    const grpId = "mgrp_" + idx;
+    const isCollapsed = collapsedGrps.has(grpId);
+    const grpCard = document.createElement("div");
+    grpCard.className = "evt-grp-card" + (isCollapsed ? " collapsed" : "");
+    grpCard.id = "card_" + grpId;
+    grpCard.style.marginBottom = "1rem";
 
-    const curEvtObj = evs.find(e => e.title === (it.currentEvent || it.event));
-    const todayStr = new Date().toISOString().split("T")[0];
-    let overdueBadge = "";
-    if (curEvtObj && curEvtObj.endDate && curEvtObj.endDate < todayStr && it.status === "using") {
-      overdueBadge = ' <span class="st st-unavail" style="font-size:.65rem;padding:.08rem .4rem;display:inline-flex;align-items:center;gap:.2rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Overdue</span>';
-    }
+    const evObj = evs.find(e => e.title === evName);
+    const evType = evObj ? evObj.type : "";
 
-    const histCount = it.custodyLogs ? it.custodyLogs.length : 0;
-    const histSummaryText = histCount ? ('#' + histCount + ' steps · ' + (latestLog ? latestLog.action : '')) : 'No history';
+    let totalQty = 0;
+    let cardsHtml = "";
 
-    const card = document.createElement("div"); card.className = "s-card";
-    card.style.cursor = "pointer";
-    card.onclick = (e) => { if (e.target.closest("button") || e.target.closest("a") || e.target.closest("input")) return; toggleHistCard(it.id); };
+    items.forEach(it => {
+      totalQty += (it.quantity || 1);
+      const si = sInfo(it.status);
+      const cq = it.confirmedQty || 0, rq = it.quantity || 1;
+      const qCls = cq >= rq ? "full" : cq > 0 ? "part" : "zero";
+      const isPending = it.status === "pending";
+      const isFinal = it.status === "unavail" || it.status === "returned";
 
-    let metaParts = [];
-    if (it.variant) metaParts.push(esc(it.variant));
-    if (it.serialNumber) metaParts.push('SN: ' + esc(it.serialNumber));
-    const subMetaHtml = metaParts.length ? '<div style="font-size:.73rem;color:var(--text-3);margin-top:.1rem">' + metaParts.join(' · ') + '</div>' : '';
+      const latestLog = (it.custodyLogs && it.custodyLogs.length) ? it.custodyLogs[0] : null;
+      let condBadge = "";
+      if (latestLog && latestLog.condition && latestLog.condition !== "Good") {
+        const cc = latestLog.condition === "Needs Repair" ? "st-unavail" : "st-partial";
+        condBadge = ' <span class="st ' + cc + '" style="font-size:.65rem;padding:.08rem .4rem;display:inline-flex;align-items:center;gap:.2rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' + esc(latestLog.condition) + '</span>';
+      }
 
-    let html = '<div class="s-card-top"><div style="display:flex;flex-direction:column;gap:.05rem"><div style="font-weight:600;font-size:.92rem;color:var(--text-1)">' + esc(it.productModel) + "</div>" + subMetaHtml;
-    html += '</div><div style="display:flex;align-items:center;gap:.25rem;flex-wrap:wrap"><span class="st ' + si.css + '">' + si.label + "</span>" + condBadge + overdueBadge + "</div></div>";
-    html += '<div class="s-card-grid">';
-    html += '<div><div class="s-card-label">Event</div><div style="font-weight:600;color:var(--blue)">' + esc(it.event || "-") + "</div></div>";
-    html += '<div><div class="s-card-label">Qty</div><span class="qty ' + qCls + '">' + cq + " / " + rq + "</span></div>";
-    html += '<div><div class="s-card-label">SPM</div>' + esc(it.modelSPM) + "</div>";
-    html += '<div><div class="s-card-label">Custodian</div><strong>' + esc(it.currentHolder || "-") + '</strong><div style="font-size:.66rem;color:var(--text-3)">' + esc(histSummaryText) + '</div></div>';
-    html += '<div><div class="s-card-label">Ready</div>' + (it.readyDate ? it.readyDate.slice(5) : "-") + "</div>";
-    html += '<div><div class="s-card-label">Requester</div>' + esc(it.requestedBy || "-") + "</div>";
-    html += "</div>";
-    html += '<div class="s-card-acts">';
-    if (isPending) html += '<button class="btn btn-p" style="height:28px;font-size:.72rem" onclick="openSPM(\'' + it.id + '\')">SPM Response</button>';
-    if (!isPending && !isFinal) html += '<button class="btn btn-s" style="height:28px;font-size:.72rem" onclick="openTrans(\'' + it.id + '\')">Transfer</button>';
-    html += '<button class="btn btn-s btn-icon" style="height:28px" onclick="openEdit(\'' + it.id + '\')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>';
-    html += "</div>";
-    // Mobile history (hidden by default)
-    html += '<div class="hist-card-box' + (expanded.has(it.id) ? " on" : "") + '" id="hc_' + it.id + '">' + buildHistHtml(it) + "</div>";
-    card.innerHTML = html;
-    c.appendChild(card);
+      const curEvtObj = evs.find(e => e.title === (it.currentEvent || it.event));
+      const todayStr = new Date().toISOString().split("T")[0];
+      let overdueBadge = "";
+      if (curEvtObj && curEvtObj.endDate && curEvtObj.endDate < todayStr && it.status === "using") {
+        overdueBadge = ' <span class="st st-unavail" style="font-size:.65rem;padding:.08rem .4rem;display:inline-flex;align-items:center;gap:.2rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>Overdue</span>';
+      }
+
+      const histCount = it.custodyLogs ? it.custodyLogs.length : 0;
+      const histSummaryText = histCount ? ('#' + histCount + ' steps · ' + (latestLog ? latestLog.action : '')) : 'No history';
+
+      let metaParts = [];
+      if (it.variant) metaParts.push(esc(it.variant));
+      if (it.serialNumber) metaParts.push('SN: ' + esc(it.serialNumber));
+      const subMetaHtml = metaParts.length ? '<div style="font-size:.73rem;color:var(--text-3);margin-top:.1rem">' + metaParts.join(' · ') + '</div>' : '';
+
+      cardsHtml += '<div class="s-card" style="cursor:pointer;margin-bottom:.5rem" onclick="if(!event.target.closest(\'button,a,input\')) toggleHistCard(\'' + it.id + '\')">';
+      cardsHtml += '<div class="s-card-top"><div style="display:flex;flex-direction:column;gap:.05rem"><div style="font-weight:600;font-size:.92rem;color:var(--text-1)">' + esc(it.productModel) + '</div>' + subMetaHtml + '</div><div style="display:flex;align-items:center;gap:.25rem;flex-wrap:wrap"><span class="st ' + si.css + '">' + si.label + '</span>' + condBadge + overdueBadge + '</div></div>';
+      cardsHtml += '<div class="s-card-grid">';
+      cardsHtml += '<div><div class="s-card-label">Event</div><div style="font-weight:600;color:var(--blue)">' + esc(it.event || "-") + '</div></div>';
+      cardsHtml += '<div><div class="s-card-label">Qty</div><span class="qty ' + qCls + '">' + cq + ' / ' + rq + '</span></div>';
+      cardsHtml += '<div><div class="s-card-label">SPM</div>' + esc(it.modelSPM) + '</div>';
+      cardsHtml += '<div><div class="s-card-label">Custodian</div><strong>' + esc(it.currentHolder || "-") + '</strong><div style="font-size:.66rem;color:var(--text-3)">' + esc(histSummaryText) + '</div></div>';
+      cardsHtml += '<div><div class="s-card-label">Ready</div>' + (it.readyDate ? it.readyDate.slice(5) : "-") + '</div>';
+      cardsHtml += '<div><div class="s-card-label">Requester</div>' + esc(it.requestedBy || "-") + '</div>';
+      cardsHtml += '</div>';
+      cardsHtml += '<div class="s-card-acts">';
+      if (isPending) cardsHtml += '<button class="btn btn-p" style="height:28px;font-size:.72rem" onclick="openSPM(\'' + it.id + '\')">SPM Response</button>';
+      if (!isPending && !isFinal) cardsHtml += '<button class="btn btn-s" style="height:28px;font-size:.72rem" onclick="openTrans(\'' + it.id + '\')">Transfer</button>';
+      cardsHtml += '<button class="btn btn-s btn-icon" style="height:28px" onclick="openEdit(\'' + it.id + '\')"><svg width="11" height="11" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 1-2 2v14a2 2 0 0 1 2 2h14a2 2 0 0 1 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>';
+      cardsHtml += '</div>';
+      cardsHtml += '<div class="hist-card-box' + (expanded.has(it.id) ? " on" : "") + '" id="hc_' + it.id + '">' + buildHistHtml(it) + '</div>';
+      cardsHtml += '</div>';
+    });
+
+    grpCard.innerHTML = '<div class="evt-grp-hdr" onclick="toggleEvtGrp(\'' + grpId + '\')">' +
+      '<div class="evt-grp-left">' +
+        '<span class="evt-grp-chevron" id="chv_' + grpId + '">▼</span>' +
+        '<span class="evt-grp-title"><svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> ' + esc(evName) + '</span>' +
+        (evType ? '<span class="st st-confirmed" style="font-size:.65rem;padding:.1rem .45rem">' + esc(evType) + '</span>' : '') +
+      '</div>' +
+      '<div class="evt-grp-right">' +
+        '<span class="evt-grp-stat" style="font-weight:600;color:var(--text-1);font-size:.78rem">' + totalQty + ' units</span>' +
+        '<button class="btn btn-p" style="height:26px;font-size:.68rem;padding:0 .65rem" onclick="event.stopPropagation(); openReqFor(\'' + esc(evName).replace(/'/g, "\\'") + '\')">+ Request</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="evt-grp-body" id="grp_' + grpId + '" style="padding:.6rem">' + cardsHtml + '</div>';
+
+    c.appendChild(grpCard);
   });
 }
 
@@ -1663,12 +1841,21 @@ function delEvtFromModal() {
   const id = document.getElementById("eId").value; if (!id) return;
   const ev = evs.find(e => e.id === id); if (!ev) return;
   if (!confirm('⚠️ Delete Confirmation (1/2):\nAre you sure you want to delete event "' + ev.title + '"?')) return;
-  if (!confirm('⚠️ Double Confirmation (2/2):\nThis action is permanent and will un-link all associated sample tracking records. Confirm deletion?')) return;
+  if (!confirm('⚠️ Double Confirmation (2/2):\nThis will delete the event record and safely reassign all associated samples to "Unassigned" to preserve asset history. Confirm deletion?')) return;
   evs = evs.filter(e => e.id !== id);
-  sms = sms.filter(s => s.event !== ev.title && s.currentEvent !== ev.title);
+  let unlinked = 0;
+  sms.forEach(s => {
+    if (s.event === ev.title || s.currentEvent === ev.title) {
+      if (s.event === ev.title) s.event = "Unassigned";
+      if (s.currentEvent === ev.title) s.currentEvent = "Unassigned";
+      if (!s.custodyLogs) s.custodyLogs = [];
+      s.custodyLogs.unshift({ date: fmtDt(new Date()), action: "Event Deleted", from: ev.title, to: "Unassigned", notes: "Linked event deleted by admin" });
+      unlinked++;
+    }
+  });
   saveEv(); saveSm(); render();
   document.getElementById("mEvt").classList.remove("on");
-  toast("Deleted event: " + ev.title);
+  toast("Deleted event: " + ev.title + (unlinked ? " (" + unlinked + " sample(s) unlinked to Unassigned)" : ""));
 }
 
 function populateLinkSelect() {
@@ -1678,9 +1865,17 @@ function populateLinkSelect() {
 }
 
 function submitEvt(e) {
-  e.preventDefault();
+  if (e) e.preventDefault();
   const id = document.getElementById("eId").value;
   const data = { title: document.getElementById("eTitle").value.trim(), type: document.getElementById("eType").value, location: document.getElementById("eLoc").value.trim(), organizer: document.getElementById("eOrg").value.trim(), startDate: document.getElementById("eStart").value, endDate: document.getElementById("eEnd").value, deadline: document.getElementById("eDL").value, precedingEvent: document.getElementById("eLink").value, notes: document.getElementById("eNotes").value.trim() };
+  if (data.startDate && data.endDate && data.endDate < data.startDate) {
+    data.endDate = data.startDate;
+  }
+  const dup = evs.find(x => x.title.toLowerCase() === data.title.toLowerCase() && x.id !== id);
+  if (dup) {
+    alert('⚠️ Duplicate Event Title:\nAn event named "' + data.title + '" already exists. Please specify a unique title to avoid system confusion.');
+    return;
+  }
   if (id) {
     const ex = evs.find(x => x.id === id);
     if (ex) {
@@ -2184,7 +2379,7 @@ function submitEdit(e) {
     });
   }
 
-  saveSm(); render(); document.getElementById("mEdit").classList.remove("on"); toast("Updated: " + s.productModel);
+  saveSm(s); render(); document.getElementById("mEdit").classList.remove("on"); toast("Updated: " + s.productModel);
 }
 
 function delSm(id) {
@@ -2199,10 +2394,12 @@ function delSm(id) {
 function openAdminSettings() {
   const elCount = document.getElementById("spmDictCount");
   if (elCount) elCount.textContent = Object.keys(modelSpmMaster).length;
-  const txtCm = document.getElementById("txtCmDirectory");
-  if (txtCm) txtCm.value = cmDirectory.join(", ");
   updateTeamsStatus();
   document.getElementById("mAdminSettings").classList.add("on");
+}
+
+function openUserManualModal() {
+  document.getElementById("mUserManual").classList.add("on");
 }
 
 function saveTeamDirectory() {
@@ -2595,7 +2792,7 @@ function submitSPM(e) {
 
   s.custodyLogs.unshift({ date: fmtDt(new Date()), action: "SPM Decision: " + sInfo(dec).label, from: s.modelSPM, to: s.modelSPM, notes: unitSummary + (sn && !unitSummary ? "SN: " + sn + ". " : "") + nt });
 
-  saveSm(); render(); document.getElementById("mSPM").classList.remove("on"); toast("SPM: " + sInfo(dec).label);
+  saveSm(s); render(); document.getElementById("mSPM").classList.remove("on"); toast("SPM: " + sInfo(dec).label);
 }
 
 /* ======================================================================
@@ -2636,7 +2833,7 @@ function submitTrans(e) {
   if (!s.custodyLogs) s.custodyLogs = [];
   s.custodyLogs.unshift({ date: fmtDt(new Date()), action: actionMap[act], from: fp, to: tp, condition: cond, targetEvent: (te && te !== s.event) ? te : "", notes: nt });
 
-  saveSm(); render(); document.getElementById("mTrans").classList.remove("on"); document.getElementById("fTransForm").reset();
+  saveSm(s); render(); document.getElementById("mTrans").classList.remove("on"); document.getElementById("fTransForm").reset();
   toast(s.productModel + " → " + (te ? te : tp));
 }
 

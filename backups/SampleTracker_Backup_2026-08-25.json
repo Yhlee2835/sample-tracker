@@ -1,0 +1,557 @@
+{
+  "appName": "ASUS Sample Custody Tracker",
+  "version": "2.0",
+  "exportDate": "2026-08-25T15:58:04Z",
+  "events": [
+    {
+      "deadline": "2026-07-31",
+      "endDate": "2026-08-05",
+      "id": "EV-msfnddu0dyo",
+      "location": "ACI",
+      "notes": "",
+      "organizer": "Rod Wang",
+      "precedingEvent": "WEMEA/EEMEA/LATAM PreG",
+      "startDate": "2026-08-04",
+      "title": "ACI Partner Summit",
+      "type": "Retail Summit"
+    },
+    {
+      "deadline": "2026-09-18",
+      "endDate": "2026-09-30",
+      "id": "EV-msfne79ybhs",
+      "location": "PT",
+      "notes": "",
+      "organizer": "Jonathan Lee",
+      "precedingEvent": "",
+      "startDate": "2026-09-28",
+      "title": "WEMEA/EEMEA/LATAM PreG",
+      "type": "PreG"
+    },
+    {
+      "deadline": "2026-09-28",
+      "endDate": "2026-10-02",
+      "id": "EV-msfnfozs3bh",
+      "location": "IN",
+      "notes": "",
+      "organizer": "Rachel1 Chou",
+      "precedingEvent": "",
+      "startDate": "2026-10-01",
+      "title": "APAC PreG",
+      "type": "PreG"
+    }
+  ],
+  "samples": [
+    {
+      "confirmedQty": 2,
+      "currentEvent": "APAC PreG",
+      "currentHolder": "VickyPS_Hung",
+      "custodyLogs": [
+        {
+          "action": "SPM Decision: Confirmed",
+          "date": "2026-08-06 22:27",
+          "from": "VickyPS_Hung",
+          "notes": "Units: #1: 234324234 (SN: 3424234) · #2: 234234324 (SN: 23423424). ",
+          "to": "VickyPS_Hung"
+        },
+        {
+          "action": "Details Edited",
+          "date": "2026-08-05 22:19",
+          "from": "VickyPS_Hung",
+          "notes": "Variant: 234324234, 234234324 → Black, White",
+          "to": "VickyPS_Hung"
+        },
+        {
+          "action": "Details Edited",
+          "date": "2026-08-05 22:01",
+          "from": "VickyPS_Hung",
+          "notes": "Status: Confirmed → Pending SPM",
+          "to": "VickyPS_Hung"
+        },
+        {
+          "action": "SPM Decision: Confirmed",
+          "date": "2026-08-05 22:01",
+          "from": "VickyPS_Hung",
+          "notes": "Units: #1: 234324234 (SN: 3424234) · #2: 234234324 (SN: 23423424). ",
+          "to": "VickyPS_Hung"
+        },
+        {
+          "action": "Details Edited",
+          "date": "2026-08-05 21:55",
+          "from": "VickyPS_Hung",
+          "notes": "Status: Partially Confirmed → Pending SPM",
+          "to": "VickyPS_Hung"
+        },
+        {
+          "action": "SPM Decision: Partially Confirmed",
+          "date": "2026-08-05 13:35",
+          "from": "VickyPS_Hung",
+          "notes": "",
+          "to": "VickyPS_Hung"
+        },
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:33",
+          "from": "Rachel1 Chou",
+          "notes": "",
+          "to": "VickyPS_Hung"
+        }
+      ],
+      "event": "APAC PreG",
+      "id": "SM-msfnic44et8",
+      "location": "IN",
+      "modelSPM": "VickyPS_Hung",
+      "notes": "",
+      "productModel": "UM5606ZA",
+      "quantity": 3,
+      "readyDate": "2026-09-28",
+      "requestedBy": "Rachel1 Chou",
+      "segment": "Zenbook",
+      "serialNumber": "3424234, 23423424",
+      "status": "confirmed",
+      "units": [
+        {
+          "color": "234324234",
+          "sn": "3424234",
+          "unitNo": 1
+        },
+        {
+          "color": "234234324",
+          "sn": "23423424",
+          "unitNo": 2
+        }
+      ],
+      "variant": "234324234, 234234324"
+    },
+    {
+      "confirmedQty": 1,
+      "currentEvent": "APAC PreG",
+      "currentHolder": "Iris",
+      "custodyLogs": [
+        {
+          "action": "Handover",
+          "condition": "Good",
+          "date": "2026-08-05 22:24",
+          "from": "Jessie Yeh",
+          "notes": "",
+          "targetEvent": "",
+          "to": "Iris"
+        },
+        {
+          "action": "SPM Decision: Confirmed",
+          "date": "2026-08-05 13:35",
+          "from": "Jessie Yeh",
+          "notes": "",
+          "to": "Jessie Yeh"
+        },
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:33",
+          "from": "Rachel1 Chou",
+          "notes": "",
+          "to": "Jessie Yeh"
+        }
+      ],
+      "event": "APAC PreG",
+      "id": "SM-msfnic44pyb",
+      "location": "IN",
+      "modelSPM": "Jessie Yeh",
+      "notes": "",
+      "productModel": "S5452MA",
+      "quantity": 1,
+      "readyDate": "2026-09-28",
+      "requestedBy": "Rachel1 Chou",
+      "segment": "Vivobook",
+      "serialNumber": "",
+      "status": "using",
+      "variant": ""
+    },
+    {
+      "confirmedQty": 1,
+      "currentEvent": "APAC PreG",
+      "currentHolder": "Sarah",
+      "custodyLogs": [
+        {
+          "action": "Cross-Event Transfer",
+          "condition": "Minor Scratch",
+          "date": "2026-08-05 13:36",
+          "from": "Jonathan",
+          "notes": "",
+          "targetEvent": "",
+          "to": "Sarah"
+        },
+        {
+          "action": "Cross-Event Transfer",
+          "condition": "Needs Repair",
+          "date": "2026-08-05 13:36",
+          "from": "BryanPE_Chou",
+          "notes": "",
+          "targetEvent": "",
+          "to": "Jonathan"
+        },
+        {
+          "action": "SPM Decision: Confirmed",
+          "date": "2026-08-05 13:35",
+          "from": "BryanPE_Chou",
+          "notes": "",
+          "to": "BryanPE_Chou"
+        },
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:33",
+          "from": "Rachel1 Chou",
+          "notes": "",
+          "to": "BryanPE_Chou"
+        }
+      ],
+      "event": "APAC PreG",
+      "id": "SM-msfnic44bn5",
+      "location": "IN",
+      "modelSPM": "BryanPE_Chou",
+      "notes": "",
+      "productModel": "X1480MA",
+      "quantity": 1,
+      "readyDate": "2026-09-28",
+      "requestedBy": "Rachel1 Chou",
+      "segment": "Vivobook",
+      "serialNumber": "",
+      "status": "using",
+      "variant": "Blue"
+    },
+    {
+      "confirmedQty": 0,
+      "currentEvent": "APAC PreG",
+      "currentHolder": "NinaPA_Hsieh",
+      "custodyLogs": [
+        {
+          "action": "SPM Decision: Unavailable",
+          "date": "2026-08-05 13:35",
+          "from": "NinaPA_Hsieh",
+          "notes": "",
+          "to": "NinaPA_Hsieh"
+        },
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:33",
+          "from": "Rachel1 Chou",
+          "notes": "",
+          "to": "NinaPA_Hsieh"
+        }
+      ],
+      "event": "APAC PreG",
+      "id": "SM-msfnic44b4m",
+      "location": "IN",
+      "modelSPM": "NinaPA_Hsieh",
+      "notes": "",
+      "productModel": "X1480PA",
+      "quantity": 1,
+      "readyDate": "2026-09-28",
+      "requestedBy": "Rachel1 Chou",
+      "segment": "Vivobook",
+      "serialNumber": "",
+      "status": "unavail",
+      "variant": "Pink"
+    },
+    {
+      "confirmedQty": 1,
+      "currentEvent": "WEMEA/EEMEA/LATAM PreG",
+      "currentHolder": "mark",
+      "custodyLogs": [
+        {
+          "action": "Handover",
+          "condition": "Good",
+          "date": "2026-08-06 22:24",
+          "from": "Sandra",
+          "notes": "",
+          "targetEvent": "",
+          "to": "mark"
+        },
+        {
+          "action": "Cross-Event Transfer",
+          "condition": "Good",
+          "date": "2026-08-06 22:24",
+          "from": "Yihsuan_Lee",
+          "notes": "",
+          "targetEvent": "",
+          "to": "Sandra"
+        },
+        {
+          "action": "Details Edited",
+          "date": "2026-08-06 00:08",
+          "from": "NinaPA_Hsieh",
+          "notes": "Custodian: NinaPA_Hsieh → Yihsuan_Lee",
+          "to": "Yihsuan_Lee"
+        },
+        {
+          "action": "SPM Decision: Confirmed",
+          "date": "2026-08-05 23:34",
+          "from": "NinaPA_Hsieh",
+          "notes": "",
+          "to": "NinaPA_Hsieh"
+        },
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:32",
+          "from": "Jonathan Lee",
+          "notes": "",
+          "to": "NinaPA_Hsieh"
+        }
+      ],
+      "event": "WEMEA/EEMEA/LATAM PreG",
+      "id": "SM-msfnhadkdwj",
+      "location": "PT",
+      "modelSPM": "Yihsuan_Lee",
+      "notes": "",
+      "productModel": "X1480PA",
+      "quantity": 1,
+      "readyDate": "2026-08-07",
+      "requestedBy": "Jonathan Lee",
+      "segment": "Zenbook",
+      "serialNumber": "",
+      "status": "using",
+      "variant": "Pink"
+    },
+    {
+      "confirmedQty": 1,
+      "currentEvent": "WEMEA/EEMEA/LATAM PreG",
+      "currentHolder": "Yihsuan_Lee",
+      "custodyLogs": [
+        {
+          "action": "Return",
+          "condition": "Good",
+          "date": "2026-08-06 22:06",
+          "from": "Rod",
+          "notes": "",
+          "targetEvent": "",
+          "to": "Yihsuan_Lee"
+        },
+        {
+          "action": "Reclaim",
+          "condition": "Good",
+          "date": "2026-08-06 22:06",
+          "from": "ChloeLL_Chang",
+          "notes": "",
+          "targetEvent": "",
+          "to": "Rod"
+        },
+        {
+          "action": "SPM Decision: Confirmed",
+          "date": "2026-08-06 22:05",
+          "from": "ChloeLL_Chang",
+          "notes": "",
+          "to": "ChloeLL_Chang"
+        },
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:32",
+          "from": "Jonathan Lee",
+          "notes": "",
+          "to": "ChloeLL_Chang"
+        }
+      ],
+      "event": "WEMEA/EEMEA/LATAM PreG",
+      "id": "SM-msfnhadk399",
+      "location": "PT",
+      "modelSPM": "ChloeLL_Chang",
+      "notes": "",
+      "productModel": "UX3680QA",
+      "quantity": 1,
+      "readyDate": "2026-09-18",
+      "requestedBy": "Jonathan Lee",
+      "segment": "Zenbook",
+      "serialNumber": "",
+      "status": "returned",
+      "variant": "Blue"
+    },
+    {
+      "confirmedQty": 0,
+      "currentEvent": "WEMEA/EEMEA/LATAM PreG",
+      "currentHolder": "ChloeCW Wang",
+      "custodyLogs": [
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:32",
+          "from": "Jonathan Lee",
+          "notes": "",
+          "to": "ChloeCW Wang"
+        }
+      ],
+      "event": "WEMEA/EEMEA/LATAM PreG",
+      "id": "SM-msfnhadkydl",
+      "location": "PT",
+      "modelSPM": "ChloeCW Wang",
+      "notes": "",
+      "productModel": "UX3480QA",
+      "quantity": 1,
+      "readyDate": "2026-09-18",
+      "requestedBy": "Jonathan Lee",
+      "segment": "Zenbook",
+      "serialNumber": "",
+      "status": "pending",
+      "variant": "Pink"
+    },
+    {
+      "confirmedQty": 0,
+      "currentEvent": "WEMEA/EEMEA/LATAM PreG",
+      "currentHolder": "Chester Chien",
+      "custodyLogs": [
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:32",
+          "from": "Jonathan Lee",
+          "notes": "",
+          "to": "Chester Chien"
+        }
+      ],
+      "event": "WEMEA/EEMEA/LATAM PreG",
+      "id": "SM-msfnhadkjxc",
+      "location": "PT",
+      "modelSPM": "Chester Chien",
+      "notes": "",
+      "productModel": "UX8200QA",
+      "quantity": 1,
+      "readyDate": "2026-09-18",
+      "requestedBy": "Jonathan Lee",
+      "segment": "Zenbook",
+      "serialNumber": "",
+      "status": "pending",
+      "variant": "Grey"
+    },
+    {
+      "confirmedQty": 1,
+      "currentEvent": "ACI Partner Summit",
+      "currentHolder": "Yihsuan_Lee",
+      "custodyLogs": [
+        {
+          "action": "Details Edited",
+          "date": "2026-08-06 22:10",
+          "from": "Han Chiang",
+          "notes": "Custodian: Han Chiang → Yihsuan_Lee",
+          "to": "Yihsuan_Lee"
+        },
+        {
+          "action": "SPM Decision: Confirmed",
+          "date": "2026-08-05 13:33",
+          "from": "Han Chiang",
+          "notes": "SN: 123456789. ",
+          "to": "Han Chiang"
+        },
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:31",
+          "from": "Rod Wang",
+          "notes": "",
+          "to": "Han Chiang"
+        }
+      ],
+      "event": "ACI Partner Summit",
+      "id": "SM-msfngetjjrm",
+      "location": "ACI",
+      "modelSPM": "Yihsuan_Lee",
+      "notes": "",
+      "productModel": "H7607BA",
+      "quantity": 1,
+      "readyDate": "2026-07-31",
+      "requestedBy": "Rod Wang",
+      "segment": "ProArt",
+      "serialNumber": "123456789",
+      "status": "confirmed",
+      "variant": "White"
+    },
+    {
+      "confirmedQty": 0,
+      "currentEvent": "ACI Partner Summit",
+      "currentHolder": "Jerry2 Hung",
+      "custodyLogs": [
+        {
+          "action": "SPM Decision: Unavailable",
+          "date": "2026-08-05 13:33",
+          "from": "Jerry2 Hung",
+          "notes": "",
+          "to": "Jerry2 Hung"
+        },
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:31",
+          "from": "Rod Wang",
+          "notes": "",
+          "to": "Jerry2 Hung"
+        }
+      ],
+      "event": "ACI Partner Summit",
+      "id": "SM-msfngetj7hc",
+      "location": "ACI",
+      "modelSPM": "Jerry2 Hung",
+      "notes": "",
+      "productModel": "GU606H",
+      "quantity": 1,
+      "readyDate": "2026-07-31",
+      "requestedBy": "Rod Wang",
+      "segment": "Zephyrus",
+      "serialNumber": "",
+      "status": "unavail",
+      "variant": ""
+    },
+    {
+      "confirmedQty": 1,
+      "currentEvent": "APAC PreG",
+      "currentHolder": "Elaine",
+      "custodyLogs": [
+        {
+          "action": "Return",
+          "condition": "Minor Scratch",
+          "date": "2026-08-05 13:50",
+          "from": "Rachel",
+          "notes": "",
+          "targetEvent": "",
+          "to": "Elaine"
+        },
+        {
+          "action": "Cross-Event Transfer",
+          "condition": "Minor Scratch",
+          "date": "2026-08-05 13:34",
+          "from": "Rod",
+          "notes": "",
+          "targetEvent": "",
+          "to": "Rachel"
+        },
+        {
+          "action": "Handover",
+          "condition": "Good",
+          "date": "2026-08-05 13:34",
+          "from": "Elaine Liang",
+          "notes": "",
+          "targetEvent": "",
+          "to": "Rod"
+        },
+        {
+          "action": "SPM Decision: Confirmed",
+          "date": "2026-08-05 13:34",
+          "from": "Elaine Liang",
+          "notes": "SN: 98765432. ",
+          "to": "Elaine Liang"
+        },
+        {
+          "action": "Request Submitted",
+          "date": "2026-08-05 13:31",
+          "from": "Rod Wang",
+          "notes": "",
+          "to": "Elaine Liang"
+        }
+      ],
+      "event": "APAC PreG",
+      "id": "SM-msfngetjc8t",
+      "location": "ACI",
+      "modelSPM": "Elaine Liang",
+      "notes": "",
+      "productModel": "H7407BA",
+      "quantity": 1,
+      "readyDate": "2026-09-18",
+      "requestedBy": "Rod Wang",
+      "segment": "ProArt",
+      "serialNumber": "98765432",
+      "status": "returned",
+      "variant": "Black"
+    }
+  ],
+  "modelSpmMaster": {}
+}
